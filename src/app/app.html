@@ -1,1 +1,40 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-col width-67>
+      <!--<img src="http://api.asambleas.cl/repositorio/usuario_1.jpg" style="max-width: 97%;"/>-->
+      <img src="../assets/img/agua.jpg" style="max-width: 99%; text-align: center; padding-left: 1%;"/>
+      <!--
+      <ion-item style="color:#4d4d4d; font-size: x-small;">
+        <ion-icon name="md-person" item-start></ion-icon>
+        {{ nombreUsuario }}
+      </ion-item>
+      <ion-item style="color:#4d4d4d; font-size: x-small;">
+        <ion-icon name="information-circle" item-start></ion-icon>
+        {{ rolUsuario }}
+
+      </ion-item>
+      -->
+    </ion-col>
+    <ion-row *ngFor="let p of pages" (click)="openPage(p)">
+      <ion-list ion-item  style="padding: 0; margin: 0; padding-left: 10px;">
+
+        <button menuClose  style="background-color: transparent; width: 100%; text-align: left;">
+          {{p.title}}
+        </button>
+      </ion-list>
+    </ion-row>
+
+
+
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
