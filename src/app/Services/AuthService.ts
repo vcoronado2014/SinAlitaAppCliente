@@ -10,6 +10,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AuthService{
   codigoCliente: string;
+  envoltorio: any;
   loggedIn:boolean;
 
   constructor(
@@ -18,6 +19,7 @@ export class AuthService{
     //inicializamos los valores
     this.codigoCliente = '';
     this.loggedIn = false;
+    this.envoltorio = null;
   }
 
   Post(codigoCliente){
@@ -38,20 +40,14 @@ export class AuthService{
             //this.username = res.AutentificacionUsuario.NombreUsuario;
             //vamos a dividir el retorno
             let retorno = JSON.parse(res);
-
-/*            sessionStorage.setItem('USU_ID', retorno.AutentificacionUsuario.Id);
-            sessionStorage.setItem('ROL_ID', retorno.Rol.Id);
-            sessionStorage.setItem('ROL_NOMBRE', retorno.Rol.Nombre);
-            sessionStorage.setItem('INST_ID', retorno.Institucion.Id);
-            sessionStorage.setItem('INSTITUCION_NOMBRE', retorno.Institucion.Nombre);
-            sessionStorage.setItem('PERSONA_NOMBRE', retorno.Persona.Nombres + ' ' + retorno.Persona.ApellidoPaterno + ' ' + retorno.Persona.ApellidoMaterno);
-            sessionStorage.setItem('REG_ID', retorno.Region.Id);
-            sessionStorage.setItem('REG_NOMBRE', retorno.Region.Nombre);
-            sessionStorage.setItem('COM_ID', retorno.Comuna.Id);
-            sessionStorage.setItem('COM_NOMBRE', retorno.Comuna.Nombre);*/
-
-            this.codigoCliente = codigoCliente;
-            this.loggedIn = true;
+            if (retorno.ProductoCodigo.Id > 0) {
+              this.envoltorio = retorno;
+              this.codigoCliente = codigoCliente;
+              this.loggedIn = true;
+            }
+            else {
+              this.loggedIn = false;
+            }
           }
           return this.loggedIn;
         }

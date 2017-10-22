@@ -13,10 +13,11 @@ import { AuthService } from '../../app/Services/AuthService';
 export class HomePage {
   codigoCliente: string;
   isLogged: boolean;
+  envoltorio: any;
 
   constructor(
     public navCtrl: NavController,
-    private auth: AuthService,
+    public auth: AuthService,
     public toastCtrl: ToastController
   ) {
 
@@ -37,12 +38,13 @@ export class HomePage {
   }
 
   goToDetails(id){
+    this.envoltorio = this.auth.envoltorio;
     this.navCtrl.push(DetailPackPage, {id: id });
   }
   Signup(){
     //validaciones
     if (!this.codigoCliente){
-      let mi = this.presentToast('Nombre de usuario requerido', 'bottom', 4000);
+      let mi = this.presentToast('Código de Pack requerido', 'bottom', 4000);
       return;
     }
 
@@ -56,7 +58,8 @@ export class HomePage {
         },
         () => {
           if (this.isLogged){
-            this.navCtrl.push(DetailPackPage, {id: this.codigoCliente })
+            this.envoltorio = this.auth.envoltorio;
+            this.navCtrl.push(DetailPackPage, {id: this.codigoCliente, envoltorio: this.envoltorio })
               .then(data => console.log(data),
                 error => {
                   //console.log(error)
