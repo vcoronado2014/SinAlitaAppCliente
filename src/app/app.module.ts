@@ -8,8 +8,8 @@ import { NgCalendarModule } from 'ionic2-calendar';
 import { ChartModule } from 'angular2-highcharts';
 import * as highcharts from 'Highcharts';
 import { TextAvatarDirective } from '../directives/text-avatar/text-avatar';
-import { CallNumber } from '@ionic-native/call-number';
 
+import { AuthService } from '../app/Services/AuthService';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -22,8 +22,7 @@ import { DetailAgendaPage } from '../pages/detail-agenda/detail-agenda';
     HomePage,
     DetailPackPage,
     DetailAgendaPage,
-    TextAvatarDirective,
-    CallNumber
+    TextAvatarDirective
   ],
   imports: [
     BrowserModule,
@@ -42,6 +41,7 @@ import { DetailAgendaPage } from '../pages/detail-agenda/detail-agenda';
   providers: [
     StatusBar,
     SplashScreen,
+    AuthService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
