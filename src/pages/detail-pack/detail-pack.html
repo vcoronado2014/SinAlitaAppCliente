@@ -12,7 +12,7 @@
 </ion-header>
 
 
-<ion-content padding class="gradiente">
+<ion-content padding>
   <ion-fab top right edge>
     <button ion-fab mini><ion-icon name="add"></ion-icon></button>
     <ion-fab-list>
@@ -50,7 +50,7 @@
     </ion-item>
     <ion-item>
       <ion-avatar item-start>
-        <ion-icon name="people" class="icono-lista fg-darkgrey"  style="font-size: 2em;"></ion-icon>
+        <ion-icon name="person" class="icono-lista fg-darkgrey"  style="font-size: 2em;"></ion-icon>
       </ion-avatar>
       <h2 class="fg-darkgrey">Cliente</h2>
       <p text-wrap>{{nombreCliente}}</p>
@@ -70,30 +70,29 @@
         <ion-icon name="calendar" class="icono-lista fg-darkgrey"  style="font-size: 2em;"></ion-icon>
       </ion-avatar>
 
-      <p>Clases Agendadas: {{clasesAgendadas}}, Cantidad Niños: {{cantidadAlumnos}}</p>
+      <p>Clases Agendadas: {{clasesAgendadas}}</p>
     </ion-item>
 
+    <ion-list>
+      <ion-item-sliding>
+        <ion-item>
+          <ion-avatar item-start>
+            <ion-icon name="people" class="icono-lista fg-darkgrey"  style="font-size: 2em;"></ion-icon>
+          </ion-avatar>
+          <h2 class="fg-darkgrey">Cantidad Niños: {{cantidadAlumnos}}</h2>
+          <p style="font-style: italic; font-size: 0.8em;">Deslice a la izquierda para ver las opciones.</p>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="primary" (click)="goToFichaAlumno()">
+            <ion-icon name="eye"></ion-icon>
+            Ver
+          </button>
+        </ion-item-options>
 
- <!--   <ion-grid class="bg-white">
-      <ion-row>
-        <ion-col col-2 style="text-align: center;">
-          &lt;!&ndash; item 1 &ndash;&gt;
-          <ion-badge align-items-center style="font-size: 2em;">{{clasesAgendadas}}</ion-badge>
-          <ion-label class="inferior-badge fg-darkgrey">Clases</ion-label>
-        </ion-col>
-        <ion-col col-2 style="text-align: center;">
-          &lt;!&ndash; item 2 &ndash;&gt;
-          <ion-badge align-items-center style="font-size: 2em;">{{cantidadAlumnos}}</ion-badge>
-          <ion-label class="inferior-badge fg-darkgrey">Alumnos</ion-label>
-        </ion-col>
-        <ion-col col-8 style="text-align: center;">
-          &lt;!&ndash; item 2 &ndash;&gt;
-          <ion-badge align-items-center style="font-size: 0.8em;">Creado por el Supervisor</ion-badge>
-          <ion-label class="inferior-badge fg-darkgrey">Estado</ion-label>
-        </ion-col>
-      </ion-row>
+      </ion-item-sliding>
+    </ion-list>
 
-    </ion-grid>-->
+
 
   </ion-list>
   <ion-grid>

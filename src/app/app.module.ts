@@ -15,6 +15,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { DetailPackPage } from '../pages/detail-pack/detail-pack';
 import { DetailAgendaPage } from '../pages/detail-agenda/detail-agenda';
+import { FichaAlumnoPage } from '../pages/ficha-alumno/ficha-alumno';
+import { DetailsFichaPage } from '../pages/details-ficha/details-ficha';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { DetailAgendaPage } from '../pages/detail-agenda/detail-agenda';
     HomePage,
     DetailPackPage,
     DetailAgendaPage,
+    FichaAlumnoPage,
+    DetailsFichaPage,
     TextAvatarDirective
   ],
   imports: [
@@ -36,7 +40,9 @@ import { DetailAgendaPage } from '../pages/detail-agenda/detail-agenda';
     MyApp,
     HomePage,
     DetailPackPage,
-    DetailAgendaPage
+    DetailAgendaPage,
+    DetailsFichaPage,
+    FichaAlumnoPage
   ],
   providers: [
     StatusBar,

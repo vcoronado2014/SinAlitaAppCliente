@@ -3,6 +3,7 @@ import { NavController, NavParams, AlertController, ToastController } from 'ioni
 import { LoadingController } from 'ionic-angular';
 import { DetailAgendaPage } from '../../pages/detail-agenda/detail-agenda';
 import { HomePage } from '../../pages/home/home';
+import { FichaAlumnoPage } from '../../pages/ficha-alumno/ficha-alumno';
 
 import * as moment from 'moment';
 
@@ -34,6 +35,8 @@ export class DetailPackPage {
   public fechaPack;
   public infoProfesor;
   public cantidadAlumnos;
+  public fichaAlumnos;
+  public idPack;
 
   constructor(
     private nav: NavController,
@@ -59,6 +62,8 @@ export class DetailPackPage {
       this.infoProfesor='';
 
       this.fechaPack = '';
+      this.fichaAlumnos= [];
+      this.idPack = 0;
 
 
     let loader = this.loading.create({
@@ -73,6 +78,8 @@ export class DetailPackPage {
       //se deben profesar ciertos parametros
       //1. si tiene o no acepta condiciones, si tiene todo bien de lo contrario se va a la pagina de acepta condiciones
       if (this.envoltorio){
+        //el identificador del pack
+        this.idPack = this.envoltorio.ProductoCodigo.Id;
         //tiene acepta condiciones
         if (this.envoltorio.TieneAceptaCondiciones){
           //tiene acepta condiciones
@@ -119,6 +126,10 @@ export class DetailPackPage {
           //enviar a la pagina de acpeta condiciones con nav.push
 
         }
+        //ficha Alumnos
+        if (this.envoltorio.FichaAlumnos){
+          this.fichaAlumnos = this.envoltorio.FichaAlumnos;
+        }
       }
       else {
         //redirect a home
@@ -132,6 +143,9 @@ export class DetailPackPage {
   }
   goToDetails(id){
     this.nav.push(DetailAgendaPage, {id: id });
+  }
+  goToFichaAlumno(){
+    this.nav.push(FichaAlumnoPage, {fichaAlumnos: this.fichaAlumnos, cantidadAlumnos: this.cantidadAlumnos, idPack: this.idPack });
   }
 
 }
