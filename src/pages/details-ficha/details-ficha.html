@@ -27,25 +27,65 @@
       <button ion-fab><ion-icon name="logo-instagram"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
+  <!-- grupo datos del alumno -->
   <ion-item-group>
     <ion-item-divider color="light">Alumno</ion-item-divider>
   <ion-item>
-    <h2>Nombre Completo</h2>
-    <h3>Edad 8 años</h3>
-    <p>Hombre</p>
+    <h2>{{nombreCompleto}}</h2>
+    <h3>{{edad}} años</h3>
+    <p>{{sexo}}</p>
   </ion-item>
   </ion-item-group>
-
+  <!-- grupo problemas cardiacos -->
   <ion-item-group>
-    <ion-item-divider color="light">Tiene enfermedades cardiacas</ion-item-divider>
+    <ion-item-divider color="light">¿Tiene problemas cardiacos?</ion-item-divider>
     <ion-item>
-      <ion-label>No tiene</ion-label>
-      <ion-toggle [(ngModel)]="pepperoni"></ion-toggle>
+      <ion-label>{{cualesProblemasCardiacos}}</ion-label>
+      <ion-toggle [(ngModel)]="tieneProblemasCardiacos" disabled="true"></ion-toggle>
     </ion-item>
-
   </ion-item-group>
-
-
+  <!-- grupo problemas motores -->
+  <ion-item-group>
+    <ion-item-divider color="light">¿Tiene problemas motores?</ion-item-divider>
+    <ion-item>
+      <ion-label>{{cualesProblemasMotores}}</ion-label>
+      <ion-toggle [(ngModel)]="tieneProblemasMotores" disabled="true"></ion-toggle>
+    </ion-item>
+  </ion-item-group>
+  <!-- grupo asma -->
+  <ion-item-group>
+    <ion-item-divider color="light">Asma</ion-item-divider>
+    <ion-item>
+      <ion-label>¿Tiene asma?</ion-label>
+      <ion-toggle [(ngModel)]="tieneAsma" disabled="true"></ion-toggle>
+    </ion-item>
+  </ion-item-group>
+  <!-- grupo Otra enfermedad -->
+  <ion-item-group>
+    <ion-item-divider color="light">Otra Enfermedad</ion-item-divider>
+    <ion-item>
+      <ion-label>{{otraEnfermedad}}</ion-label>
+    </ion-item>
+  </ion-item-group>
+  <!-- grupo datos urgencia -->
+  <ion-item-group>
+    <ion-item-divider color="light">Ante una Urgencia</ion-item-divider>
+    <ion-item>
+      <h2>Acudir a</h2>
+      <h3>{{dondeAcudir}}</h3>
+    </ion-item>
+    <ion-item>
+      <h2>Teléfono emergencia</h2>
+      <h3>{{numeroEmergencia}}</h3>
+    </ion-item>
+  </ion-item-group>
+  <!-- grupo Otros datos -->
+  <ion-item-group>
+    <ion-item-divider color="light">Otras Antecedentes</ion-item-divider>
+    <ion-item>
+      <ion-label>{{observacion}}</ion-label>
+    </ion-item>
+  </ion-item-group>
   <ion-list>
 
 <!--    <ion-item>

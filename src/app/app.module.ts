@@ -10,6 +10,7 @@ import * as highcharts from 'Highcharts';
 import { TextAvatarDirective } from '../directives/text-avatar/text-avatar';
 
 import { AuthService } from '../app/Services/AuthService';
+import { FichaAlumnoService } from '../app/Services/FichaAlumnoService';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -48,6 +49,7 @@ import { DetailsFichaPage } from '../pages/details-ficha/details-ficha';
     StatusBar,
     SplashScreen,
     AuthService,
+    FichaAlumnoService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

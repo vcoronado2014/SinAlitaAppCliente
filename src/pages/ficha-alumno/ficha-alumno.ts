@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, ToastController, ModalController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, AlertController, ToastController, ModalController, List } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { DetailAgendaPage } from '../../pages/detail-agenda/detail-agenda';
 import { HomePage } from '../../pages/home/home';
 import { DetailsFichaPage } from '../../pages/details-ficha/details-ficha';
+
+import { FichaAlumnoService } from '../../app/Services/FichaAlumnoService';
 
 import * as moment from 'moment';
 
@@ -21,6 +23,8 @@ import * as moment from 'moment';
 })
 export class FichaAlumnoPage {
 
+  @ViewChild('myList', {read: List}) list: List;
+
   public fichaAlumnos;
   public cantidadAlumnos;
   public idPack;
@@ -33,14 +37,15 @@ export class FichaAlumnoPage {
     public loading: LoadingController,
     public toastCtrl: ToastController,
     private navParams: NavParams,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    public ficha: FichaAlumnoService
   ) {
 
     //aca hay cosas importantes
     //1. si el idPack es mayor a cero, existe.
     //2. si la ficha de alumnos viene vacia se debería consultar mediante el servicio la ficha de alumnos envoltorio
 
-    this.fichaAlumnos = navParams.get('fichaAlumnos');
+    //this.fichaAlumnos = navParams.get('fichaAlumnos');
     this.cantidadAlumnos = navParams.get('cantidadAlumnos');
     this.idPack = navParams.get("idPack");
     this.botonAgregar= false;
@@ -50,6 +55,13 @@ export class FichaAlumnoPage {
     });
 
     loader.present().then(() => {
+      this.ficha.getFichas(this.idPack).subscribe(
+        data => {
+          this.fichaAlumnos = data.json();
+        },
+        err => console.error(err),
+        () => console.log('get ficha completed')
+      );
 
       //aca se debe o no mostrar el boton para agregar mas niños
       if (this.fichaAlumnos){
@@ -70,7 +82,9 @@ export class FichaAlumnoPage {
   presentModal(item) {
     let modal = this.modalCtrl.create(DetailsFichaPage, {fichaAlumno: item });
     modal.present();
+    this.list.closeSlidingItems();
   }
+
 
 
 

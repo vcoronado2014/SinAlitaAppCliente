@@ -15,6 +15,23 @@ import { LoadingController } from 'ionic-angular';
 })
 export class DetailsFichaPage {
   public fichaAlumno;
+
+  public nombreCompleto;
+  public edad;
+  public sexo;
+
+  public tieneAsma;
+  public tieneProblemasCardiacos;
+  public tieneProblemasMotores;
+
+  public cualesProblemasCardiacos;
+  public cualesProblemasMotores;
+  public dondeAcudir;
+  public numeroEmergencia;
+  public observacion;
+  public otraEnfermedad;
+
+
   constructor(
     private nav: NavController,
     private alert: AlertController,
@@ -30,9 +47,44 @@ export class DetailsFichaPage {
     });
 
     loader.present().then(() => {
+      if (this.fichaAlumno){
+        this.nombreCompleto = this.fichaAlumno.NombreCompleto;
+        this.edad = this.fichaAlumno.Edad;
+        this.sexo = this.fichaAlumno.Sexo;
+
+        if (this.fichaAlumno.TieneAsma == 1){
+          this.tieneAsma = true;
+        }
+        else {
+          this.tieneAsma = false;
+        }
+
+        if (this.fichaAlumno.TieneProblemasCardiacos == 1){
+          this.tieneProblemasCardiacos = true;
+          this.cualesProblemasCardiacos = this.fichaAlumno.CualesProblemasCardiacos;
+        }
+        else {
+          this.tieneProblemasCardiacos = false;
+          this.cualesProblemasCardiacos = "No tiene";
+        }
+
+        if (this.fichaAlumno.TieneProblemasMotores == 1){
+          this.tieneProblemasMotores = true;
+          this.cualesProblemasMotores = this.fichaAlumno.CualesProblemasMotores;
+        }
+        else {
+          this.tieneProblemasMotores = false;
+          this.cualesProblemasMotores = "No tiene";
+        }
 
 
 
+        this.dondeAcudir = this.fichaAlumno.DondeAcudir;
+        this.numeroEmergencia = this.fichaAlumno.NumeroEmergencia;
+        this.observacion = this.fichaAlumno.Observacion;
+        this.otraEnfermedad = this.fichaAlumno.OtraEnfermedad;
+
+      }
       loader.dismiss();
     });
 

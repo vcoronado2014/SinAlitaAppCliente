@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild  } from '@angular/core';
+import { List } from 'ionic-angular';
 import { NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { DetailAgendaPage } from '../../pages/detail-agenda/detail-agenda';
@@ -19,6 +20,8 @@ import * as moment from 'moment';
   templateUrl: 'detail-pack.html'
 })
 export class DetailPackPage {
+  @ViewChild('myList', {read: List}) list: List;
+  //@ViewChild('item') slidingItem: ItemSliding;
 
   public idElemento;
   public envoltorio;
@@ -65,6 +68,7 @@ export class DetailPackPage {
       this.fichaAlumnos= [];
       this.idPack = 0;
 
+    //this.list.closeSlidingItems();
 
     let loader = this.loading.create({
       content: 'Cargando...',
@@ -146,6 +150,8 @@ export class DetailPackPage {
   }
   goToFichaAlumno(){
     this.nav.push(FichaAlumnoPage, {fichaAlumnos: this.fichaAlumnos, cantidadAlumnos: this.cantidadAlumnos, idPack: this.idPack });
+    //acá cerramos el slide
+    this.list.closeSlidingItems();
   }
 
 }
