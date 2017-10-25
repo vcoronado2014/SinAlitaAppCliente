@@ -67,8 +67,8 @@ export class FichaAlumnoPage {
 
 
   }
-  presentModal() {
-    let modal = this.modalCtrl.create(DetailsFichaPage);
+  presentModal(item) {
+    let modal = this.modalCtrl.create(DetailsFichaPage, {fichaAlumno: item });
     modal.present();
   }
 

@@ -6,10 +6,10 @@
 -->
 <ion-header>
   <ion-navbar>
-   <button ion-button start (click)="close()">
-      <ion-icon name="close-circled"></ion-icon>
-    </button>
-    <ion-title>Ficha</ion-title>
+    <ion-title>
+      <ion-icon name="arrow-back" end (click)="close()" style="font-size: 1.5em;"></ion-icon>
+      <label>&nbsp;Ficha</label>
+    </ion-title>
     <!--
       <ion-icon name="close-circle" float-right (click)="logout()"></ion-icon>
     -->
@@ -27,5 +27,45 @@
       <button ion-fab><ion-icon name="logo-instagram"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
+  <ion-item-group>
+    <ion-item-divider color="light">Alumno</ion-item-divider>
+  <ion-item>
+    <h2>Nombre Completo</h2>
+    <h3>Edad 8 años</h3>
+    <p>Hombre</p>
+  </ion-item>
+  </ion-item-group>
+
+  <ion-item-group>
+    <ion-item-divider color="light">Tiene enfermedades cardiacas</ion-item-divider>
+    <ion-item>
+      <ion-label>No tiene</ion-label>
+      <ion-toggle [(ngModel)]="pepperoni"></ion-toggle>
+    </ion-item>
+
+  </ion-item-group>
+
+
+  <ion-list>
+
+<!--    <ion-item>
+      <ion-avatar item-start>
+        <ion-toggle></ion-toggle>
+      </ion-avatar>
+      <h2>Cher</h2>
+      <p>Ugh. As if.</p>
+    </ion-item>-->
+
+<!--    <ion-item>
+      <ion-label>Sausage</ion-label>
+      <ion-toggle [(ngModel)]="sausage" disabled="true"></ion-toggle>
+    </ion-item>-->
+
+<!--    <ion-item>
+      <ion-label>Mushrooms</ion-label>
+      <ion-toggle [(ngModel)]="mushrooms"></ion-toggle>
+    </ion-item>-->
+
+  </ion-list>
 
 </ion-content>

@@ -14,7 +14,7 @@ import { LoadingController } from 'ionic-angular';
   templateUrl: 'details-ficha.html',
 })
 export class DetailsFichaPage {
-
+  public fichaAlumno;
   constructor(
     private nav: NavController,
     private alert: AlertController,
@@ -23,6 +23,18 @@ export class DetailsFichaPage {
     private navParams: NavParams,
     private viewCtrl: ViewController
   ) {
+
+    this.fichaAlumno = navParams.get('fichaAlumno');
+    let loader = this.loading.create({
+      content: 'Cargando...',
+    });
+
+    loader.present().then(() => {
+
+
+
+      loader.dismiss();
+    });
 
 
   }

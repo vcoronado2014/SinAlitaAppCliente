@@ -36,10 +36,10 @@
         <p>Edad: {{user.Edad}} años</p>
         <p>Sexo: {{user.Sexo}}</p>
         <p style="font-style: italic; font-size: 0.8em;">Deslice a la izquierda para ver las opciones.</p>
-        <!--<p>{{ user.company }} - {{ user.job_title }}</p>-->
+
       </ion-item>
       <ion-item-options side="right">
-        <button ion-button color="primary" (click)="presentModal()">
+        <button ion-button color="primary" (click)="presentModal(user)">
           <ion-icon name="eye"></ion-icon>
           Ver
         </button>
