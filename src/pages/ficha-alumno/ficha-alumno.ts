@@ -4,6 +4,7 @@ import { LoadingController } from 'ionic-angular';
 import { DetailAgendaPage } from '../../pages/detail-agenda/detail-agenda';
 import { HomePage } from '../../pages/home/home';
 import { DetailsFichaPage } from '../../pages/details-ficha/details-ficha';
+import { CreaAlumnoPage } from '../../pages/crea-alumno/crea-alumno';
 
 import { FichaAlumnoService } from '../../app/Services/FichaAlumnoService';
 
@@ -58,20 +59,22 @@ export class FichaAlumnoPage {
       this.ficha.getFichas(this.idPack).subscribe(
         data => {
           this.fichaAlumnos = data.json();
+          //aca se debe o no mostrar el boton para agregar mas niños
+          if (this.fichaAlumnos){
+            this.cantidadAlumnosBd = this.fichaAlumnos.length;
+
+          }
+          //mostramos el boton agregar
+          if (this.cantidadAlumnosBd != this.cantidadAlumnos){
+            this.botonAgregar = true;
+          }
+
         },
         err => console.error(err),
         () => console.log('get ficha completed')
       );
 
-      //aca se debe o no mostrar el boton para agregar mas niños
-      if (this.fichaAlumnos){
-        this.cantidadAlumnosBd = this.fichaAlumnos.length;
 
-      }
-      //mostramos el boton agregar
-      if (this.cantidadAlumnosBd != this.cantidadAlumnos){
-        this.botonAgregar = true;
-      }
 
       loader.dismiss();
     });
@@ -83,6 +86,10 @@ export class FichaAlumnoPage {
     let modal = this.modalCtrl.create(DetailsFichaPage, {fichaAlumno: item });
     modal.present();
     this.list.closeSlidingItems();
+  }
+  presentModalNuevo() {
+    let modal = this.modalCtrl.create(CreaAlumnoPage, {idPack: this.idPack });
+    modal.present();
   }
 
 

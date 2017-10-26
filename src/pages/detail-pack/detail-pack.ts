@@ -2,6 +2,7 @@ import { Component, ViewChild  } from '@angular/core';
 import { List } from 'ionic-angular';
 import { NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
+import { SplashScreen } from '@ionic-native/splash-screen';
 import { DetailAgendaPage } from '../../pages/detail-agenda/detail-agenda';
 import { HomePage } from '../../pages/home/home';
 import { FichaAlumnoPage } from '../../pages/ficha-alumno/ficha-alumno';
@@ -46,7 +47,8 @@ export class DetailPackPage {
     private alert: AlertController,
     public loading: LoadingController,
     public toastCtrl: ToastController,
-    private navParams: NavParams
+    private navParams: NavParams,
+    private splashScreen: SplashScreen
   ) {
       this.idElemento = navParams.get('id');
       this.envoltorio = navParams.get('envoltorio');
@@ -68,17 +70,15 @@ export class DetailPackPage {
       this.fichaAlumnos= [];
       this.idPack = 0;
 
-    //this.list.closeSlidingItems();
-
+    this.splashScreen.show();
+/*
     let loader = this.loading.create({
       content: 'Cargando...',
     });
+*/
+    /*loader.present().then(() => {*/
 
-    loader.present().then(() => {
       //aca las llamadas ajax
-/*      this.listarTipoMovimientos();
-      this.recuperarRendicion(this.rendicion.Id);*/
-
       //se deben profesar ciertos parametros
       //1. si tiene o no acepta condiciones, si tiene todo bien de lo contrario se va a la pagina de acepta condiciones
       if (this.envoltorio){
@@ -86,11 +86,6 @@ export class DetailPackPage {
         this.idPack = this.envoltorio.ProductoCodigo.Id;
         //tiene acepta condiciones
         if (this.envoltorio.TieneAceptaCondiciones){
-          //tiene acepta condiciones
-          //ahora si tiene cupos
-/*          if (this.envoltorio.Cupos.length > 0){
-            this.clasesAgendadas = this.envoltorio.Cupos.length;
-          }*/
           this.cantidadAlumnos = this.envoltorio.ProductoCodigo.CantidadAlumnos;
           this.clasesAgendadas = this.envoltorio.ProductoCodigo.CantidadClases;
           //ahora si tiene profesor
@@ -140,10 +135,10 @@ export class DetailPackPage {
         nav.setRoot(HomePage);
       }
 
-
-
+    this.splashScreen.hide();
+/*
       loader.dismiss();
-    });
+    });*/
   }
   goToDetails(id){
     this.nav.push(DetailAgendaPage, {id: id });

@@ -27,6 +27,9 @@
     </ion-fab-list>
   </ion-fab>
 
+  <ion-col col-12>
+    <button ion-button color="success" style="width: 100%;"  *ngIf="botonAgregar" (click)="presentModalNuevo()"> Agregar</button>
+  </ion-col>
   <ion-list #myList>
     <ion-item-sliding *ngFor="let user of fichaAlumnos">
     <!--<button ion-item *ngFor="let user of users" (click)="presentUserInfoAlert(user)">-->
@@ -46,5 +49,6 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+
 
 </ion-content>
