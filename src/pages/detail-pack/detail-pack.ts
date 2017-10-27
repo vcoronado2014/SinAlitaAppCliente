@@ -41,6 +41,7 @@ export class DetailPackPage {
   public cantidadAlumnos;
   public fichaAlumnos;
   public idPack;
+  public clieId;
 
   constructor(
     private nav: NavController,
@@ -69,6 +70,7 @@ export class DetailPackPage {
       this.fechaPack = '';
       this.fichaAlumnos= [];
       this.idPack = 0;
+      this.clieId = 0;
 
     this.splashScreen.show();
 /*
@@ -111,6 +113,7 @@ export class DetailPackPage {
           }
           //cliente
           if (this.envoltorio.Cliente.Id > 0){
+            this.clieId = this.envoltorio.Cliente.Id;
             this.nombreCliente = this.envoltorio.Cliente.Nombres + ' ' +  this.envoltorio.Cliente.PrimerApellido + ' ' + this.envoltorio.Cliente.SegundoApellido;
             this.direccionCliente = this.envoltorio.Cliente.Direccion;
             this.comunaCliente = this.envoltorio.ComunaCliente.Nombre;
@@ -144,7 +147,7 @@ export class DetailPackPage {
     this.nav.push(DetailAgendaPage, {id: id });
   }
   goToFichaAlumno(){
-    this.nav.push(FichaAlumnoPage, {fichaAlumnos: this.fichaAlumnos, cantidadAlumnos: this.cantidadAlumnos, idPack: this.idPack });
+    this.nav.push(FichaAlumnoPage, {fichaAlumnos: this.fichaAlumnos, cantidadAlumnos: this.cantidadAlumnos, idPack: this.idPack, clieId: this.clieId });
     //acá cerramos el slide
     this.list.closeSlidingItems();
   }

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      <ion-icon name="arrow-back" end (click)="close()" style="font-size: 1.5em;"></ion-icon>
+      <ion-icon name="arrow-back" start (click)="close()" style="font-size: 1.5em;"></ion-icon>
       <label>&nbsp;Nuevo Alumno</label>
     </ion-title>
     <!--
@@ -22,7 +22,23 @@
     </ion-fab-list>
   </ion-fab>
   <!-- comenzamos a contruir los controles -->
-
+  <ion-row *ngIf="tieneAlumnos"  style="width: 100%;">
+    <label class="alert alert-primary" role="alert">
+      Usted ya cuenta con alumnos registrados en el Sistema, si desea utilizarlos seleccionelo de la lista y presione usar.
+    </label>
+    <ion-row style="width: 100%;">
+      <ion-item>
+        <ion-select [(ngModel)]="item" style="width: 100%;">
+          <ion-option *ngFor="let alumn of alumnosArr" [value]="alumn.Id"  style="width: 100%;">{{alumn.NombreCompleto}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-row>
+    <ion-row style="width: 100%;">
+      <ion-col col-12>
+        <button ion-button color="success" style="width: 100%;"> Usar</button>
+      </ion-col>
+    </ion-row>
+  </ion-row>
 
 
 </ion-content>

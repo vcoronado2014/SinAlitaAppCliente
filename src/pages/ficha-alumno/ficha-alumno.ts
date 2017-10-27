@@ -31,6 +31,7 @@ export class FichaAlumnoPage {
   public idPack;
   public cantidadAlumnosBd;
   public botonAgregar: boolean;
+  public clieId;
 
   constructor(
     private nav: NavController,
@@ -49,6 +50,7 @@ export class FichaAlumnoPage {
     //this.fichaAlumnos = navParams.get('fichaAlumnos');
     this.cantidadAlumnos = navParams.get('cantidadAlumnos');
     this.idPack = navParams.get("idPack");
+    this.clieId = navParams.get("clieId");
     this.botonAgregar= false;
 
     let loader = this.loading.create({
@@ -88,7 +90,7 @@ export class FichaAlumnoPage {
     this.list.closeSlidingItems();
   }
   presentModalNuevo() {
-    let modal = this.modalCtrl.create(CreaAlumnoPage, {idPack: this.idPack });
+    let modal = this.modalCtrl.create(CreaAlumnoPage, {idPack: this.idPack, clieId: this.clieId });
     modal.present();
   }
 

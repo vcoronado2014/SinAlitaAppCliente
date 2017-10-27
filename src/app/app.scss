@@ -81,4 +81,12 @@
 .font-pequena{
   font-size: 0.7em;
 }
+ion-select {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  max-width: 100%;
+}
 

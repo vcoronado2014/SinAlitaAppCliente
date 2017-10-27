@@ -1,6 +1,6 @@
 {
   "name": "appSinAlitasCliente",
-  "app_id": "",
+  "app_id": "appSinalitas",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

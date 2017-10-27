@@ -11,6 +11,7 @@ import { TextAvatarDirective } from '../directives/text-avatar/text-avatar';
 
 import { AuthService } from '../app/Services/AuthService';
 import { FichaAlumnoService } from '../app/Services/FichaAlumnoService';
+import { AlumnoService } from '../app/Services/AlumnoService';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -53,6 +54,7 @@ import { CreaAlumnoPage } from '../pages/crea-alumno/crea-alumno';
     SplashScreen,
     AuthService,
     FichaAlumnoService,
+    AlumnoService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
