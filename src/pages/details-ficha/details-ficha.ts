@@ -30,6 +30,7 @@ export class DetailsFichaPage {
   public numeroEmergencia;
   public observacion;
   public otraEnfermedad;
+  pet: string = "puppies";
 
 
   constructor(

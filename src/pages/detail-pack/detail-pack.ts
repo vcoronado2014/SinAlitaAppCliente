@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { DetailAgendaPage } from '../../pages/detail-agenda/detail-agenda';
 import { HomePage } from '../../pages/home/home';
 import { FichaAlumnoPage } from '../../pages/ficha-alumno/ficha-alumno';
+import { AceptaCondicionesPage } from '../../pages/acepta-condiciones/acepta-condiciones';
 
 import * as moment from 'moment';
 
@@ -126,6 +127,7 @@ export class DetailPackPage {
         }
         else{
           //enviar a la pagina de acpeta condiciones con nav.push
+          this.goToAceptaCondiciones(this.idPack);
 
         }
         //ficha Alumnos
@@ -142,6 +144,9 @@ export class DetailPackPage {
 /*
       loader.dismiss();
     });*/
+  }
+  goToAceptaCondiciones(id){
+    this.nav.push(AceptaCondicionesPage, {id: id });
   }
   goToDetails(id){
     this.nav.push(DetailAgendaPage, {id: id });

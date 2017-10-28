@@ -1,13 +1,18 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      <ion-icon name="arrow-back" start (click)="close()" style="font-size: 1.5em;"></ion-icon>
-      <label>&nbsp;Nuevo Alumno</label>
-    </ion-title>
-    <!--
-      <ion-icon name="close-circle" float-right (click)="logout()"></ion-icon>
-    -->
+    <ion-grid>
+      <ion-row>
+        <ion-col col-2>
+          <ion-icon name="arrow-back" start (click)="close()" style="font-size: 1.5em;"></ion-icon>
+        </ion-col>
+        <ion-col col-10>
+          <ion-title start>
 
+            Nuevo Alumno
+          </ion-title>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-navbar>
 </ion-header>
 
@@ -22,23 +27,210 @@
     </ion-fab-list>
   </ion-fab>
   <!-- comenzamos a contruir los controles -->
-  <ion-row *ngIf="tieneAlumnos"  style="width: 100%;">
+  <ion-card *ngIf="tieneAlumnos" style="padding: 0;margin: 0;width: 100%;">
+
+    <ion-card-header>
+      Información
+    </ion-card-header>
+
+    <ion-card-content>
+      <!-- Add card content here! -->
+      <label class="alert alert-primary" role="alert">
+        Usted ya cuenta con alumnos registrados en el Sistema, si desea utilizarlos seleccionelo de la lista y presione usar.
+      </label>
+      <ion-row style="width: 100%;">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-10>
+              <ion-select [(ngModel)]="item" style="width: 100%;">
+                <ion-option *ngFor="let alumn of alumnosArr" [value]="alumn.Id"  style="width: 100%;">{{alumn.NombreCompleto}}</ion-option>
+              </ion-select>
+            </ion-col>
+            <ion-col col-2>
+              <button ion-button color="success" small (click)="usar(item)"> Usar</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+      </ion-row>
+    </ion-card-content>
+
+  </ion-card>
+
+<!--  <ion-row *ngIf="tieneAlumnos"  style="width: 100%;" color="light">
     <label class="alert alert-primary" role="alert">
       Usted ya cuenta con alumnos registrados en el Sistema, si desea utilizarlos seleccionelo de la lista y presione usar.
     </label>
     <ion-row style="width: 100%;">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-10>
+            <ion-select [(ngModel)]="item" style="width: 100%;">
+              <ion-option *ngFor="let alumn of alumnosArr" [value]="alumn.Id"  style="width: 100%;">{{alumn.NombreCompleto}}</ion-option>
+            </ion-select>
+          </ion-col>
+          <ion-col col-2>
+            <button ion-button color="success" small (click)="usar(item)"> Usar</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-row>
+  </ion-row>-->
+
+  <div style="padding-top: 10px;">
+    <ion-segment [(ngModel)]="pet">
+      <ion-segment-button value="puppies">
+        Alumno
+      </ion-segment-button>
+      <ion-segment-button value="Medicos">
+        Médicos
+      </ion-segment-button>
+      <ion-segment-button value="Otros">
+        Otros
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <div [ngSwitch]="pet">
+    <ion-row  *ngSwitchCase="'puppies'">
+      <!-- nombre del alumno -->
       <ion-item>
-        <ion-select [(ngModel)]="item" style="width: 100%;">
-          <ion-option *ngFor="let alumn of alumnosArr" [value]="alumn.Id"  style="width: 100%;">{{alumn.NombreCompleto}}</ion-option>
+        <ion-label color="primary" floating>Nombre Completo</ion-label>
+        <ion-input type="text" [(ngModel)]="nombreCompleto"></ion-input>
+      </ion-item>
+
+      <!-- edad -->
+      <ion-item col-6>
+        <ion-label color="primary" floating>Edad</ion-label>
+        <ion-input type="number" [(ngModel)]="edad"></ion-input>
+      </ion-item>
+
+      <ion-item col-6>
+        <ion-label color="primary" floating>Sexo</ion-label>
+        <ion-select [(ngModel)]="sexo">
+          <ion-option value="Hombre">Hombre</ion-option>
+          <ion-option value="Mujer">Mujer</ion-option>
         </ion-select>
       </ion-item>
+
     </ion-row>
-    <ion-row style="width: 100%;">
-      <ion-col col-12>
-        <button ion-button color="success" style="width: 100%;"> Usar</button>
+    <ion-row *ngSwitchCase="'Medicos'">
+      <ion-item col-9>
+        <ion-label color="primary" floating>¿Problemas Cardiacos, cuales?</ion-label>
+        <ion-input type="text" [(ngModel)]="cualesProblemasCardiacos"></ion-input>
+      </ion-item>
+      <ion-item col-3 no-border>
+        <ion-toggle [(ngModel)]="tieneProblemasCardiacos"></ion-toggle>
+      </ion-item>
+      <ion-item col-9>
+        <ion-label color="primary" floating>¿Problemas Motores, cuales?</ion-label>
+        <ion-input type="text" [(ngModel)]="cualesProblemasMotores"></ion-input>
+      </ion-item>
+      <ion-item col-3 no-border>
+        <ion-toggle [(ngModel)]="tieneProblemasMotores"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary">¿Tiene asma?</ion-label>
+        <ion-toggle [(ngModel)]="tieneAsma"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Otra Enfermedad</ion-label>
+        <ion-input type="text" [(ngModel)]="otraEnfermedad"></ion-input>
+      </ion-item>
+
+    </ion-row>
+    <ion-row *ngSwitchCase="'Otros'">
+      <ion-item>
+        <ion-label color="primary" floating>Acudir a</ion-label>
+        <ion-input type="text" [(ngModel)]="dondeAcudir"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Teléfono Urgencia</ion-label>
+        <ion-input type="number" [(ngModel)]="numeroEmergencia"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" floating>Observaciones</ion-label>
+        <ion-input type="text" [(ngModel)]="observacion"></ion-input>
+      </ion-item>
+    </ion-row>
+
+  </div>
+
+<!--  <ion-row>
+    <h6>Alumno</h6>
+    &lt;!&ndash; nombre del alumno &ndash;&gt;
+    <ion-item>
+      <ion-label color="primary" floating>Nombre Completo</ion-label>
+      <ion-input type="text" [(ngModel)]="nombreCompleto"></ion-input>
+    </ion-item>
+
+    &lt;!&ndash; edad &ndash;&gt;
+    <ion-item col-6>
+      <ion-label color="primary" floating>Edad</ion-label>
+      <ion-input type="number" [(ngModel)]="edad"></ion-input>
+    </ion-item>
+
+    <ion-item col-6>
+      <ion-label color="primary" floating>Sexo</ion-label>
+      <ion-select [(ngModel)]="sexo">
+        <ion-option value="Hombre">Hombre</ion-option>
+        <ion-option value="Mujer">Mujer</ion-option>
+      </ion-select>
+    </ion-item>
+
+  </ion-row>
+  <ion-row style="padding-top: 10px;">
+  <h6>Antecedentes Médicos</h6>
+
+  <ion-item col-9>
+    <ion-label color="primary" floating>¿Problemas Cardiacos, cuales?</ion-label>
+    <ion-input type="text" [(ngModel)]="cualesProblemasCardiacos"></ion-input>
+  </ion-item>
+  <ion-item col-3 no-border>
+    <ion-toggle [(ngModel)]="tieneProblemasCardiacos"></ion-toggle>
+  </ion-item>
+    <ion-item col-9>
+      <ion-label color="primary" floating>¿Problemas Motores, cuales?</ion-label>
+      <ion-input type="text" [(ngModel)]="cualesProblemasMotores"></ion-input>
+    </ion-item>
+    <ion-item col-3 no-border>
+      <ion-toggle [(ngModel)]="tieneProblemasMotores"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">¿Tiene asma?</ion-label>
+      <ion-toggle [(ngModel)]="tieneAsma"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>Otra Enfermedad</ion-label>
+      <ion-input type="text" [(ngModel)]="otraEnfermedad"></ion-input>
+    </ion-item>
+
+</ion-row>
+  <ion-row style="padding-top: 10px;">
+    <h6>Otros</h6>
+    <ion-item>
+      <ion-label color="primary" floating>Acudir a</ion-label>
+      <ion-input type="text" [(ngModel)]="dondeAcudir"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>Teléfono Urgencia</ion-label>
+      <ion-input type="number" [(ngModel)]="numeroEmergencia"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>Observaciones</ion-label>
+      <ion-input type="text" [(ngModel)]="observacion"></ion-input>
+    </ion-item>
+  </ion-row>-->
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button color="success" style="width: 100%;" (click)="limpiar()"> Limpiar</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button color="secondary" style="width: 100%;" (click)="guardar()"> Agregar</button>
       </ion-col>
     </ion-row>
-  </ion-row>
-
+  </ion-grid>
 
 </ion-content>

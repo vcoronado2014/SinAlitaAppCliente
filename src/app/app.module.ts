@@ -20,6 +20,7 @@ import { DetailAgendaPage } from '../pages/detail-agenda/detail-agenda';
 import { FichaAlumnoPage } from '../pages/ficha-alumno/ficha-alumno';
 import { DetailsFichaPage } from '../pages/details-ficha/details-ficha';
 import { CreaAlumnoPage } from '../pages/crea-alumno/crea-alumno';
+import { AceptaCondicionesPage } from '../pages/acepta-condiciones/acepta-condiciones';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CreaAlumnoPage } from '../pages/crea-alumno/crea-alumno';
     FichaAlumnoPage,
     DetailsFichaPage,
     CreaAlumnoPage,
+    AceptaCondicionesPage,
     TextAvatarDirective
   ],
   imports: [
@@ -47,7 +49,8 @@ import { CreaAlumnoPage } from '../pages/crea-alumno/crea-alumno';
     DetailAgendaPage,
     DetailsFichaPage,
     FichaAlumnoPage,
-    CreaAlumnoPage
+    CreaAlumnoPage,
+    AceptaCondicionesPage
   ],
   providers: [
     StatusBar,
