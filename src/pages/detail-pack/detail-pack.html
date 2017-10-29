@@ -81,7 +81,12 @@
           </ion-avatar>
           <h2 class="fg-darkgrey">Cantidad Niños: {{cantidadAlumnos}}</h2>
           <p style="font-style: italic; font-size: 0.8em;">Deslice a la izquierda para ver las opciones.</p>
-          <p style="color: white; background: salmon;" *ngIf="tieneAlerta" text-wrap>{{mensajeAlerta}}</p>
+          <p style="color: white; background: salmon;" *ngIf="tieneAlerta" text-wrap>{{mensajeAlerta}}
+            <button end ion-button color="danger" (click)="goToCrearAlumno()" smaller style="float: right;">
+              <ion-icon name="eye"></ion-icon>
+              &nbsp;Ir
+            </button>
+          </p>
         </ion-item>
         <ion-item-options side="right">
           <button ion-button color="primary" (click)="goToFichaAlumno()">

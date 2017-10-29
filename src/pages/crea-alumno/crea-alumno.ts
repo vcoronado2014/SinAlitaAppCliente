@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, ToastController, ViewController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
+import { DetailPackPage } from '../../pages/detail-pack/detail-pack';
 
 import { AlumnoService } from '../../app/Services/AlumnoService';
+import { FichaAlumnoService } from '../../app/Services/FichaAlumnoService';
+import { AuthService } from '../../app/Services/AuthService';
 
 /**
  * Generated class for the CreaAlumnoPage page.
@@ -20,8 +23,10 @@ export class CreaAlumnoPage {
   //el id del cliente para buscar una lista de alumnos que tenga,
   //mostrarlos en un combo y que lo pueda usar
   alumnosArr =[];
+  fichasArr =[];
   public tieneAlumnos;
   public clieId;
+  public idPack;
   //variables del formulario
   public idAlumno;
   public nombreCompleto;
@@ -39,8 +44,12 @@ export class CreaAlumnoPage {
   public observacion;
   public otraEnfermedad;
 
+  public cantidadAlumnosActual;
+  public codigoCliente;
+
   pet: string = "puppies";
 
+  public idAlumnoEditar;
 
     constructor(
     private nav: NavController,
@@ -49,11 +58,16 @@ export class CreaAlumnoPage {
     public toastCtrl: ToastController,
     private navParams: NavParams,
     private viewCtrl: ViewController,
-    public alumnos: AlumnoService
+    public alumnos: AlumnoService,
+    public auth: AuthService,
+    public ficha: FichaAlumnoService
   ) {
-
+      this.cantidadAlumnosActual = 0;
       this.clieId = navParams.get('clieId');
+      this.idPack = navParams.get('idPack');
+      this.codigoCliente= navParams.get('codigoCliente');
       this.tieneAlumnos = false;
+      this.idAlumnoEditar = 0;
 
       let loader = this.loading.create({
         content: 'Cargando...',
@@ -73,6 +87,20 @@ export class CreaAlumnoPage {
           () => console.log('get alumnos completed')
         );
 
+        this.ficha.getFichas(this.idPack).subscribe(
+          dataAl => {
+            this.fichasArr = dataAl.json();
+            if (this.fichasArr){
+              this.cantidadAlumnosActual = this.fichasArr.length;
+            }
+
+
+
+          },
+          err => console.error(err),
+          () => console.log('get fichas completed')
+        );
+
 
 
         loader.dismiss();
@@ -80,15 +108,114 @@ export class CreaAlumnoPage {
 
   }
   guardar(){
+    //se envian los elementos a guardar, luego se asigna al arreglo de fichas
+    //el retorno del guardado, se asigna a la variable contador la cantidad de alumnos
+    //se limpia el formulario
       if (this.validar()){
         //todo ok.
-        let mi = this.presentToast('correcto', 'bottom', 4000);
+        //let mi = this.presentToast('correcto', 'bottom', 4000);
+        //el IdAlumnoEditar es el elemento de nuevo o antiguo
+        var intTieneProblemasCardiacos = "0";
+        var intTieneProblemasMotores= "0";
+        var intTieneAsma = "0";
+
+        if (this.tieneAsma)
+          intTieneAsma = "1";
+        if (this.tieneProblemasCardiacos)
+          intTieneProblemasCardiacos = "1";
+        if (this.tieneProblemasMotores)
+          intTieneProblemasMotores = "1";
+
+        var entidad = {
+          IdAlumno: this.idAlumnoEditar.toString(),
+          IdPack: this.idPack.toString(),
+          NombreCompleto: this.nombreCompleto,
+          Edad: this.edad.toString(),
+          Sexo: this.sexo,
+          TieneProblemasMotores: intTieneProblemasMotores,
+          CualesProblemasMotores: this.cualesProblemasMotores,
+          TieneProblemasCardiacos: intTieneProblemasCardiacos,
+          CualesProblemasCardiacos: this.cualesProblemasCardiacos,
+          TieneAsma: intTieneAsma,
+          OtraEnfermedad: this.otraEnfermedad,
+          NumeroEmergencia: this.numeroEmergencia,
+          DondeAcudir: this.dondeAcudir,
+          Observacion: this.observacion
+        };
+
+        //la entidad esta lista
+        //ahora a enviar los elementos
+        this.ficha.put(entidad).subscribe(
+          data => {
+            if (data.status == 200) {
+              //todo ok
+              let mi = this.presentToast('Registro Guardado con éxito.', 'top', 5000);
+              this.fichasArr = data.json();
+              if (this.fichasArr){
+                this.cantidadAlumnosActual = this.fichasArr.length;
+              }
+              this.alumnos.getAlumnos(this.clieId).subscribe(
+                data => {
+                  this.alumnosArr = data.json();
+                  if (this.alumnosArr.length > 0){
+                    this.tieneAlumnos = true;
+                  }
+
+
+                },
+                err => console.error(err),
+                () => console.log('get alumnos completed')
+              );
+              this.limpiar();
+
+            }
+            else {
+              let mi = this.presentToast('Error al guardar.', 'bottom', 4000);
+              //redireccionar a la anterior
+              //this.nav.setRoot(HomePage);
+            }
+          },
+          err => console.error(err),
+          () => console.log('ok')
+        );
+
+
+
       }
   }
 
   close(){
+    this.auth.Post(this.codigoCliente).subscribe(
+      data => {
+        this.nav.push(DetailPackPage, {id: this.codigoCliente, envoltorio: this.auth.envoltorio });
+      },
+      err => console.error(err),
+      () => console.log('ok')
+    );
     //aca hay que ir a la pagina anterior con push
-    this.viewCtrl.dismiss();
+    //this.viewCtrl.dismiss();
+/*    this.auth.Post(this.codigoCliente)
+      .subscribe(
+        rs => = rs,
+        er => {
+          //console.log(error)
+          //let mi = this.presentToast('No existe información', 'bottom', 4000);
+
+        },
+        () => {
+            this.nav.push(DetailPackPage, {id: this.codigoCliente, envoltorio: this.auth.envoltorio })
+              .then(data => console.log(data),
+                error => {
+                  //console.log(error)
+                  let mi = this.presentToast(error, 'bottom', 4000);
+                }
+              );
+          }
+
+        }
+      )*/
+
+
   }
   validar(){
     if (this.nombreCompleto == undefined){
@@ -156,6 +283,7 @@ export class CreaAlumnoPage {
   }
   limpiar(){
     this.idAlumno = 0;
+    this.idAlumnoEditar = 0;
 
     this.nombreCompleto = "";
     this.edad="";
@@ -187,7 +315,6 @@ export class CreaAlumnoPage {
 
     return alumno;
   }
-
   presentToast = function(mensaje, posicion, duracion) {
     let toast = this.toastCtrl.create({
       message: mensaje,

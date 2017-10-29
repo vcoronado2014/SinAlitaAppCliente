@@ -25,5 +25,13 @@ export class FichaAlumnoService{
     });
     return repos;
   }
+  put(dataPut){
+    let url = AppSettings.URL_API + 'FichaAlumno';
+
+    let repos = this.http.put(url, dataPut, {
+      headers: new Headers({'Content-Type': 'application/json'})
+    });
+    return repos;
+  }
 
 }

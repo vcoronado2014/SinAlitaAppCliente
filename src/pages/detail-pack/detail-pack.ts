@@ -7,6 +7,7 @@ import { DetailAgendaPage } from '../../pages/detail-agenda/detail-agenda';
 import { HomePage } from '../../pages/home/home';
 import { FichaAlumnoPage } from '../../pages/ficha-alumno/ficha-alumno';
 import { AceptaCondicionesPage } from '../../pages/acepta-condiciones/acepta-condiciones';
+import { CreaAlumnoPage } from '../../pages/crea-alumno/crea-alumno';
 
 import * as moment from 'moment';
 
@@ -190,6 +191,9 @@ export class DetailPackPage {
   }
   goToDetails(id){
     this.nav.push(DetailAgendaPage, {id: id });
+  }
+  goToCrearAlumno(){
+    this.nav.push(CreaAlumnoPage, {idPack: this.idPack, clieId: this.clieId, codigoCliente: this.codigoCliente});
   }
   goToFichaAlumno(){
     this.nav.push(FichaAlumnoPage, {fichaAlumnos: this.fichaAlumnos, cantidadAlumnos: this.cantidadAlumnos, idPack: this.idPack, clieId: this.clieId });

@@ -89,6 +89,9 @@
       <ion-segment-button value="Otros">
         Otros
       </ion-segment-button>
+      <ion-segment-button value="Lista">
+        Lista <ion-badge item-end>{{cantidadAlumnosActual}}</ion-badge>
+      </ion-segment-button>
     </ion-segment>
   </div>
   <div [ngSwitch]="pet">
@@ -152,6 +155,17 @@
         <ion-label color="primary" floating>Observaciones</ion-label>
         <ion-input type="text" [(ngModel)]="observacion"></ion-input>
       </ion-item>
+    </ion-row>
+
+    <ion-row *ngSwitchCase="'Lista'">
+      <ion-list  *ngFor="let user of fichasArr">
+        <ion-item >
+          <text-avatar [text]="user.NombreCompleto" [color]="user.color" item-left></text-avatar>
+          <h2>{{ user.NombreCompleto || upper}}</h2>
+          <p>Edad: {{user.Edad}} años</p>
+          <p>Sexo: {{user.Sexo}}</p>
+        </ion-item>
+    </ion-list>
     </ion-row>
 
   </div>
