@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, Toast} from 'ionic-angular';
+import {NavController, Toast, NavParams} from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { DetailPackPage } from '../../pages/detail-pack/detail-pack';
 
@@ -17,9 +17,15 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
+    private navParams: NavParams,
     public auth: AuthService,
     public toastCtrl: ToastController
   ) {
+
+    if (this.navParams.get('codigoCliente') != null)
+    {
+      this.codigoCliente = this.navParams.get('codigoCliente');
+    }
 
   }
 

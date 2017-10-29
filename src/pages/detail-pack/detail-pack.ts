@@ -43,6 +43,13 @@ export class DetailPackPage {
   public fichaAlumnos;
   public idPack;
   public clieId;
+  public codigoCliente;
+  //para controlar
+  public puedeVerAgenda;
+  public tieneAlerta;
+  public mensajeAlerta;
+  public alumnosCreados;
+  public cuposCreados;
 
   constructor(
     private nav: NavController,
@@ -55,6 +62,7 @@ export class DetailPackPage {
       this.idElemento = navParams.get('id');
       this.envoltorio = navParams.get('envoltorio');
       this.clasesAgendadas = 0;
+      this.cuposCreados = 0;
 
       this.nombreProfesor = '';
       this.emailProfesor = '';
@@ -72,6 +80,13 @@ export class DetailPackPage {
       this.fichaAlumnos= [];
       this.idPack = 0;
       this.clieId = 0;
+      this.codigoCliente="";
+
+      this.puedeVerAgenda = false;
+      this.tieneAlerta = false;
+      this.alumnosCreados = 0;
+      this.mensajeAlerta="";
+
 
     this.splashScreen.show();
 /*
@@ -87,6 +102,7 @@ export class DetailPackPage {
       if (this.envoltorio){
         //el identificador del pack
         this.idPack = this.envoltorio.ProductoCodigo.Id;
+        this.codigoCliente = this.envoltorio.ProductoCodigo.CodigoCliente;
         //tiene acepta condiciones
         if (this.envoltorio.TieneAceptaCondiciones){
           this.cantidadAlumnos = this.envoltorio.ProductoCodigo.CantidadAlumnos;
@@ -112,6 +128,11 @@ export class DetailPackPage {
             this.fotoProfesor = "../../assets/img/no_foto.png";
             this.infoProfesor = '';
           }
+          if (this.envoltorio.Cupos){
+            if (this.envoltorio.Cupos.length > 0){
+              this.cuposCreados = this.envoltorio.Cupos.length;
+            }
+          }
           //cliente
           if (this.envoltorio.Cliente.Id > 0){
             this.clieId = this.envoltorio.Cliente.Id;
@@ -120,6 +141,7 @@ export class DetailPackPage {
             this.comunaCliente = this.envoltorio.ComunaCliente.Nombre;
             this.telefonosCliente = this.envoltorio.Cliente.TelefonosContacto;
           }
+          this.codigoCliente = this.envoltorio.ProductoCodigo.CodigoCliente;
           //fecha creacion
           let fecha = moment(this.envoltorio.ProductoCodigo.FechaCreacion).format('DD-MM-YYYY HH:MM');
           this.fechaPack = fecha;
@@ -133,7 +155,24 @@ export class DetailPackPage {
         //ficha Alumnos
         if (this.envoltorio.FichaAlumnos){
           this.fichaAlumnos = this.envoltorio.FichaAlumnos;
+          if (this.fichaAlumnos.length > 0){
+            this.alumnosCreados = this.fichaAlumnos.length;
+          }
         }
+        //controles
+        //puede ver agenda cuando la cantidad de alumnos creados sea igual a la programada
+        if (this.alumnosCreados != this.cantidadAlumnos){
+          this.puedeVerAgenda = false;
+          this.tieneAlerta = true;
+          var dif = this.cantidadAlumnos - this.alumnosCreados;
+          var sms = "No puede ver su agenda hasta que cree la ficha de " + dif.toString() + " alumnos.";
+          this.mensajeAlerta = sms;
+        }
+        if (this.cuposCreados == 0){
+          this.puedeVerAgenda = false;
+        }
+
+
       }
       else {
         //redirect a home
@@ -146,7 +185,8 @@ export class DetailPackPage {
     });*/
   }
   goToAceptaCondiciones(id){
-    this.nav.push(AceptaCondicionesPage, {id: id });
+    //this.nav.push(AceptaCondicionesPage, {id: id });
+    this.nav.setRoot(AceptaCondicionesPage, {id: id, codigoCliente: this.codigoCliente });
   }
   goToDetails(id){
     this.nav.push(DetailAgendaPage, {id: id });
