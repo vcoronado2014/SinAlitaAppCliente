@@ -4,6 +4,7 @@ import { ToastController } from 'ionic-angular';
 import { DetailPackPage } from '../../pages/detail-pack/detail-pack';
 
 import { AuthService } from '../../app/Services/AuthService';
+import {AppSettings} from "../../../AppSettings";
 
 @Component({
   selector: 'page-home',
@@ -14,6 +15,7 @@ export class HomePage {
   codigoCliente: string;
   isLogged: boolean;
   envoltorio: any;
+  icono;
 
   constructor(
     public navCtrl: NavController,
@@ -22,6 +24,7 @@ export class HomePage {
     public toastCtrl: ToastController
   ) {
 
+    this.icono = AppSettings.URL_FOTOS + 'img/icono.png';
     if (this.navParams.get('codigoCliente') != null)
     {
       this.codigoCliente = this.navParams.get('codigoCliente');

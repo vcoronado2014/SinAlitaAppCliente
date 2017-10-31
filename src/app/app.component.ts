@@ -4,17 +4,20 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
+import {AppSettings} from "../../AppSettings";
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage:any = HomePage;
-  pages: Array<{title: string, component: any}>
+  pages: Array<{title: string, component: any}>;
+  imgPrincipal;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     var paginaUno = {title: 'Inicio', component: HomePage, visible: true };
-
+    this.imgPrincipal = AppSettings.URL_FOTOS + "img/agua.jpg";
 
 
     this.pages = [

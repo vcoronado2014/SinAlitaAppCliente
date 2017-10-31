@@ -10,6 +10,7 @@ import { AceptaCondicionesPage } from '../../pages/acepta-condiciones/acepta-con
 import { CreaAlumnoPage } from '../../pages/crea-alumno/crea-alumno';
 
 import * as moment from 'moment';
+import {AppSettings} from "../../../AppSettings";
 
 /**
  * Generated class for the DetailPackPage page.
@@ -116,17 +117,17 @@ export class DetailPackPage {
             this.fonoProfesor = this.envoltorio.Profesor.TelefonosContacto;
             this.infoProfesor =  this.emailProfesor + ', ' + this.fonoProfesor;
             if (this.envoltorio.Profesor.Fotografia == ''){
-              this.fotoProfesor = "../../assets/img/no_foto.png";
+              this.fotoProfesor = AppSettings.URL_FOTOS + "img/no_foto.png";
             }
             else {
-              this.fotoProfesor = this.envoltorio.Profesor.Fotografia;
+              this.fotoProfesor = AppSettings.URL_FOTOS + "img/" + this.envoltorio.Profesor.Fotografia;
             }
 
           }
           else {
             //no hay profesor asignado aun
             this.nombreProfesor = 'No hay profesor asignado';
-            this.fotoProfesor = "../../assets/img/no_foto.png";
+            this.fotoProfesor = AppSettings.URL_FOTOS + "img/no_foto.png";
             this.infoProfesor = '';
           }
           if (this.envoltorio.Cupos){
@@ -199,6 +200,9 @@ export class DetailPackPage {
     this.nav.push(FichaAlumnoPage, {fichaAlumnos: this.fichaAlumnos, cantidadAlumnos: this.cantidadAlumnos, idPack: this.idPack, clieId: this.clieId });
     //acá cerramos el slide
     this.list.closeSlidingItems();
+  }
+  close(){
+    this.nav.push(HomePage);
   }
 
 }

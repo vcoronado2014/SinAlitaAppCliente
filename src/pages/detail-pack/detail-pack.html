@@ -1,16 +1,27 @@
-<ion-header>
+<!--<ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Información del Pack</ion-title>
-    <!--
-      <ion-icon name="close-circle" float-right (click)="logout()"></ion-icon>
-    -->
-
+  </ion-navbar>
+</ion-header>-->
+<ion-header>
+  <ion-navbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-2>
+          <ion-icon name="arrow-back" start (click)="close()" style="font-size: 1.5em;"></ion-icon>
+        </ion-col>
+        <ion-col col-10>
+          <ion-title start>
+            Información del Pack
+          </ion-title>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-navbar>
 </ion-header>
-
 
 <ion-content padding>
   <ion-fab top right edge>
@@ -25,7 +36,7 @@
   <ion-grid style="padding-bottom: 0;">
     <ion-row>
       <ion-item style="text-align: center;">
-        <img src="{{fotoProfesor}}" style="max-height: 150px;">
+        <img src="{{fotoProfesor}}" style="max-height: 120px;">
       </ion-item>
       <ion-item style="border-bottom-style: none;">
         <h2 class="fg-darkgrey" style="text-align: center;">{{nombreProfesor}}</h2>
@@ -45,14 +56,14 @@
       <ion-avatar item-start>
         <ion-icon name="information-circle" class="icono-lista fg-darkgrey"  style="font-size: 2em;"></ion-icon>
       </ion-avatar>
-      <h2 class="fg-darkgrey">Código Pack</h2>
+      <h6 class="fg-darkgrey">Código Pack</h6>
       <p>{{idElemento}}</p>
     </ion-item>
     <ion-item>
       <ion-avatar item-start>
         <ion-icon name="person" class="icono-lista fg-darkgrey"  style="font-size: 2em;"></ion-icon>
       </ion-avatar>
-      <h2 class="fg-darkgrey">Cliente</h2>
+      <h6 class="fg-darkgrey">Cliente</h6>
       <p text-wrap>{{nombreCliente}}</p>
     </ion-item>
 
@@ -61,7 +72,7 @@
       <ion-avatar item-start>
         <ion-icon name="clock" class="icono-lista fg-darkgrey"  style="font-size: 2em;"></ion-icon>
       </ion-avatar>
-      <h2 class="fg-darkgrey">Fecha Creación</h2>
+      <h6 class="fg-darkgrey">Fecha Creación</h6>
       <p>{{fechaPack}}</p>
     </ion-item>
 
@@ -79,7 +90,7 @@
           <ion-avatar item-start>
             <ion-icon name="people" class="icono-lista fg-darkgrey"  style="font-size: 2em;"></ion-icon>
           </ion-avatar>
-          <h2 class="fg-darkgrey">Cantidad Niños: {{cantidadAlumnos}}</h2>
+          <h6 class="fg-darkgrey">Cantidad Niños: {{cantidadAlumnos}}</h6>
           <p style="font-style: italic; font-size: 0.8em;">Deslice a la izquierda para ver las opciones.</p>
           <p style="color: white; background: salmon;" *ngIf="tieneAlerta" text-wrap>{{mensajeAlerta}}
             <button end ion-button color="danger" (click)="goToCrearAlumno()" smaller style="float: right;">

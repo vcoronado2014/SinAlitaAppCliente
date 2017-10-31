@@ -2,4 +2,14 @@ page-crea-alumno {
   .back-button.show-back-button {
     display: none;
   }
+  .card-header-md {
+    font-size: 1.6rem;
+    color: #222;
+    padding: 8PX;
+  }
+  .card-content-md {
+    padding: 5px 13px;
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
 }

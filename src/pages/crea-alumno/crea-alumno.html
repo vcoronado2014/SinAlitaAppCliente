@@ -41,13 +41,13 @@
       <ion-row style="width: 100%;">
         <ion-grid>
           <ion-row>
-            <ion-col col-10>
-              <ion-select [(ngModel)]="item" style="width: 100%;">
+            <ion-col col-9>
+              <ion-select [(ngModel)]="item" style="width: 100%; font-size: 1.2em;">
                 <ion-option *ngFor="let alumn of alumnosArr" [value]="alumn.Id"  style="width: 100%;">{{alumn.NombreCompleto}}</ion-option>
               </ion-select>
             </ion-col>
-            <ion-col col-2>
-              <button ion-button color="success" small (click)="usar(item)"> Usar</button>
+            <ion-col col-3>
+              <button ion-button color="success" smaller (click)="usar(item)" style="padding-right: 3px; width: 100%;"> Usar</button>
             </ion-col>
           </ion-row>
         </ion-grid>
