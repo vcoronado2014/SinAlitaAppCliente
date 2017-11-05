@@ -40,7 +40,9 @@
       </ion-item>
       <ion-item style="border-bottom-style: none;">
         <h2 class="fg-darkgrey" style="text-align: center;">{{nombreProfesor}}</h2>
-        <p text-wrap>{{infoProfesor}}</p>
+        <h6 style="text-align: center;"><ion-icon name="mail"></ion-icon><a href="mailto:{{emailProfesor}}?Subject=Consulta" target="_top">&nbsp;{{emailProfesor}}</a></h6>
+        <h6 style="text-align: center;"><ion-icon name="logo-whatsapp"></ion-icon><a href="whatsapp://send?text=Hola&phone=+569{{fonoProfesor}}&abid=+569{{fonoProfesor}}">&nbsp;{{fonoProfesor}}</a></h6>
+        <!-- <p text-wrap>{{infoProfesor}}</p>-->
       </ion-item>
 
     </ion-row>

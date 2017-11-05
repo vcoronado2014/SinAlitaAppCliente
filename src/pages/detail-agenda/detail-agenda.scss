@@ -12,4 +12,17 @@ page-detail-agenda {
     line-height: 1.5;
     color: #666666;
   }
+  .icono-texto {
+    width: 4.2rem;
+    height: 4.2rem;
+    border-radius: 2.1rem;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-size: large;
+    background: cadetblue;
+    padding-top: 0.7em;
+    color: white;
+    font-weight: bold;
+  }
 }

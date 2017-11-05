@@ -68,7 +68,8 @@ export class FichaAlumnoPage {
           }
           //mostramos el boton agregar
           if (this.cantidadAlumnosBd != this.cantidadAlumnos){
-            this.botonAgregar = true;
+            //lo vamos a dejar siempre invisible
+            this.botonAgregar = false;
           }
 
         },

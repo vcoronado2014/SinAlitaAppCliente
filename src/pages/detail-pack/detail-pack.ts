@@ -52,6 +52,7 @@ export class DetailPackPage {
   public mensajeAlerta;
   public alumnosCreados;
   public cuposCreados;
+  public arrCupos;
 
   constructor(
     private nav: NavController,
@@ -89,14 +90,16 @@ export class DetailPackPage {
       this.alumnosCreados = 0;
       this.mensajeAlerta="";
 
+      this.arrCupos = [];
 
-    this.splashScreen.show();
-/*
+
+    //this.splashScreen.show();
+
     let loader = this.loading.create({
       content: 'Cargando...',
     });
-*/
-    /*loader.present().then(() => {*/
+
+    loader.present().then(() => {
 
       //aca las llamadas ajax
       //se deben profesar ciertos parametros
@@ -133,6 +136,7 @@ export class DetailPackPage {
           if (this.envoltorio.Cupos){
             if (this.envoltorio.Cupos.length > 0){
               this.cuposCreados = this.envoltorio.Cupos.length;
+              this.puedeVerAgenda = true;
             }
           }
           //cliente
@@ -173,7 +177,9 @@ export class DetailPackPage {
         if (this.cuposCreados == 0){
           this.puedeVerAgenda = false;
         }
-
+        if (this.envoltorio.Cupos){
+          this.arrCupos = this.envoltorio.Cupos;
+        }
 
       }
       else {
@@ -181,17 +187,17 @@ export class DetailPackPage {
         nav.setRoot(HomePage);
       }
 
-    this.splashScreen.hide();
-/*
+    //this.splashScreen.hide();
+
       loader.dismiss();
-    });*/
+    });
   }
   goToAceptaCondiciones(id){
     //this.nav.push(AceptaCondicionesPage, {id: id });
     this.nav.setRoot(AceptaCondicionesPage, {id: id, codigoCliente: this.codigoCliente });
   }
   goToDetails(id){
-    this.nav.push(DetailAgendaPage, {id: id });
+    this.nav.push(DetailAgendaPage, {id: id, cupos: this.arrCupos, profesor: this.envoltorio.Profesor, codigoPack: this.codigoCliente });
   }
   goToCrearAlumno(){
     this.nav.push(CreaAlumnoPage, {idPack: this.idPack, clieId: this.clieId, codigoCliente: this.codigoCliente});
@@ -202,7 +208,7 @@ export class DetailPackPage {
     this.list.closeSlidingItems();
   }
   close(){
-    this.nav.push(HomePage);
+    this.nav.setRoot(HomePage);
   }
 
 }
