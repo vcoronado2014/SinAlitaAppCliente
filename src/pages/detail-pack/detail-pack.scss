@@ -22,4 +22,16 @@ page-detail-pack {
   .label-md {
     margin: 6px 8px 6px 0;
   }
+  .item-md p {
+    margin: 0 0 2px;
+    overflow: inherit;
+    font-size: 1.4rem;
+    line-height: normal;
+    text-overflow: inherit;
+    color: black;
+  }
+  [padding] h1:first-child, [padding] h2:first-child, [padding] h3:first-child, [padding] h4:first-child, [padding] h5:first-child, [padding] h6:first-child {
+    margin-top: 0rem;
+    font-size: 1.2rem;
+  }
 }

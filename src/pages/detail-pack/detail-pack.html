@@ -1,11 +1,3 @@
-<!--<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Información del Pack</ion-title>
-  </ion-navbar>
-</ion-header>-->
 <ion-header>
   <ion-navbar>
     <ion-grid>
@@ -35,13 +27,16 @@
   <!-- elementos superiores -->
   <ion-grid style="padding-bottom: 0;">
     <ion-row>
-      <ion-item style="text-align: center;">
+      <ion-item style="text-align: center;" no-lines>
         <img src="{{fotoProfesor}}" style="max-height: 120px;">
       </ion-item>
-      <ion-item style="border-bottom-style: none;">
-        <h2 class="fg-darkgrey" style="text-align: center;">{{nombreProfesor}}</h2>
-        <h6 style="text-align: center;"><ion-icon name="mail"></ion-icon><a href="mailto:{{emailProfesor}}?Subject=Consulta" target="_top">&nbsp;{{emailProfesor}}</a></h6>
-        <h6 style="text-align: center;"><ion-icon name="logo-whatsapp"></ion-icon><a href="whatsapp://send?text=Hola&phone=+569{{fonoProfesor}}&abid=+569{{fonoProfesor}}">&nbsp;{{fonoProfesor}}</a></h6>
+      <ion-item style="border-bottom-style: none;" no-lines>
+        <h2 class="fg-darkgrey" style="text-align: center; font-size: 1.6rem;">{{nombreProfesor}}</h2>
+        <h6 style="text-align: center;"><ion-icon name="mail" color="primary"></ion-icon><a href="mailto:{{emailProfesor}}?Subject=Consulta" target="_top">&nbsp;{{emailProfesor}}</a></h6>
+        <h6 style="text-align: center;"><ion-icon name="logo-whatsapp"  color="primary"></ion-icon><a href="whatsapp://send?text=Hola&phone=+56{{fonoProfesor}}&abid=+56{{fonoProfesor}}">&nbsp;+56{{fonoProfesor}}</a></h6>
+        <!--
+        <h6 style="text-align: center;"><ion-icon name="logo-whatsapp"></ion-icon><a href="whatsapp://send?text=Hola&phone=+569{{fonoProfesor}}&abid=+569{{fonoProfesor}}">&nbsp;+569{{fonoProfesor}}</a></h6>
+        -->
         <!-- <p text-wrap>{{infoProfesor}}</p>-->
       </ion-item>
 
@@ -49,38 +44,33 @@
   </ion-grid>
   <!-- lista de elementos -->
   <ion-list>
-    <!-- HEADER -->
-<!--    <ion-list-header class="no-margin-bottom">
-      <h2><strong>Información del Pack</strong></h2>
-    </ion-list-header>-->
-
     <ion-item>
       <ion-avatar item-start>
-        <ion-icon name="information-circle" class="icono-lista fg-darkgrey"  style="font-size: 2em;"></ion-icon>
+        <ion-icon name="information-circle" class="icono-lista"  style="font-size: 2em;"></ion-icon>
       </ion-avatar>
-      <h6 class="fg-darkgrey">Código Pack</h6>
+      <h6>Código Pack</h6>
       <p>{{idElemento}}</p>
     </ion-item>
     <ion-item>
       <ion-avatar item-start>
-        <ion-icon name="person" class="icono-lista fg-darkgrey"  style="font-size: 2em;"></ion-icon>
+        <ion-icon name="person" class="icono-lista"  style="font-size: 2em;"></ion-icon>
       </ion-avatar>
-      <h6 class="fg-darkgrey">Cliente</h6>
+      <h6>Cliente</h6>
       <p text-wrap>{{nombreCliente}}</p>
     </ion-item>
 
 
     <ion-item>
       <ion-avatar item-start>
-        <ion-icon name="clock" class="icono-lista fg-darkgrey"  style="font-size: 2em;"></ion-icon>
+        <ion-icon name="clock" class="icono-lista"  style="font-size: 2em;"></ion-icon>
       </ion-avatar>
-      <h6 class="fg-darkgrey">Fecha Creación</h6>
+      <h6>Fecha Creación</h6>
       <p>{{fechaPack}}</p>
     </ion-item>
 
     <ion-item>
       <ion-avatar item-start>
-        <ion-icon name="calendar" class="icono-lista fg-darkgrey"  style="font-size: 2em;"></ion-icon>
+        <ion-icon name="calendar" class="icono-lista"  style="font-size: 2em;"></ion-icon>
       </ion-avatar>
 
       <p>Clases Agendadas: {{clasesAgendadas}}</p>
@@ -90,9 +80,9 @@
       <ion-item-sliding #item>
         <ion-item>
           <ion-avatar item-start>
-            <ion-icon name="people" class="icono-lista fg-darkgrey"  style="font-size: 2em;"></ion-icon>
+            <ion-icon name="people" class="icono-lista"  style="font-size: 2em;"></ion-icon>
           </ion-avatar>
-          <h6 class="fg-darkgrey">Cantidad Niños: {{cantidadAlumnos}}</h6>
+          <h6>Cantidad Niños: {{cantidadAlumnos}}</h6>
           <p style="font-style: italic; font-size: 0.8em;">Deslice a la izquierda para ver las opciones.</p>
           <p style="color: white; background: salmon;" *ngIf="tieneAlerta" text-wrap>{{mensajeAlerta}}
             <button end ion-button color="danger" (click)="goToCrearAlumno()" smaller style="float: right;">

@@ -20,19 +20,25 @@
       <button ion-fab><ion-icon name="logo-instagram"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
+  <h2 ion-text>Bienvenido a la App SinAlitas</h2>
   <ion-grid style="padding-bottom: 0;">
     <ion-row>
-      <ion-item style="text-align: center;">
+      <ion-item style="text-align: center;" no-lines>
         <img src="{{icono}}" style="max-height: 120px;">
       </ion-item>
     </ion-row>
   </ion-grid>
-  <h2 ion-text color="primary">Bienvenido</h2>
-  <p text-justify>
-    Esta es nuestra Plataforma de gestión para nuestros Clientes, ingrese el codigo de Pack proporcionado por a Supervisora  luego presione el botón "Buscar".
+
+  <p text-justify class="font-principal" padding-left>
+
+    Estimado cliente muchas gracias por confiar en nuestros servicios y comenzar a vivir la experiencia de SinAlitas.
+
   </p>
+  <ion-list-header style="padding-bottom: 0; margin-bottom: 0; color: black; text-align: center; font-size: 1.6em;border-bottom: 1px solid #dedede;">
+    Acceso Clientes
+  </ion-list-header>
   <ion-item style="background: transparent;">
-    <ion-label color="primary" floating>Código Pack</ion-label>
+    <ion-label floating>Código Pack</ion-label>
     <ion-input clearInput [(ngModel)]="codigoCliente"></ion-input>
 
   </ion-item>
