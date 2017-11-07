@@ -205,7 +205,7 @@ export class DetailPackPage {
   goToFichaAlumno(){
     this.nav.push(FichaAlumnoPage, {fichaAlumnos: this.fichaAlumnos, cantidadAlumnos: this.cantidadAlumnos, idPack: this.idPack, clieId: this.clieId });
     //acá cerramos el slide
-    this.list.closeSlidingItems();
+    //this.list.closeSlidingItems();
   }
   close(){
     this.nav.setRoot(HomePage);

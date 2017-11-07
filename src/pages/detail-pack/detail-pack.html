@@ -17,7 +17,7 @@
 
 <ion-content padding>
   <ion-fab top right edge>
-    <button ion-fab mini><ion-icon name="add"></ion-icon></button>
+    <button ion-fab mini color="dark"><ion-icon name="add"></ion-icon></button>
     <ion-fab-list>
       <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
       <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
@@ -28,7 +28,7 @@
   <ion-grid style="padding-bottom: 0;">
     <ion-row>
       <ion-item style="text-align: center;" no-lines>
-        <img src="{{fotoProfesor}}" style="max-height: 120px;">
+        <img src="{{fotoProfesor}}" style="max-height: 95px;">
       </ion-item>
       <ion-item style="border-bottom-style: none;" no-lines>
         <h2 class="fg-darkgrey" style="text-align: center; font-size: 1.6rem;">{{nombreProfesor}}</h2>
@@ -75,8 +75,16 @@
 
       <p>Clases Agendadas: {{clasesAgendadas}}</p>
     </ion-item>
+    <button ion-item (click)="goToFichaAlumno()">
+      <ion-avatar item-start>
+        <ion-icon name="people" class="icono-lista"  style="font-size: 2em;"></ion-icon>
+      </ion-avatar>
+      <h6>Cantidad Niños: {{cantidadAlumnos}}</h6>
+      <p style="font-style: italic; font-size: 0.6em;">Pinche aquí para ver los alumnos.</p>
 
-    <ion-list #myList>
+    </button>
+
+    <!--<ion-list #myList>
       <ion-item-sliding #item>
         <ion-item>
           <ion-avatar item-start>
@@ -84,12 +92,7 @@
           </ion-avatar>
           <h6>Cantidad Niños: {{cantidadAlumnos}}</h6>
           <p style="font-style: italic; font-size: 0.8em;">Deslice a la izquierda para ver las opciones.</p>
-          <p style="color: white; background: salmon;" *ngIf="tieneAlerta" text-wrap>{{mensajeAlerta}}
-            <button end ion-button color="danger" (click)="goToCrearAlumno()" smaller style="float: right;">
-              <ion-icon name="eye"></ion-icon>
-              &nbsp;Ir
-            </button>
-          </p>
+
         </ion-item>
         <ion-item-options side="right">
           <button ion-button color="primary" (click)="goToFichaAlumno()">
@@ -99,7 +102,20 @@
         </ion-item-options>
 
       </ion-item-sliding>
-    </ion-list>
+    </ion-list>-->
+
+    <ion-item *ngIf="tieneAlerta">
+      <ion-avatar item-start>
+        <ion-icon name="information-circle" class="icono-lista"  style="font-size: 2em;" color="danger"></ion-icon>
+      </ion-avatar>
+
+      <p color="danger" text-wrap>{{mensajeAlerta}}
+        <button end ion-button color="danger" (click)="goToCrearAlumno()" smaller style="float: right;">
+          <ion-icon name="eye"></ion-icon>
+          &nbsp;Ir
+        </button>
+      </p>
+    </ion-item>
 
 
 
