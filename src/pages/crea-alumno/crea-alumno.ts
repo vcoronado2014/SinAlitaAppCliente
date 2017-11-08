@@ -6,6 +6,7 @@ import { DetailPackPage } from '../../pages/detail-pack/detail-pack';
 import { AlumnoService } from '../../app/Services/AlumnoService';
 import { FichaAlumnoService } from '../../app/Services/FichaAlumnoService';
 import { AuthService } from '../../app/Services/AuthService';
+import {AppSettings} from "../../../AppSettings";
 
 /**
  * Generated class for the CreaAlumnoPage page.
@@ -50,6 +51,9 @@ export class CreaAlumnoPage {
   pet: string = "puppies";
 
   public idAlumnoEditar;
+    public urlFacebook;
+  public urlInstagram;
+  public urlFun;
 
     constructor(
     private nav: NavController,
@@ -68,6 +72,9 @@ export class CreaAlumnoPage {
       this.codigoCliente= navParams.get('codigoCliente');
       this.tieneAlumnos = false;
       this.idAlumnoEditar = 0;
+          this.urlFacebook = AppSettings.URL_FACEBOOK;
+    this.urlInstagram = AppSettings.URL_INSTAGRAM;
+    this.urlFun = AppSettings.URL_FUN;
 
       let loader = this.loading.create({
         content: 'Cargando...',

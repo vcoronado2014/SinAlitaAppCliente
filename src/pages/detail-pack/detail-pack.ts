@@ -53,7 +53,9 @@ export class DetailPackPage {
   public alumnosCreados;
   public cuposCreados;
   public arrCupos;
-
+  public urlFacebook;
+  public urlInstagram;
+  public urlFun;
   constructor(
     private nav: NavController,
     private alert: AlertController,
@@ -100,6 +102,9 @@ export class DetailPackPage {
     });
 
     loader.present().then(() => {
+          this.urlFacebook = AppSettings.URL_FACEBOOK;
+    this.urlInstagram = AppSettings.URL_INSTAGRAM;
+    this.urlFun = AppSettings.URL_FUN;
 
       //aca las llamadas ajax
       //se deben profesar ciertos parametros

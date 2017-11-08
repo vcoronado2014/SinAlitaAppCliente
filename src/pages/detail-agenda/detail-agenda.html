@@ -14,11 +14,11 @@
 
 <ion-content padding>
   <ion-fab top right edge>
-    <button ion-fab mini><ion-icon name="add"></ion-icon></button>
+    <button ion-fab mini color="dark"><ion-icon name="add"></ion-icon></button>
     <ion-fab-list>
-      <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
-      <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
-      <button ion-fab><ion-icon name="logo-instagram"></ion-icon></button>
+      <a href="{{urlFacebook}}" ion-fab><ion-icon name="logo-facebook"></ion-icon></a>
+      <a href="{{urlFun}}" ion-fab><ion-icon name="at"></ion-icon></a>
+      <a href="{{urlInstagram}}" ion-fab><ion-icon name="logo-instagram"></ion-icon></a>
     </ion-fab-list>
   </ion-fab>
   <!-- elementos superiores -->
@@ -39,91 +39,66 @@
 
   <ion-grid class="bg-white">
     <ion-row>
-      <ion-col col-6 style="text-align: center;">
+      <ion-col col-3 style="text-align: center;">
         <!-- item 1 -->
         <ion-badge align-items-center style="font-size: 2em;">{{clasesAgendadas}}</ion-badge>
         <ion-label class="inferior-badge fg-darkgrey">Agendadas</ion-label>
       </ion-col>
-      <ion-col col-6 style="text-align: center;">
+      <ion-col col-5 style="text-align: center;">
         <!-- item 2 -->
         <ion-badge align-items-center style="font-size: 2em;">{{codigoPack}}</ion-badge>
         <ion-label class="inferior-badge fg-darkgrey">Codigo</ion-label>
+      </ion-col>
+      <ion-col col-4 style="text-align: center;">
+          <div class="row">
+            <ion-col col-2>
+              <div class="icono-texto-primary-pequeno">
+              </div>
+            </ion-col>
+            <ion-col style="font-size: 0.7em;" class="fg-primary" col-10>
+              Cupo Creado.
+            </ion-col>
+          </div>
+          <div class="row">
+            <ion-col col-2>
+              <div class="icono-texto-secondary-pequeno">
+              </div>
+            </ion-col>
+            <ion-col style="font-size: 0.7em;" class="fg-secondary" col-10>
+              En Curso.
+            </ion-col>
+          </div>
+          <div class="row">
+            <ion-col col-2>
+              <div class="icono-texto-danger-pequeno">
+              </div>
+            </ion-col>
+            <ion-col style="font-size: 0.7em;" class="fg-danger" col-10>
+              Terminada.
+            </ion-col>
+          </div>
       </ion-col>
     </ion-row>
 
   </ion-grid>
   <ion-list *ngFor="let cal of arrAgenda">
-    <ion-item text-wrap>
-      <ion-avatar item-start class="icono-texto">
-        <!--<text-avatar text="{{cal.DiaMesInicio}}" class="{{cal.CssItem}}"></text-avatar>-->
-        {{cal.DiaMesInicio}}
-      </ion-avatar>
-      <h2 class="fg-darkgrey">{{cal.DiaSemanaLargo.toUpperCase()}}, {{cal.MesLargo}} del {{cal.Anno}}</h2>
-      <!--<label item-end class="fg-darkgrey font-pequena"><ion-icon name="clock"></ion-icon> {{cal.HoraInicio}}-{{cal.HoraTermino}}</label>-->
-      <div item-end>
-      <label  class="fg-darkgrey"><ion-icon name="clock"></ion-icon> {{cal.HoraInicio}}</label>
-      <label class="fg-darkgrey"><ion-icon name="clock"></ion-icon> {{cal.HoraTermino}}</label>
-      </div>
-    </ion-item>
+
+    <ion-grid>
+      <ion-row class="{{cal.CssRow}}">
+        <ion-col col-2  item-start>
+          <div class="{{cal.CssItem}}">{{cal.DiaMesInicio}}</div>
+        </ion-col>
+        <ion-col col-7 text-wrap>
+          <h6>{{cal.DiaSemanaLargo.toUpperCase()}}, {{cal.MesLargo}} del {{cal.Anno}}</h6>
+        </ion-col>
+        <ion-col col-3>
+          <label><ion-icon name="clock"></ion-icon> {{cal.HoraInicio}}</label><br/>
+          <label><ion-icon name="clock"></ion-icon> {{cal.HoraTermino}}</label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-list>
 
-<!--  <ion-list>
-    <ion-item text-wrap>
-      <ion-avatar item-start>
-        <text-avatar text="P" class="bg-pendiente"></text-avatar>
-      </ion-avatar>
-      <h2 class="fg-darkgrey">Miércoles 20 de Octubre 2017</h2>
-      <label item-end class="fg-darkgrey font-pequena"><ion-icon name="clock"></ion-icon> 18:00-18:45</label>
-    </ion-item>
-    <ion-item text-wrap>
-      <ion-avatar item-start>
-        <text-avatar text="T" class="bg-terminada"></text-avatar>
-      </ion-avatar>
-      <h2 class="fg-darkgrey">Jueves 21 de Octubre 2017</h2>
-      <label item-end class="fg-darkgrey font-pequena"><ion-icon name="clock"></ion-icon> 18:00-18:45</label>
-    </ion-item>
-    <ion-item text-wrap>
-      <ion-avatar item-start>
-        <text-avatar text="P" class="bg-pendiente"></text-avatar>
-      </ion-avatar>
-      <h2 class="fg-darkgrey">Viernes 22 de Octubre 2017</h2>
-      <label item-end class="fg-darkgrey font-pequena"><ion-icon name="clock"></ion-icon> 18:00-18:45</label>
-    </ion-item>
-    <ion-item text-wrap>
-      <ion-avatar item-start>
-        <text-avatar text="T" class="bg-terminada"></text-avatar>
-      </ion-avatar>
-      <h2 class="fg-darkgrey">Sábado 23 de Octubre 2017</h2>
-      <label item-end class="fg-darkgrey font-pequena"><ion-icon name="clock"></ion-icon> 18:00-18:45</label>
-    </ion-item>
-    <ion-item text-wrap>
-      <ion-avatar item-start>
-        <text-avatar text="P" class="bg-pendiente"></text-avatar>
-      </ion-avatar>
-      <h2 class="fg-darkgrey">Miércoles 20 de Octubre 2017</h2>
-      <label item-end class="fg-darkgrey font-pequena"><ion-icon name="clock"></ion-icon> 18:00-18:45</label>
-    </ion-item>
-    <ion-item text-wrap>
-      <ion-avatar item-start>
-        <text-avatar text="T" class="bg-terminada"></text-avatar>
-      </ion-avatar>
-      <h2 class="fg-darkgrey">Jueves 21 de Octubre 2017</h2>
-      <label item-end class="fg-darkgrey font-pequena"><ion-icon name="clock"></ion-icon> 18:00-18:45</label>
-    </ion-item>
-    <ion-item text-wrap>
-      <ion-avatar item-start>
-        <text-avatar text="P" class="bg-pendiente"></text-avatar>
-      </ion-avatar>
-      <h2 class="fg-darkgrey">Viernes 22 de Octubre 2017</h2>
-      <label item-end class="fg-darkgrey font-pequena"><ion-icon name="clock"></ion-icon> 18:00-18:45</label>
-    </ion-item>
-    <ion-item text-wrap>
-      <ion-avatar item-start>
-        <text-avatar text="T" class="bg-terminada"></text-avatar>
-      </ion-avatar>
-      <h2 class="fg-darkgrey">Sábado 23 de Octubre 2017</h2>
-      <label item-end class="fg-darkgrey font-pequena"><ion-icon name="clock"></ion-icon> 18:00-18:45</label>
-    </ion-item>
-  </ion-list>-->
+
 
 </ion-content>

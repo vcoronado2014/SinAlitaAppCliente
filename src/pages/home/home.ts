@@ -22,6 +22,9 @@ export class HomePage {
   //para las redes sociales
   public scheme: String;
   public isApp;
+  public urlFacebook;
+  public urlInstagram;
+  public urlFun;
 
   constructor(public navCtrl: NavController,
               private navParams: NavParams,
@@ -31,6 +34,9 @@ export class HomePage {
               public platform: Platform) {
 
     this.icono = AppSettings.URL_FOTOS + 'img/sinalitas.png';
+    this.urlFacebook = AppSettings.URL_FACEBOOK;
+    this.urlInstagram = AppSettings.URL_INSTAGRAM;
+    this.urlFun = AppSettings.URL_FUN;
     if (this.navParams.get('codigoCliente') != null) {
       this.codigoCliente = this.navParams.get('codigoCliente');
     }
@@ -127,6 +133,7 @@ export class HomePage {
       return this.scheme;
     }
   }
+  /*
   openFacebookApp(){
     var miFacebookScheme = this.findSchemeFacebook();
     this.appAvailability.check(
@@ -134,7 +141,7 @@ export class HomePage {
       function() {  // Success callback
           //aca abrir facebook
           //esto me retornara fb:// o com.facebook.katana
-          
+
           console.log(this.scheme + ' is available :)');
       },
       function() {  // Error callback
@@ -153,5 +160,5 @@ export class HomePage {
       }
     );
   }
-
+  */
 }

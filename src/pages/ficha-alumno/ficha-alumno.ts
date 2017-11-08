@@ -7,6 +7,7 @@ import { DetailsFichaPage } from '../../pages/details-ficha/details-ficha';
 import { CreaAlumnoPage } from '../../pages/crea-alumno/crea-alumno';
 
 import { FichaAlumnoService } from '../../app/Services/FichaAlumnoService';
+import {AppSettings} from "../../../AppSettings";
 
 import * as moment from 'moment';
 
@@ -32,6 +33,9 @@ export class FichaAlumnoPage {
   public cantidadAlumnosBd;
   public botonAgregar: boolean;
   public clieId;
+    public urlFacebook;
+  public urlInstagram;
+  public urlFun;
 
   constructor(
     private nav: NavController,
@@ -48,6 +52,9 @@ export class FichaAlumnoPage {
     //2. si la ficha de alumnos viene vacia se debería consultar mediante el servicio la ficha de alumnos envoltorio
 
     //this.fichaAlumnos = navParams.get('fichaAlumnos');
+        this.urlFacebook = AppSettings.URL_FACEBOOK;
+    this.urlInstagram = AppSettings.URL_INSTAGRAM;
+    this.urlFun = AppSettings.URL_FUN;
     this.cantidadAlumnos = navParams.get('cantidadAlumnos');
     this.idPack = navParams.get("idPack");
     this.clieId = navParams.get("clieId");

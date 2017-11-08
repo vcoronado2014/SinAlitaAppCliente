@@ -6,6 +6,7 @@ import { DetailPackPage } from '../../pages/detail-pack/detail-pack';
 import { HomePage } from '../../pages/home/home';
 
 import {AceptaCondicionesService} from '../../app/Services/AceptaCondicionesService';
+import {AppSettings} from "../../../AppSettings";
 
 /**
  * Generated class for the AceptaCondicionesPage page.
@@ -22,6 +23,9 @@ import {AceptaCondicionesService} from '../../app/Services/AceptaCondicionesServ
 export class AceptaCondicionesPage {
   public idPack;
   public codigoCliente;
+    public urlFacebook;
+  public urlInstagram;
+  public urlFun;
   constructor(
     private nav: NavController,
     private alert: AlertController,
@@ -31,7 +35,9 @@ export class AceptaCondicionesPage {
     private viewCtrl: ViewController,
     public acc: AceptaCondicionesService
   ) {
-
+    this.urlFacebook = AppSettings.URL_FACEBOOK;
+    this.urlInstagram = AppSettings.URL_INSTAGRAM;
+    this.urlFun = AppSettings.URL_FUN;
     this.idPack = navParams.get('id');
     this.codigoCliente = navParams.get('codigoCliente');
   }

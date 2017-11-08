@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, ToastController, ViewController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
+import {AppSettings} from "../../../AppSettings";
 
 /**
  * Generated class for the DetailsFichaPage page.
@@ -31,6 +32,9 @@ export class DetailsFichaPage {
   public observacion;
   public otraEnfermedad;
   pet: string = "puppies";
+    public urlFacebook;
+  public urlInstagram;
+  public urlFun;
 
 
   constructor(
@@ -43,6 +47,9 @@ export class DetailsFichaPage {
   ) {
 
     this.fichaAlumno = navParams.get('fichaAlumno');
+        this.urlFacebook = AppSettings.URL_FACEBOOK;
+    this.urlInstagram = AppSettings.URL_INSTAGRAM;
+    this.urlFun = AppSettings.URL_FUN;
     let loader = this.loading.create({
       content: 'Cargando...',
     });

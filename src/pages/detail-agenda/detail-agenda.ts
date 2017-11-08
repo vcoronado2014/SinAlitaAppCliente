@@ -30,6 +30,10 @@ export class DetailAgendaPage {
   public arrAgenda;
   public codigoPack;
   public clasesAgendadas;
+    public urlFacebook;
+  public urlInstagram;
+  public urlFun;
+  public fondoFechas;
 
   constructor(
     private nav: NavController,
@@ -46,7 +50,10 @@ export class DetailAgendaPage {
     this.arrAgenda = [];
     this.clasesAgendadas = 0;
     this.codigoPack=navParams.get('codigoPack');
-
+    this.urlFacebook = AppSettings.URL_FACEBOOK;
+    this.urlInstagram = AppSettings.URL_INSTAGRAM;
+    this.urlFun = AppSettings.URL_FUN;
+    this.fondoFechas = AppSettings.URL_FOTOS + 'alarm-clock.png';
     let loader = this.loading.create({
       content: 'Cargando...',
     });
@@ -88,27 +95,35 @@ export class DetailAgendaPage {
           var anno = fechaTermino.format("YYYY");
 
           var estado;
-          var cssItem = 'bg-pendiente';
+          var cssItem = 'icono-texto-dark';
+          var cssRow = 'row fg-dark';
           if (this.arrCupos[s].EstadoCupo == '0')
           {
             //esta creado pero no disponible
             estado = 'Creado';
+            cssItem = 'icono-texto-danger';
+            cssRow = 'row fg-danger';
           }
           if (this.arrCupos[s].EstadoCupo == '1')
           {
             //esta disponible
             estado = 'Disponible';
+            cssItem = 'icono-texto-primary';
+            cssRow = 'row fg-dark';
           }
           if (this.arrCupos[s].EstadoCupo == '2')
           {
             //esta creado pero no disponible
             estado = 'Asignada';
+            cssItem = 'icono-texto-secondary';
+            cssRow = 'row fg-dark';
           }
           if (this.arrCupos[s].EstadoCupo == '3')
           {
             //esta terminado
             estado = 'Terminada';
-            cssItem = 'bg-terminada';
+            cssItem = 'icono-texto-secondary';
+            cssRow = 'row fg-dark';
           }
           var entidad = {
             DiaMesInicio: diaMesInicio,
@@ -120,7 +135,8 @@ export class DetailAgendaPage {
             CssItem: cssItem,
             DiaSemanaLargo: diaSemanaLargo,
             MesLargo: mesLargo,
-            Anno: anno
+            Anno: anno,
+            CssRow: cssRow
           };
 
           this.arrAgenda.push(entidad);
