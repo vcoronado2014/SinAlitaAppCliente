@@ -44,18 +44,18 @@
     <ion-row  *ngSwitchCase="'puppies'">
       <!-- nombre del alumno -->
       <ion-item>
-        <ion-label color="primary" floating>Nombre Completo</ion-label>
+        <ion-label floating>Nombre Completo</ion-label>
         <ion-input type="text" disabled="true" [(ngModel)]="nombreCompleto"></ion-input>
       </ion-item>
 
       <!-- edad -->
       <ion-item col-6>
-        <ion-label color="primary" floating>Edad</ion-label>
+        <ion-label floating>Edad</ion-label>
         <ion-input type="number" disabled="true" [(ngModel)]="edad"></ion-input>
       </ion-item>
 
       <ion-item col-6>
-        <ion-label color="primary" floating>Sexo</ion-label>
+        <ion-label floating>Sexo</ion-label>
         <ion-select [(ngModel)]="sexo" disabled="true">
           <ion-option value="Hombre">Hombre</ion-option>
           <ion-option value="Mujer">Mujer</ion-option>
@@ -65,40 +65,40 @@
     </ion-row>
     <ion-row *ngSwitchCase="'Medicos'">
       <ion-item col-9>
-        <ion-label color="primary" floating>¿Problemas Cardiacos, cuales?</ion-label>
+        <ion-label floating>¿Problemas Cardiacos, cuales?</ion-label>
         <ion-input type="text" [(ngModel)]="cualesProblemasCardiacos"  disabled="true"></ion-input>
       </ion-item>
       <ion-item col-3 no-border>
         <ion-toggle [(ngModel)]="tieneProblemasCardiacos"  disabled="true" ></ion-toggle>
       </ion-item>
       <ion-item col-9>
-        <ion-label color="primary" floating>¿Problemas Motores, cuales?</ion-label>
+        <ion-label floating>¿Problemas Motores, cuales?</ion-label>
         <ion-input type="text" [(ngModel)]="cualesProblemasMotores" disabled="true"></ion-input>
       </ion-item>
       <ion-item col-3 no-border>
         <ion-toggle [(ngModel)]="tieneProblemasMotores"  disabled="true"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label color="primary">¿Tiene asma?</ion-label>
+        <ion-label>¿Tiene asma?</ion-label>
         <ion-toggle [(ngModel)]="tieneAsma"  disabled="true"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label color="primary" floating>Otra Enfermedad</ion-label>
+        <ion-label floating>Otra Enfermedad</ion-label>
         <ion-input type="text" [(ngModel)]="otraEnfermedad"  disabled="true"></ion-input>
       </ion-item>
 
     </ion-row>
     <ion-row *ngSwitchCase="'Otros'">
       <ion-item>
-        <ion-label color="primary" floating>Acudir a</ion-label>
+        <ion-label floating>Acudir a</ion-label>
         <ion-input type="text" [(ngModel)]="dondeAcudir"  disabled="true"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label color="primary" floating>Teléfono Urgencia</ion-label>
+        <ion-label floating>Teléfono Urgencia</ion-label>
         <ion-input type="number" [(ngModel)]="numeroEmergencia" disabled="true"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label color="primary" floating>Observaciones</ion-label>
+        <ion-label floating>Observaciones</ion-label>
         <ion-input type="text" [(ngModel)]="observacion"  disabled="true"></ion-input>
       </ion-item>
     </ion-row>

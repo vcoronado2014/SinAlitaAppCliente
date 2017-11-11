@@ -95,7 +95,7 @@ export class FichaAlumnoPage {
   presentModal(item) {
     let modal = this.modalCtrl.create(DetailsFichaPage, {fichaAlumno: item });
     modal.present();
-    this.list.closeSlidingItems();
+    //this.list.closeSlidingItems();
   }
   presentModalNuevo() {
     let modal = this.modalCtrl.create(CreaAlumnoPage, {idPack: this.idPack, clieId: this.clieId });

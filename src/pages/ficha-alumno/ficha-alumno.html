@@ -27,27 +27,28 @@
     </ion-fab-list>
   </ion-fab>
 
-  <ion-col col-12>
+<!--  <ion-col col-12>
     <button ion-button color="success" style="width: 100%;"  *ngIf="botonAgregar" (click)="presentModalNuevo()"> Agregar</button>
-  </ion-col>
-  <ion-list #myList>
-    <ion-item-sliding *ngFor="let user of fichaAlumnos">
+  </ion-col>-->
+
+  <ion-list #myList >
+    <ion-item *ngFor="let user of fichaAlumnos">
     <!--<button ion-item *ngFor="let user of users" (click)="presentUserInfoAlert(user)">-->
-      <ion-item >
+      <button ion-item (click)="presentModal(user)" text-wrap>
         <text-avatar [text]="user.NombreCompleto" [color]="user.color" item-left></text-avatar>
         <h2>{{ user.NombreCompleto || upper}}</h2>
         <p>Edad: {{user.Edad}} años</p>
         <p>Sexo: {{user.Sexo}}</p>
-        <p style="font-style: italic; font-size: 0.8em;">Deslice a la izquierda para ver las opciones.</p>
+        <p style="font-style: italic; font-size: 0.6em;">Pinche aquí para ver los detalles.</p>
 
-      </ion-item>
-      <ion-item-options side="right">
+      </button>
+<!--      <ion-item-options side="right">
         <button ion-button color="primary" (click)="presentModal(user)">
           <ion-icon name="eye"></ion-icon>
           Ver
         </button>
-      </ion-item-options>
-    </ion-item-sliding>
+      </ion-item-options>-->
+    </ion-item>
   </ion-list>
 
 
