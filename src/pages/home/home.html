@@ -1,12 +1,9 @@
-<ion-header>
+<ion-header class="mui--bg-color-green-500 fg-light">
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Inicio</ion-title>
-    <!--
-      <ion-icon name="close-circle" float-right (click)="logout()"></ion-icon>
-    -->
 
   </ion-navbar>
 </ion-header>
@@ -20,7 +17,7 @@
       <a href="{{urlInstagram}}" ion-fab><ion-icon name="logo-instagram"></ion-icon></a>
     </ion-fab-list>
   </ion-fab>
-  <h2 ion-text>Bienvenido a la App SinAlitas</h2>
+  <h2 ion-text class="mui--text-title">Bienvenido a la App SinAlitas</h2>
   <ion-grid style="padding-bottom: 0;">
     <ion-row>
       <ion-item style="text-align: center;" no-lines>
@@ -29,12 +26,12 @@
     </ion-row>
   </ion-grid>
 
-  <p text-justify class="font-principal" padding-left>
+  <p text-justify class="mui--text-dark mui--text-body2" padding-left>
 
     Estimado cliente muchas gracias por confiar en nuestros servicios y comenzar a vivir la experiencia de SinAlitas.
 
   </p>
-  <ion-list-header style="padding-bottom: 0; margin-bottom: 0; color: black; text-align: center; font-size: 1.6em;border-bottom: 1px solid #dedede;">
+  <ion-list-header style="padding-bottom: 0; margin-bottom: 0; text-align: center; border-bottom: 1px solid #dedede;" class="mui--text-dark mui--text-subhead mui--bg-color-green-50 mui--color-green-700">
     Acceso Clientes
   </ion-list-header>
   <ion-item style="background: transparent;">
@@ -43,7 +40,7 @@
 
   </ion-item>
   <ion-col text-left>
-    <button ion-button color="primary" style="width: 100%;" (click)="Signup()" > Buscar</button>
+    <button ion-button class="mui--bg-color-green-500" style="width: 100%;" (click)="Signup()" > Buscar</button>
   </ion-col>
 
 
