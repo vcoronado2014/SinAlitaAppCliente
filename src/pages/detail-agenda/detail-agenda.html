@@ -1,12 +1,9 @@
-<ion-header>
+<ion-header class="mui--bg-color-blue-500 fg-light">
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Mis Clases</ion-title>
-    <!--
-      <ion-icon name="close-circle" float-right (click)="logout()"></ion-icon>
-    -->
 
   </ion-navbar>
 </ion-header>
@@ -14,7 +11,7 @@
 
 <ion-content padding>
   <ion-fab top right edge>
-    <button ion-fab mini color="dark"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab mini class="mui--bg-color-blue-900"><ion-icon name="add"></ion-icon></button>
     <ion-fab-list>
       <a href="{{urlFacebook}}" ion-fab><ion-icon name="logo-facebook"></ion-icon></a>
       <a href="{{urlFun}}" ion-fab><ion-icon name="at"></ion-icon></a>
@@ -29,8 +26,8 @@
       </ion-item>
       <ion-item style="border-bottom-style: none;">
         <h2 class="fg-darkgrey" style="text-align: center;">{{nombreProfesor}}</h2>
-        <h6 style="text-align: center;"><ion-icon name="mail"></ion-icon><a href="mailto:{{emailProfesor}}?Subject=Consulta" target="_top">&nbsp;{{emailProfesor}}</a></h6>
-        <h6 style="text-align: center;"><ion-icon name="logo-whatsapp"></ion-icon><a href="whatsapp://send?text=Hola&phone=+56{{fonoProfesor}}&abid=+56{{fonoProfesor}}">&nbsp;+56{{fonoProfesor}}</a></h6>
+        <h6 style="text-align: center;"><ion-icon name="mail" color="primary"></ion-icon><a href="mailto:{{emailProfesor}}?Subject=Consulta" target="_top">&nbsp;{{emailProfesor}}</a></h6>
+        <h6 style="text-align: center;"><ion-icon name="logo-whatsapp" color="primary"></ion-icon><a href="whatsapp://send?text=Hola&phone=+56{{fonoProfesor}}&abid=+56{{fonoProfesor}}">&nbsp;+56{{fonoProfesor}}</a></h6>
         <!-- <p text-wrap>{{infoProfesor}}</p>-->
       </ion-item>
 
@@ -89,11 +86,13 @@
           <div class="{{cal.CssItem}}">{{cal.DiaMesInicio}}</div>
         </ion-col>
         <ion-col col-7 text-wrap>
-          <h6>{{cal.DiaSemanaLargo.toUpperCase()}}, {{cal.MesLargo}} del {{cal.Anno}}</h6>
+          <!--<h6>{{cal.DiaSemanaLargo.toUpperCase()}}</h6>-->
+          <div class="mui--text-dark-secondary mui--text-body1">{{cal.DiaSemanaLargo.toUpperCase()}}</div>
+          <div class="mui--text-accent mui--text-body2">{{cal.MesLargo}} del {{cal.Anno}}</div>
         </ion-col>
         <ion-col col-3>
-          <label><ion-icon name="clock"></ion-icon> {{cal.HoraInicio}}</label><br/>
-          <label><ion-icon name="clock"></ion-icon> {{cal.HoraTermino}}</label>
+          <label class="mui--text-dark-secondary"><ion-icon name="clock"></ion-icon> {{cal.HoraInicio}}</label><br/>
+          <label class="mui--text-dark-secondary"><ion-icon name="clock"></ion-icon> {{cal.HoraTermino}}</label>
         </ion-col>
       </ion-row>
     </ion-grid>

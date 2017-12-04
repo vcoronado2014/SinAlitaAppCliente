@@ -1,11 +1,11 @@
-<ion-header>
+<ion-header class="mui--bg-color-blue-500 fg-light">
   <ion-navbar>
     <ion-grid>
       <ion-row>
-        <ion-col col-2>
-          <ion-icon name="arrow-back" start (click)="atras()" style="font-size: 1.5em;"></ion-icon>
+        <ion-col col-1>
+          <ion-icon name="arrow-back" start (click)="close()" style="font-size: 1.5em;"></ion-icon>
         </ion-col>
-        <ion-col col-10>
+        <ion-col col-11>
           <ion-title start>
             Acepta Condiciones
           </ion-title>
@@ -29,10 +29,10 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <button ion-button color="success" style="width: 100%;" (click)="atras()"> Cancelar</button>
+        <button ion-button class="mui--bg-color-blue-100" style="width: 100%;" (click)="atras()"> Cancelar</button>
       </ion-col>
       <ion-col>
-        <button ion-button color="secondary" style="width: 100%;" (click)="aceptar()"> Acepto</button>
+        <button ion-button class="mui--bg-color-blue-500" style="width: 100%;" (click)="aceptar()"> Acepto</button>
       </ion-col>
     </ion-row>
   </ion-grid>

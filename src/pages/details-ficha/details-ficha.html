@@ -1,11 +1,11 @@
-<ion-header>
+<ion-header class="mui--bg-color-blue-500 fg-light">
   <ion-navbar>
     <ion-grid>
       <ion-row>
-        <ion-col col-2>
+        <ion-col col-1>
           <ion-icon name="arrow-back" start (click)="close()" style="font-size: 1.5em;"></ion-icon>
         </ion-col>
-        <ion-col col-10>
+        <ion-col col-11>
           <ion-title start>
             Ficha
           </ion-title>
@@ -19,7 +19,7 @@
 
 <ion-content padding>
   <ion-fab top right edge>
-    <button ion-fab mini color="dark"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab mini class="mui--bg-color-blue-900"><ion-icon name="add"></ion-icon></button>
     <ion-fab-list>
       <a href="{{urlFacebook}}" ion-fab><ion-icon name="logo-facebook"></ion-icon></a>
       <a href="{{urlFun}}" ion-fab><ion-icon name="at"></ion-icon></a>
@@ -105,148 +105,5 @@
 
   </div>
 
-<!--  <ion-row>
-    <h6>Alumno</h6>
-    &lt;!&ndash; nombre del alumno &ndash;&gt;
-    <ion-item>
-      <ion-label color="primary" floating>Nombre Completo</ion-label>
-      <ion-input type="text" disabled="true" [(ngModel)]="nombreCompleto"></ion-input>
-    </ion-item>
-
-    &lt;!&ndash; edad &ndash;&gt;
-    <ion-item col-6>
-      <ion-label color="primary" floating>Edad</ion-label>
-      <ion-input type="number" disabled="true" [(ngModel)]="edad"></ion-input>
-    </ion-item>
-
-    <ion-item col-6>
-      <ion-label color="primary" floating>Sexo</ion-label>
-      <ion-input type="text" disabled="true" [(ngModel)]="sexo"></ion-input>
-    </ion-item>
-
-  </ion-row>
-  <ion-row style="padding-top: 10px;">
-    <h6>Antecedentes Médicos</h6>
-
-    <ion-item col-9>
-      <ion-label color="primary" floating>¿Problemas Cardiacos, cuales?</ion-label>
-      <ion-input type="text"  disabled="true" [(ngModel)]="cualesProblemasCardiacos"></ion-input>
-    </ion-item>
-    <ion-item col-3 no-border>
-      <ion-toggle  disabled="true" [(ngModel)]="tieneProblemasCardiacos"></ion-toggle>
-    </ion-item>
-    <ion-item col-9>
-      <ion-label color="primary" floating>¿Problemas Motores, cuales?</ion-label>
-      <ion-input type="text"  disabled="true" [(ngModel)]="cualesProblemasMotores"></ion-input>
-    </ion-item>
-    <ion-item col-3 no-border>
-      <ion-toggle  disabled="true" [(ngModel)]="tieneProblemasMotores"></ion-toggle>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary">¿Tiene asma?</ion-label>
-      <ion-toggle  disabled="true" [(ngModel)]="tieneAsma"></ion-toggle>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary" floating>Otra Enfermedad</ion-label>
-      <ion-input type="text"  disabled="true" [(ngModel)]="otraEnfermedad"></ion-input>
-    </ion-item>
-
-  </ion-row>
-  <ion-row style="padding-top: 10px;">
-    <h6>Otros</h6>
-    <ion-item>
-      <ion-label color="primary" floating>Acudir a</ion-label>
-      <ion-input type="text"  disabled="true" [(ngModel)]="dondeAcudir"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary" floating>Teléfono Urgencia</ion-label>
-      <ion-input type="number"  disabled="true" [(ngModel)]="numeroEmergencia"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary" floating>Observaciones</ion-label>
-      <ion-input type="text"  disabled="true" [(ngModel)]="observacion"></ion-input>
-    </ion-item>
-  </ion-row>-->
-
-<!--  &lt;!&ndash; grupo datos del alumno &ndash;&gt;
-  <ion-item-group>
-    <ion-item-divider color="light">Alumno</ion-item-divider>
-  <ion-item>
-    <h2>{{nombreCompleto}}</h2>
-    <h3>{{edad}} años</h3>
-    <p>{{sexo}}</p>
-  </ion-item>
-  </ion-item-group>
-  &lt;!&ndash; grupo problemas cardiacos &ndash;&gt;
-  <ion-item-group>
-    <ion-item-divider color="light">¿Tiene problemas cardiacos?</ion-item-divider>
-    <ion-item>
-      <ion-label>{{cualesProblemasCardiacos}}</ion-label>
-      <ion-toggle [(ngModel)]="tieneProblemasCardiacos" disabled="true"></ion-toggle>
-    </ion-item>
-  </ion-item-group>
-  &lt;!&ndash; grupo problemas motores &ndash;&gt;
-  <ion-item-group>
-    <ion-item-divider color="light">¿Tiene problemas motores?</ion-item-divider>
-    <ion-item>
-      <ion-label>{{cualesProblemasMotores}}</ion-label>
-      <ion-toggle [(ngModel)]="tieneProblemasMotores" disabled="true"></ion-toggle>
-    </ion-item>
-  </ion-item-group>
-  &lt;!&ndash; grupo asma &ndash;&gt;
-  <ion-item-group>
-    <ion-item-divider color="light">Asma</ion-item-divider>
-    <ion-item>
-      <ion-label>¿Tiene asma?</ion-label>
-      <ion-toggle [(ngModel)]="tieneAsma" disabled="true"></ion-toggle>
-    </ion-item>
-  </ion-item-group>
-  &lt;!&ndash; grupo Otra enfermedad &ndash;&gt;
-  <ion-item-group>
-    <ion-item-divider color="light">Otra Enfermedad</ion-item-divider>
-    <ion-item>
-      <ion-label>{{otraEnfermedad}}</ion-label>
-    </ion-item>
-  </ion-item-group>
-  &lt;!&ndash; grupo datos urgencia &ndash;&gt;
-  <ion-item-group>
-    <ion-item-divider color="light">Ante una Urgencia</ion-item-divider>
-    <ion-item>
-      <h2>Acudir a</h2>
-      <h3>{{dondeAcudir}}</h3>
-    </ion-item>
-    <ion-item>
-      <h2>Teléfono emergencia</h2>
-      <h3>{{numeroEmergencia}}</h3>
-    </ion-item>
-  </ion-item-group>
-  &lt;!&ndash; grupo Otros datos &ndash;&gt;
-  <ion-item-group>
-    <ion-item-divider color="light">Otras Antecedentes</ion-item-divider>
-    <ion-item>
-      <ion-label>{{observacion}}</ion-label>
-    </ion-item>
-  </ion-item-group>
-  <ion-list>
-
-&lt;!&ndash;    <ion-item>
-      <ion-avatar item-start>
-        <ion-toggle></ion-toggle>
-      </ion-avatar>
-      <h2>Cher</h2>
-      <p>Ugh. As if.</p>
-    </ion-item>&ndash;&gt;
-
-&lt;!&ndash;    <ion-item>
-      <ion-label>Sausage</ion-label>
-      <ion-toggle [(ngModel)]="sausage" disabled="true"></ion-toggle>
-    </ion-item>&ndash;&gt;
-
-&lt;!&ndash;    <ion-item>
-      <ion-label>Mushrooms</ion-label>
-      <ion-toggle [(ngModel)]="mushrooms"></ion-toggle>
-    </ion-item>&ndash;&gt;
-
-  </ion-list>-->
 
 </ion-content>

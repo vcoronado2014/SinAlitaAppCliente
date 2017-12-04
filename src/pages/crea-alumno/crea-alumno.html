@@ -1,14 +1,13 @@
-<ion-header>
+<ion-header class="mui--bg-color-blue-500 fg-light">
   <ion-navbar>
     <ion-grid>
       <ion-row>
-        <ion-col col-2>
+        <ion-col col-1>
           <ion-icon name="arrow-back" start (click)="close()" style="font-size: 1.5em;"></ion-icon>
         </ion-col>
-        <ion-col col-10>
+        <ion-col col-11>
           <ion-title start>
-
-            Nuevo Alumno
+            Nuevo
           </ion-title>
         </ion-col>
       </ion-row>
@@ -17,9 +16,10 @@
 </ion-header>
 
 
+
 <ion-content padding>
   <ion-fab top right edge>
-    <button ion-fab mini color="dark"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab mini class="mui--bg-color-blue-900"><ion-icon name="add"></ion-icon></button>
     <ion-fab-list>
       <a href="{{urlFacebook}}" ion-fab><ion-icon name="logo-facebook"></ion-icon></a>
       <a href="{{urlFun}}" ion-fab><ion-icon name="at"></ion-icon></a>
@@ -153,10 +153,10 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <button ion-button color="success" style="width: 100%;" (click)="limpiar()"> Limpiar</button>
+        <button ion-button class="mui--bg-color-blue-100" (click)="limpiar()"> Limpiar</button>
       </ion-col>
       <ion-col>
-        <button ion-button color="secondary" style="width: 100%;" (click)="guardar()"> Agregar</button>
+        <button ion-button class="mui--bg-color-blue-500" style="width: 100%;" (click)="guardar()"> Agregar</button>
       </ion-col>
     </ion-row>
   </ion-grid>

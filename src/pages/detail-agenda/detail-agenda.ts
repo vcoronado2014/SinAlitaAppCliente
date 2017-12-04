@@ -122,7 +122,7 @@ export class DetailAgendaPage {
           {
             //esta terminado
             estado = 'Terminada';
-            cssItem = 'icono-texto-secondary';
+            cssItem = 'icono-texto-danger';
             cssRow = 'row fg-dark';
           }
           var entidad = {

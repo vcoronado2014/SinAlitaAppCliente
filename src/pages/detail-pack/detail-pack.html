@@ -1,11 +1,11 @@
-<ion-header>
+<ion-header class="mui--bg-color-blue-500 fg-light">
   <ion-navbar>
     <ion-grid>
       <ion-row>
-        <ion-col col-2>
+        <ion-col col-1>
           <ion-icon name="arrow-back" start (click)="close()" style="font-size: 1.5em;"></ion-icon>
         </ion-col>
-        <ion-col col-10>
+        <ion-col col-11>
           <ion-title start>
             Información del Pack
           </ion-title>
@@ -15,9 +15,10 @@
   </ion-navbar>
 </ion-header>
 
+
 <ion-content padding>
   <ion-fab top right edge>
-    <button ion-fab mini color="dark"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab mini class="mui--bg-color-blue-900"><ion-icon name="add"></ion-icon></button>
     <ion-fab-list>
       <a href="{{urlFacebook}}" ion-fab><ion-icon name="logo-facebook"></ion-icon></a>
       <a href="{{urlFun}}" ion-fab><ion-icon name="at"></ion-icon></a>
@@ -46,14 +47,14 @@
   <ion-list>
     <ion-item>
       <ion-avatar item-start>
-        <ion-icon name="information-circle" class="icono-lista"  style="font-size: 2em;"></ion-icon>
+        <ion-icon name="information-circle" class="icono-lista mui--text-dark-secondary"  style="font-size: 2em;"></ion-icon>
       </ion-avatar>
       <h6>Código Pack</h6>
-      <p>{{idElemento}}</p>
+      <p class="mui--text-accent-secondary">{{idElemento}}</p>
     </ion-item>
     <ion-item>
       <ion-avatar item-start>
-        <ion-icon name="person" class="icono-lista"  style="font-size: 2em;"></ion-icon>
+        <ion-icon name="person" class="icono-lista mui--text-dark-secondary"  style="font-size: 2em;"></ion-icon>
       </ion-avatar>
       <h6>Cliente</h6>
       <p text-wrap>{{nombreCliente}}</p>
@@ -62,7 +63,7 @@
 
     <ion-item>
       <ion-avatar item-start>
-        <ion-icon name="clock" class="icono-lista"  style="font-size: 2em;"></ion-icon>
+        <ion-icon name="clock" class="icono-lista mui--text-dark-secondary"  style="font-size: 2em;"></ion-icon>
       </ion-avatar>
       <h6>Fecha Creación</h6>
       <p>{{fechaPack}}</p>
@@ -70,39 +71,20 @@
 
     <ion-item>
       <ion-avatar item-start>
-        <ion-icon name="calendar" class="icono-lista"  style="font-size: 2em;"></ion-icon>
+        <ion-icon name="calendar" class="icono-lista mui--text-dark-secondary"  style="font-size: 2em;"></ion-icon>
       </ion-avatar>
 
       <p>Clases Agendadas: {{clasesAgendadas}}</p>
     </ion-item>
     <button ion-item (click)="goToFichaAlumno()">
       <ion-avatar item-start>
-        <ion-icon name="people" class="icono-lista"  style="font-size: 2em;"></ion-icon>
+        <ion-icon name="people" class="icono-lista mui--text-dark-secondary"  style="font-size: 2em;"></ion-icon>
       </ion-avatar>
       <h6>Cantidad Niños: {{cantidadAlumnos}}</h6>
       <p style="font-style: italic; font-size: 0.6em;">Pinche aquí para ver los alumnos.</p>
 
     </button>
 
-    <!--<ion-list #myList>
-      <ion-item-sliding #item>
-        <ion-item>
-          <ion-avatar item-start>
-            <ion-icon name="people" class="icono-lista"  style="font-size: 2em;"></ion-icon>
-          </ion-avatar>
-          <h6>Cantidad Niños: {{cantidadAlumnos}}</h6>
-          <p style="font-style: italic; font-size: 0.8em;">Deslice a la izquierda para ver las opciones.</p>
-
-        </ion-item>
-        <ion-item-options side="right">
-          <button ion-button color="primary" (click)="goToFichaAlumno()">
-            <ion-icon name="eye"></ion-icon>
-            Ver
-          </button>
-        </ion-item-options>
-
-      </ion-item-sliding>
-    </ion-list>-->
 
     <ion-item *ngIf="tieneAlerta">
       <ion-avatar item-start>
@@ -122,11 +104,9 @@
   </ion-list>
   <ion-grid>
     <ion-row>
-<!--      <ion-col col-6>
-        <button ion-button color="danger" style="width: 100%;"> Cancelar</button>
-      </ion-col>-->
+
       <ion-col col-12>
-        <button ion-button color="success" style="width: 100%;" (click)="goToDetails('1')"  *ngIf="puedeVerAgenda" > Ver Agenda</button>
+        <button ion-button class="mui--bg-color-blue-500" style="width: 100%;" (click)="goToDetails('1')"  *ngIf="puedeVerAgenda" > Ver Agenda</button>
       </ion-col>
     </ion-row>
   </ion-grid>
