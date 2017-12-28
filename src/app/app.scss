@@ -135,4 +135,29 @@ ion-select {
 .fg-dark{
   color: #222;
 }
+.toolbar-title {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+.toolbar-ios ion-title {
+  left: 0;
+  top: 0;
+  padding: 0 5px 1px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  pointer-events: none;
+}
+.toolbar-title-ios {
+  text-align: center;
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: white;
+  pointer-events: auto;
+}
 
