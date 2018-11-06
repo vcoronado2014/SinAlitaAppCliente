@@ -29,6 +29,8 @@ export class CrearPackPage {
   precioPack;
   descuento=0;
   totalPack=0;
+  cantidadClases;
+  cantidadAlumnos;
 
   constructor(
     private nav: NavController,
@@ -213,4 +215,102 @@ export class CrearPackPage {
       loader.dismiss();
     });
   }
+  presentToast = function(mensaje, posicion, duracion) {
+    let toast = this.toastCtrl.create({
+      message: mensaje,
+      duration: duracion,
+      position: posicion
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
+  }
+  guardarPack(){
+
+    let loader = this.loading.create({
+      content: 'Guardando Pack...',
+    });
+
+    loader.present().then(() => {
+
+      var idCliente = this.cliente.Id;
+
+      if (!this.producto  || this.producto == ""){
+        let toast = this.presentToast("Producto requerido", "bottom", 2000);
+        loader.dismiss();
+        return;
+      }
+      if (!this.cantidadClases  || this.cantidadClases == ""){
+        let toast = this.presentToast("Cantidad Clases requerido", "bottom", 2000);
+        loader.dismiss();
+        return;
+      }
+      if (!this.cantidadAlumnos  || this.cantidadAlumnos == ""){
+        let toast = this.presentToast("Cantidad Alumnos requerido", "bottom", 2000);
+        loader.dismiss();
+        return;
+      }
+      if (!this.precioPack  || this.precioPack == ""){
+        let toast = this.presentToast("Precio requerido", "bottom", 2000);
+        loader.dismiss();
+        return;
+      }
+
+      if (!this.totalPack  || this.totalPack == 0){
+        let toast = this.presentToast("Total Pack debe ser mayor a cero", "bottom", 2000);
+        loader.dismiss();
+        return;
+      }
+      if (!this.codigoCliente  || this.codigoCliente == ""){
+        let toast = this.presentToast("Código cliente requerido", "bottom", 2000);
+        loader.dismiss();
+        return;
+      }
+
+
+      this.global.putProductoCodigo(
+        idCliente,
+        this.codigoCliente,
+        this.producto,
+        this.cantidadClases,
+        this.descuento,
+        this.totalPack,
+        this.cantidadAlumnos
+      ).subscribe(
+        data => {
+          var datos = data.json();
+          /*
+          if (datos){
+            datos.forEach(element => {
+              element.NombreCompleto = element.Nombres.trim() + ' ' + element.PrimerApellido.trim() + ' ' + element.SegundoApellido.trim();
+            });
+          }
+          */
+          //this.clientes = datos;
+          //this.todasLosClientes = this.clientesArr;
+        },
+        err => {
+          console.error(err);
+          let toast = this.presentToast("Error al guardar producto", "top", 2000);
+          loader.dismiss();
+        },
+        () => {
+          console.log('save completed');
+          let toast = this.presentToast("Pack guardado con éxito", "top", 2000);
+          //ProfesoresPage.cargarProfesores();
+          loader.dismiss();
+          //volvemos a la página anterior
+          this.viewCtrl.dismiss();
+        }
+      );
+
+
+
+    });
+
+  }  
+  
 }

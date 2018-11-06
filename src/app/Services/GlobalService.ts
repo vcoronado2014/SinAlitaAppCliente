@@ -169,5 +169,23 @@ export class GlobalService{
       });
       return repos;
     }
+    putProductoCodigo(idCliente, codigoCliente, proId, cantidadClases, descuento, totalPack, cantidadAlumnos){
+      var usuario = localStorage.getItem("USUARIO");
+      let url = AppSettings.URL_API + 'ProductoCodigo';
+      let dataGet = { 
+        IdCliente: idCliente.toString(),
+        CodigoCliente: codigoCliente,
+        ProId: proId.toString(),
+        CantidadClases: cantidadClases.toString(),
+        Descuento: descuento.toString(),
+        TotalPack: totalPack.toString(),
+        CantidadAlumnos: cantidadAlumnos.toString()
+      };
+  
+      let repos = this.http.put(url, dataGet, {
+        headers: new Headers({'Content-Type': 'application/json'})
+      });
+      return repos;
+    }
   
 }
