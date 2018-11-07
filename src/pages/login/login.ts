@@ -5,6 +5,7 @@ import { DetailPackPage } from '../../pages/detail-pack/detail-pack';
 import { HomePage } from '../../pages/home/home';
 //import { InicioPage } from '../../pages/inicio/inicio';
 import { SupervisorPage } from '../../pages/supervisor/supervisor';
+import { ProfesorPage } from '../../pages/profesor/profesor';
 //para redes sociales
 import { AppAvailability } from '@ionic-native/app-availability';
 import { Platform } from 'ionic-angular';
@@ -60,8 +61,16 @@ export class LoginPage {
         },
         () => {
           if (this.isLogged) {
-            console.log(this.global.persona);
-            this.navCtrl.push(SupervisorPage);
+            //console.log(this.global.persona);
+            if (this.global.envoltorio){
+              if (this.global.envoltorio.RolId == 2){
+                this.navCtrl.push(SupervisorPage);
+              }
+              if (this.global.envoltorio.RolId == 3){
+                this.navCtrl.push(ProfesorPage);
+              }
+            }
+            
             /*
             this.envoltorio = this.auth.envoltorio;
             this.navCtrl.push(DetailPackPage, {id: this.codigoCliente, envoltorio: this.envoltorio})

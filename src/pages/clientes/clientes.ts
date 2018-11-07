@@ -7,6 +7,7 @@ import * as moment from 'moment';
 //modales
 import { EditarClientePage } from '../../pages/editar-cliente/editar-cliente';
 import { CrearPackPage } from '../../pages/crear-pack/crear-pack';
+import { InicioPage } from '../../pages/Inicio/inicio';
 
 /**
  * Generated class for the ClientesPage page.
@@ -153,6 +154,10 @@ export class ClientesPage {
     modal.present();
 
   }  
+  cerrarSesion(){
+    sessionStorage.clear();
+    this.nav.setRoot(InicioPage);
+  }
 
 
 }

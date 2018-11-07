@@ -41,11 +41,13 @@ export class GlobalService{
               //vamos a dividir el retorno
               let retorno = JSON.parse(res);
               if (retorno.Id > 0) {
-                localStorage.setItem('PERSONA', retorno);
+                sessionStorage.setItem('PERSONA', retorno);
                 this.envoltorio = retorno;
                 this.persona = retorno;
                 this.nombreUsuario = usuario;
-                localStorage.setItem('USUARIO', this.nombreUsuario);
+                sessionStorage.setItem('USUARIO', this.nombreUsuario);
+                sessionStorage.setItem('ROL_ID', retorno.RolId);
+                sessionStorage.setItem('PROF_ID', retorno.Id);
                 this.loggedIn = true;
               }
               else {
@@ -183,6 +185,36 @@ export class GlobalService{
       };
   
       let repos = this.http.put(url, dataGet, {
+        headers: new Headers({'Content-Type': 'application/json'})
+      });
+      return repos;
+    }
+    postActualizarAgenda(mesInicio, profId, anno){
+      var usuario = localStorage.getItem("USUARIO");
+      let url = AppSettings.URL_API + 'ActualizarAgenda';
+      let dataGet = { 
+        NodId: '1',
+        MesInicio: mesInicio.toString(),
+        ProfId: profId.toString(),
+        Anno: anno.toString() 
+      };
+  
+      let repos = this.http.post(url, dataGet, {
+        headers: new Headers({'Content-Type': 'application/json'})
+      });
+      return repos;
+    }
+    postBuscarSegmentos(fechaEntera, profId, esBloqueado){
+      var usuario = localStorage.getItem("USUARIO");
+      let url = AppSettings.URL_API + 'BuscarSegmentos';
+      let dataGet = { 
+        NodId: '1',
+        FechaEntera: fechaEntera.toString(),
+        ProfId: profId.toString(),
+        EsBloqueado: esBloqueado.toString() 
+      };
+  
+      let repos = this.http.post(url, dataGet, {
         headers: new Headers({'Content-Type': 'application/json'})
       });
       return repos;

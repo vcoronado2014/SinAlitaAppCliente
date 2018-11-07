@@ -1,0 +1,67 @@
+<!--
+  Generated template for the AgendaProfesorPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header  class="mui--bg-color-red-A200 fg-light">
+
+  <ion-navbar>
+    <ion-title>Agenda Profesor</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-item>
+        <ion-label>Seleccione Fecha</ion-label>
+        <ion-datetime displayFormat="MMMM/YYYY" [(ngModel)]="myDate" 
+        min="{{minDate}}" max="{{maxDate}}"
+        monthNames="Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre"
+        (ionChange)="cargarAgenda()"
+        ></ion-datetime>
+      </ion-item>
+
+    <ion-list>
+    
+      <ion-item-sliding *ngFor="let cal of agendaArr">
+        <!-- opciones a la izquierda-->
+        <ion-item-options side="left">
+          <button ion-button color="primary" (click)="asociarComunas(prof)">
+            <ion-icon name="trash"></ion-icon>
+            Eliminar
+          </button>
+          <button ion-button color="primary" (click)="asociarComunas(prof)">
+            <ion-icon name="list-box"></ion-icon>
+            Todas
+          </button>
+        </ion-item-options>
+        <ion-item-options side="right">
+          <button ion-button color="primary" (click)="detalleAgenda(cal)">
+            <ion-icon name="checkbox"></ion-icon>
+            Check
+          </button>
+          <button ion-button color="danger" (click)="desactivarProfesor(prof)">
+            <ion-icon name="eye"></ion-icon>
+            Ver
+          </button>
+        </ion-item-options>
+        <ion-item>
+          <ion-avatar item-start>
+            <span [ngClass]="cal.ClaseDia" style="border-radius: 15px;">{{cal.DiaSemanaInt}}</span>
+          </ion-avatar>
+          <h2>{{cal.DiaSemana}}</h2>
+          <p>{{cal.HoraInicio}} - {{cal.HoraTermino}}</p>
+          <ion-note item-end style="font-size: 1.2rem;">
+            {{cal.CuposDisponibles}} Disponibles
+          </ion-note>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+
+</ion-content>

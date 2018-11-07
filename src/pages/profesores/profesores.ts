@@ -7,6 +7,7 @@ import * as moment from 'moment';
 //modales
 import { EditarProfesorPage } from '../../pages/editar-profesor/editar-profesor';
 import { AsociarComunasPage } from '../../pages/asociar-comunas/asociar-comunas';
+import { InicioPage } from '../../pages/Inicio/inicio';
 
 /**
  * Generated class for the ProfesoresPage page.
@@ -197,6 +198,10 @@ export class ProfesoresPage {
 
     });
 
+  }
+  cerrarSesion(){
+    sessionStorage.clear();
+    this.nav.setRoot(InicioPage);
   }
 
 }

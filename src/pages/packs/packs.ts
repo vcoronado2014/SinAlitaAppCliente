@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { InicioPage } from '../../pages/Inicio/inicio';
 
 /**
  * Generated class for the PacksPage page.
@@ -14,9 +15,12 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class PacksPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public nav: NavController, public navParams: NavParams) {
   }
-
+  cerrarSesion(){
+    sessionStorage.clear();
+    this.nav.setRoot(InicioPage);
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad PacksPage');
   }
