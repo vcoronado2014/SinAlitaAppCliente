@@ -4,6 +4,7 @@ import { NavController, NavParams, AlertController, ToastController, ViewControl
 import { GlobalService } from '../../app/Services/GlobalService';
 //modales
 import { DetalleAgendaPage } from '../../pages/detalle-agenda/detalle-agenda';
+import { InicioPage } from '../../pages/Inicio/inicio';
 import * as moment from 'moment';
 
 /**
@@ -85,12 +86,145 @@ export class AgendaProfesorPage {
     modal.present();
 
   }
+  disponibilizarTodo(item) {
+
+    const confirm = this.alert.create({
+      title: 'Cupos disponibles',
+      message: '¿Estas seguro de dejar todos tus cupos disponibles.?',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Si',
+          handler: () => {
+
+            let loader = this.loading.create({
+              content: 'Disponibilizando...',
+            });
+            loader.present().then(() => {
+              console.log(item);
+              //ahora vamos a enviar los parametros a guardar
+              //en este caso el arreglo se va completo, la api
+              //determina que guarda y no
+              var fechaEntera = item.FechaEntera;
+              var profId = item.ProfId;
+              var arrGuardar = '1,2,3,4,5,6,7,8';
+              var arrGuardarNo = '';
+              this.global.putSegmentos(
+                1,
+                fechaEntera,
+                profId,
+                arrGuardar.toString(),
+                arrGuardarNo.toString()
+              ).subscribe(
+                data => {
+                  //this.agendaArr = data.json();
+                  this.cargarAgenda();
+                },
+                err => {
+                  console.error(err);
+                  let toast = this.presentToast("Error al guardar", "top", 2000);
+                  loader.dismiss();
+                },
+                () => {
+                  console.log('save completed');
+                  let toast = this.presentToast("Registro guardado con éxito", "top", 2000);
+                  loader.dismiss();
+                }
+              );
+              loader.dismiss();
+            });
+          }
+        }
+      ]
+    });
+    confirm.present();
+
+
+  }
+  borrarTodo(item) {
+
+    const confirm = this.alert.create({
+      title: 'Cupos NO disponibles',
+      message: '¿Estas seguro de desactivar todos tus cupos disponibles.?',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Si',
+          handler: () => {
+
+            let loader = this.loading.create({
+              content: 'Desactivando...',
+            });
+            loader.present().then(() => {
+              console.log(item);
+              //ahora vamos a enviar los parametros a guardar
+              //en este caso el arreglo se va completo, la api
+              //determina que guarda y no
+              var fechaEntera = item.FechaEntera;
+              var profId = item.ProfId;
+              var arrGuardar = '';
+              var arrGuardarNo = '1,2,3,4,5,6,7,8';
+              this.global.putSegmentos(
+                1,
+                fechaEntera,
+                profId,
+                arrGuardar.toString(),
+                arrGuardarNo.toString()
+              ).subscribe(
+                data => {
+                  //this.agendaArr = data.json();
+                  this.cargarAgenda();
+                },
+                err => {
+                  console.error(err);
+                  let toast = this.presentToast("Error al guardar", "top", 2000);
+                  loader.dismiss();
+                },
+                () => {
+                  console.log('save completed');
+                  let toast = this.presentToast("Registro guardado con éxito", "top", 2000);
+                  loader.dismiss();
+                }
+              );
+              loader.dismiss();
+            });
+          }
+        }
+      ]
+    });
+    confirm.present();
+
+
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AgendaProfesorPage');
   }
   cerrarSesion(){
     sessionStorage.clear();
     this.nav.setRoot(InicioPage);
+  }
+  presentToast = function(mensaje, posicion, duracion) {
+    let toast = this.toastCtrl.create({
+      message: mensaje,
+      duration: duracion,
+      position: posicion
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
   }
 
 }

@@ -98,7 +98,7 @@ export class FichaAlumnoPage {
     //this.list.closeSlidingItems();
   }
   presentModalNuevo() {
-    let modal = this.modalCtrl.create(CreaAlumnoPage, {idPack: this.idPack, clieId: this.clieId });
+    let modal = this.modalCtrl.create(CreaAlumnoPage, {idPack: this.idPack, clieId: this.clieId, cantidadAlumnos: this.cantidadAlumnos });
     modal.present();
   }
 

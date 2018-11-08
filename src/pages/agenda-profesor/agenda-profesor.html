@@ -37,11 +37,11 @@
       <ion-item-sliding *ngFor="let cal of agendaArr">
         <!-- opciones a la izquierda-->
         <ion-item-options side="left">
-          <button ion-button color="primary" (click)="asociarComunas(prof)" *ngIf="cal.DeshabilitaBorrarTodo == 1">
+          <button ion-button color="danger" (click)="borrarTodo(cal)" *ngIf="cal.DeshabilitaBorrarTodo == 1">
             <ion-icon name="trash"></ion-icon>
             Eliminar
           </button>
-          <button ion-button color="primary" (click)="asociarComunas(prof)" *ngIf="cal.DeshabilitaCrearTodo == 1 && cal.CuposDisponibles > 0">
+          <button ion-button color="primary" (click)="disponibilizarTodo(cal)" *ngIf="cal.DeshabilitaCrearTodo == 1 && cal.CuposDisponibles > 0">
             <ion-icon name="list-box"></ion-icon>
             Todas
           </button>

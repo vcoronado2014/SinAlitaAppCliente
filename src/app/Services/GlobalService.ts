@@ -235,5 +235,17 @@ export class GlobalService{
       });
       return repos;
     }
+    postObtenerPCOGrilla(estado, codigo){
+      var usuario = localStorage.getItem("USUARIO");
+      let url = AppSettings.URL_API + 'ObtenerProductoCodigoGrilla';
+      let dataGet = { 
+        Estado: estado.toString(),
+        Codigo: codigo
+      };
   
+      let repos = this.http.post(url, dataGet, {
+        headers: new Headers({'Content-Type': 'application/json'})
+      });
+      return repos;
+    }
 }

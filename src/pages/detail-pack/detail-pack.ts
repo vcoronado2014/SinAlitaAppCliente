@@ -172,17 +172,18 @@ export class DetailPackPage {
         }
         //controles
         //puede ver agenda cuando la cantidad de alumnos creados sea igual a la programada
-        if (this.alumnosCreados != this.cantidadAlumnos){
+        //if (this.alumnosCreados != this.cantidadAlumnos){
+        if (this.cantidadAlumnos > this.alumnosCreados) {
           this.puedeVerAgenda = false;
           this.tieneAlerta = true;
           var dif = this.cantidadAlumnos - this.alumnosCreados;
           var sms = "No puede ver su agenda hasta que cree la ficha de " + dif.toString() + " alumnos.";
           this.mensajeAlerta = sms;
         }
-        if (this.cuposCreados == 0){
+        if (this.cuposCreados == 0) {
           this.puedeVerAgenda = false;
         }
-        if (this.envoltorio.Cupos){
+        if (this.envoltorio.Cupos) {
           this.arrCupos = this.envoltorio.Cupos;
         }
 
@@ -205,7 +206,7 @@ export class DetailPackPage {
     this.nav.push(DetailAgendaPage, {id: id, cupos: this.arrCupos, profesor: this.envoltorio.Profesor, codigoPack: this.codigoCliente });
   }
   goToCrearAlumno(){
-    this.nav.push(CreaAlumnoPage, {idPack: this.idPack, clieId: this.clieId, codigoCliente: this.codigoCliente});
+    this.nav.push(CreaAlumnoPage, {idPack: this.idPack, clieId: this.clieId, codigoCliente: this.codigoCliente, cantidadAlumnos: this.cantidadAlumnos});
   }
   goToFichaAlumno(){
     this.nav.push(FichaAlumnoPage, {fichaAlumnos: this.fichaAlumnos, cantidadAlumnos: this.cantidadAlumnos, idPack: this.idPack, clieId: this.clieId });

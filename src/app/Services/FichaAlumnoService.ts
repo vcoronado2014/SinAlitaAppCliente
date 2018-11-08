@@ -25,6 +25,15 @@ export class FichaAlumnoService{
     });
     return repos;
   }
+  deleteFicha(idAlumno, idPack){
+    let url = AppSettings.URL_API + 'FichaAlumnoDelete';
+    let dataGet = { IdAlumno: idAlumno.toString(), IdPack: idPack.toString() };
+
+    let repos = this.http.post(url, dataGet, {
+      headers: new Headers({'Content-Type': 'application/json'})
+    });
+    return repos;
+  }
   put(dataPut){
     let url = AppSettings.URL_API + 'FichaAlumno';
 

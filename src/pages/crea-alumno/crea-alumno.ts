@@ -45,7 +45,7 @@ export class CreaAlumnoPage {
   public observacion;
   public otraEnfermedad;
 
-  public cantidadAlumnosActual;
+  public cantidadAlumnosActual = 0;
   public codigoCliente;
 
   pet: string = "puppies";
@@ -54,6 +54,7 @@ export class CreaAlumnoPage {
     public urlFacebook;
   public urlInstagram;
   public urlFun;
+  cantidadAlumnos = 0;
 
     constructor(
     private nav: NavController,
@@ -70,6 +71,7 @@ export class CreaAlumnoPage {
       this.clieId = navParams.get('clieId');
       this.idPack = navParams.get('idPack');
       this.codigoCliente= navParams.get('codigoCliente');
+      this.cantidadAlumnos= navParams.get('cantidadAlumnos');
       this.tieneAlumnos = false;
       this.idAlumnoEditar = 0;
           this.urlFacebook = AppSettings.URL_FACEBOOK;
@@ -118,6 +120,7 @@ export class CreaAlumnoPage {
     //se envian los elementos a guardar, luego se asigna al arreglo de fichas
     //el retorno del guardado, se asigna a la variable contador la cantidad de alumnos
     //se limpia el formulario
+    if (this.fichasArr.length < this.cantidadAlumnos){
       if (this.validar()){
         //todo ok.
         //let mi = this.presentToast('correcto', 'bottom', 4000);
@@ -189,8 +192,50 @@ export class CreaAlumnoPage {
 
 
       }
+    }
+    else {
+      let mi = this.presentToast('No puede crear más alumnos, cumplió el tope.', 'bottom', 3000);
+    }
+
   }
 
+  eliminar(item) {
+    //logica para eliminar la ficha pack
+    var idPack = item.IdPack;
+    var idAlumno = item.Id;
+    //ahora eliminamos
+    this.ficha.deleteFicha(idAlumno, idPack).subscribe(
+      data => {
+        if (data.status == 200) {
+          //todo ok
+          let mi = this.presentToast('Registro Guardado con éxito.', 'top', 5000);
+          this.ficha.getFichas(this.idPack).subscribe(
+            dataAl => {
+              this.fichasArr = dataAl.json();
+              if (this.fichasArr){
+                this.cantidadAlumnosActual = this.fichasArr.length;
+              }
+  
+  
+  
+            },
+            err => console.error(err),
+            () => console.log('get fichas completed')
+          );
+          //this.limpiar();
+
+        }
+        else {
+          let mi = this.presentToast('Error al guardar.', 'bottom', 4000);
+          //redireccionar a la anterior
+          //this.nav.setRoot(HomePage);
+        }
+      },
+      err => console.error(err),
+      () => console.log('ok')
+    );
+
+  }
   close(){
     this.auth.Post(this.codigoCliente).subscribe(
       data => {

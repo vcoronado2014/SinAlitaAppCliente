@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ToastController, ViewController, LoadingController, ModalController  } from 'ionic-angular';
+
+import { GlobalService } from '../../app/Services/GlobalService';
 import { InicioPage } from '../../pages/Inicio/inicio';
 
 /**
@@ -15,7 +17,17 @@ import { InicioPage } from '../../pages/Inicio/inicio';
 })
 export class PacksPage {
 
-  constructor(public nav: NavController, public navParams: NavParams) {
+  packArr = [];
+  constructor(    
+    private nav: NavController,
+    private alert: AlertController,
+    public loading: LoadingController,
+    public toastCtrl: ToastController,
+    private navParams: NavParams,
+    private viewCtrl: ViewController,
+    private global: GlobalService,
+    private modalCtrl: ModalController) {
+      this.cargarPack();
   }
   cerrarSesion(){
     sessionStorage.clear();
@@ -24,5 +36,43 @@ export class PacksPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PacksPage');
   }
+  cargarPack() {
+    let loader = this.loading.create({
+      content: 'Cargando...',
+    });
+    loader.present().then(() => {
+      var estado = '0';
+      var codigo = '';
+      this.global.postObtenerPCOGrilla(estado, codigo).subscribe(
+        data => {
+          this.packArr = data.json();
 
+        },
+        err => console.error(err),
+        () => console.log('get alumnos completed')
+      );
+      loader.dismiss();
+    });
+  }
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      this.cargarPack();
+      refresher.complete();
+    }, 2000);
+  }
+  presentToast = function(mensaje, posicion, duracion) {
+    let toast = this.toastCtrl.create({
+      message: mensaje,
+      duration: duracion,
+      position: posicion
+    }); 
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
+  }
 }

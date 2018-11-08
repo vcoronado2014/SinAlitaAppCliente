@@ -18,6 +18,7 @@
 
 
 <ion-content padding>
+  <!--
   <ion-fab top right edge>
     <button ion-fab mini class="mui--bg-color-blue-900"><ion-icon name="add"></ion-icon></button>
     <ion-fab-list>
@@ -26,6 +27,7 @@
       <a href="{{urlInstagram}}" ion-fab><ion-icon name="logo-instagram"></ion-icon></a>
     </ion-fab-list>
   </ion-fab>
+-->
   <!-- comenzamos a contruir los controles -->
   <ion-card *ngIf="tieneAlumnos" style="padding: 0;margin: 0;width: 100%;">
 
@@ -137,14 +139,25 @@
     </ion-row>
 
     <ion-row *ngSwitchCase="'Lista'">
-      <ion-list  *ngFor="let user of fichasArr">
-        <ion-item >
-          <text-avatar [text]="user.NombreCompleto" [color]="user.color" item-left></text-avatar>
-          <h2>{{ user.NombreCompleto || upper}}</h2>
-          <p>Edad: {{user.Edad}} años</p>
-          <p>Sexo: {{user.Sexo}}</p>
-        </ion-item>
-    </ion-list>
+      <ion-list style="width: 100%;">
+        <ion-item-sliding *ngFor="let user of fichasArr">
+          <ion-item-options side="right">
+            <button ion-button color="danger" (click)="eliminar(user)">
+              <ion-icon name="trash"></ion-icon>
+              Borrar
+            </button>
+          </ion-item-options>
+          <ion-item>
+            <text-avatar [text]="user.NombreCompleto" [color]="user.color" item-left></text-avatar>
+            <h2>{{ user.NombreCompleto || upper}}</h2>
+            <p>Edad: {{user.Edad}} años</p>
+            <p>Sexo: {{user.Sexo}}</p>
+            <p style="font-size: 0.9rem;
+            color: black;
+            font-style: italic;">Deslize a la izquierda si quiere eliminar este alumno...</p>
+          </ion-item>
+        </ion-item-sliding>
+      </ion-list>
     </ion-row>
 
   </div>
