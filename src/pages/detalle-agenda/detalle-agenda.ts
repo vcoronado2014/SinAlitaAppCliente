@@ -21,6 +21,8 @@ export class DetalleAgendaPage {
   agenda;
   profId;
   segmentosArr=[];
+  agendaArr=[];
+  habilitaBotonGuardar = true;
   constructor(   
      private nav: NavController,
     private alert: AlertController,
@@ -33,6 +35,9 @@ export class DetalleAgendaPage {
       this.profId = sessionStorage.getItem("PROF_ID");
       this.agenda =  navParams.get('agenda');
       if (this.agenda){
+        if (this.agenda.DeshabilitaBorrarTodo == 0 && this.agenda.DeshabilitaCrearTodo == 0){
+          this.habilitaBotonGuardar = false;
+        }
         this.titulo = "Agenda del " + this.agenda.DiaSemana + " " + this.agenda.DiaSemanaInt.toString();
         this.buscarSegmentos(this.agenda);
       }
@@ -68,6 +73,79 @@ export class DetalleAgendaPage {
   }
   cancel(){
     this.viewCtrl.dismiss();
+  }
+  guardar() {
+
+    let loader = this.loading.create({
+      content: 'Guardando...',
+    });
+
+    loader.present().then(() => {
+      var arregloSegmentosGuardar = "";
+      var arrGuardar = [];
+      var arrGuardarNo = [];
+
+      this.segmentosArr.forEach(element => {
+        var ele = element;
+        if (ele.EsSeleccionado) {
+          //agregar los elementos a guardar
+          arrGuardar.push(ele.SghId);
+        }
+        else{
+          arrGuardarNo.push(ele.SghId);
+        }
+
+      });
+     // if (arrGuardar.length > 0) {
+        //enviar a guardar
+        console.log(arrGuardar.toString());
+        this.global.putSegmentos(
+          1,
+          this.agenda.FechaEntera,
+          this.agenda.ProfId,
+          arrGuardar.toString(),
+          arrGuardarNo.toString()
+        ).subscribe(
+          data => {
+            this.agendaArr = data.json();
+          },
+          err => {
+            console.error(err);
+            let toast = this.presentToast("Error al guardar", "top", 2000);
+            loader.dismiss();
+          },
+          () => {
+            console.log('save completed');
+            let toast = this.presentToast("Registro guardado con éxito", "top", 2000);
+            //ProfesoresPage.cargarProfesores();
+            loader.dismiss();
+            //volvemos a la página anterior
+            this.viewCtrl.dismiss({ agenda: this.agendaArr });
+          }
+        );
+
+        /*
+      }
+      else {
+        loader.dismiss();
+        let mensaje = this.presentToast('Debe seleccionar horas para guardar', 'top', 2000);
+
+      }
+*/
+    });
+  }
+  presentToast = function(mensaje, posicion, duracion) {
+    let toast = this.toastCtrl.create({
+      message: mensaje,
+      duration: duracion,
+      position: posicion
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
   }
 
 }

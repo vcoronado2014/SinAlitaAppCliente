@@ -40,8 +40,15 @@
             <ion-icon name="leaf" item-start></ion-icon>
           -->
 
-          <ion-label text-wrap>{{ user.Comentario}}</ion-label>
-          <ion-toggle item-end></ion-toggle>
+          <ion-label text-wrap>
+            <h2>{{ user.Comentario}}</h2>
+            <p>
+                <ion-badge item-start>{{user.HoraInicio}} - {{user.HoraTermino}}</ion-badge> 
+            </p>
+
+          </ion-label>
+
+          <ion-toggle item-end disabled="{{user.EsDisponible == false}}" [checked]="user.EsSeleccionado" [(ngModel)]="user.EsSeleccionado"></ion-toggle>
           <!--
               <h2 class="mui--text-dark-secondary" text-wrap>{{ user.Comentario}}</h2>
               <p>{{user.HoraInicio}} - {{user.HoraTermino}}</p>
@@ -49,4 +56,12 @@
 
         </ion-item>
       </ion-list>
+      <ion-row>
+        <ion-col col-6>
+          <button ion-button class="mui--bg-color-red-500" style="width: 100%;" (click)="cancel()"> Cancelar</button>
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button class="mui--bg-color-green-500" style="width: 100%;" (click)="guardar()" *ngIf="habilitaBotonGuardar"> Guardar</button>
+        </ion-col>
+      </ion-row>
 </ion-content>

@@ -77,15 +77,20 @@ export class AgendaProfesorPage {
     let modal = this.modalCtrl.create(DetalleAgendaPage, {agenda: agenda });
     modal.onDidDismiss(data => {
       // Data is your data from the modal
-      //if (data != undefined){
-      //  this.profesoresArr = data.profesores;
-      //}
+      if (data != undefined){
+        //this.agendaArr = data;
+        this.cargarAgenda();
+      }
     });
     modal.present();
 
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AgendaProfesorPage');
+  }
+  cerrarSesion(){
+    sessionStorage.clear();
+    this.nav.setRoot(InicioPage);
   }
 
 }

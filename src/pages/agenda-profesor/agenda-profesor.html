@@ -18,6 +18,11 @@
     <ion-refresher (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
+    <ion-fab top right edge>
+        <button ion-fab mini class="mui--bg-color-red-900" (click)="cerrarSesion()">
+          <ion-icon name="exit"></ion-icon>
+        </button>
+      </ion-fab>
     <ion-item>
         <ion-label>Seleccione Fecha</ion-label>
         <ion-datetime displayFormat="MMMM/YYYY" [(ngModel)]="myDate" 
@@ -32,11 +37,11 @@
       <ion-item-sliding *ngFor="let cal of agendaArr">
         <!-- opciones a la izquierda-->
         <ion-item-options side="left">
-          <button ion-button color="primary" (click)="asociarComunas(prof)">
+          <button ion-button color="primary" (click)="asociarComunas(prof)" *ngIf="cal.DeshabilitaBorrarTodo == 1">
             <ion-icon name="trash"></ion-icon>
             Eliminar
           </button>
-          <button ion-button color="primary" (click)="asociarComunas(prof)">
+          <button ion-button color="primary" (click)="asociarComunas(prof)" *ngIf="cal.DeshabilitaCrearTodo == 1 && cal.CuposDisponibles > 0">
             <ion-icon name="list-box"></ion-icon>
             Todas
           </button>

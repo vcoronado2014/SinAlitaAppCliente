@@ -219,5 +219,21 @@ export class GlobalService{
       });
       return repos;
     }
+    putSegmentos(nodId, fechaEntera, profId, arregloShg, arregloNo){
+
+      let url = AppSettings.URL_API + 'BuscarSegmentos';
+      let dataGet = { 
+        NodId: nodId.toString(),
+        FechaEntera: fechaEntera.toString(),
+        ProfId: profId.toString(),
+        Segmentos: arregloShg,
+        SegmentosNo: arregloNo
+      };
+  
+      let repos = this.http.put(url, dataGet, {
+        headers: new Headers({'Content-Type': 'application/json'})
+      });
+      return repos;
+    }
   
 }

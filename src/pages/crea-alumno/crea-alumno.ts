@@ -84,11 +84,11 @@ export class CreaAlumnoPage {
         this.alumnos.getAlumnos(this.clieId).subscribe(
           data => {
             this.alumnosArr = data.json();
-            if (this.alumnosArr.length > 0){
-              this.tieneAlumnos = true;
+            if (this.alumnosArr) {
+              if (this.alumnosArr.length > 0) {
+                this.tieneAlumnos = true;
+              }
             }
-
-
           },
           err => console.error(err),
           () => console.log('get alumnos completed')
