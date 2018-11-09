@@ -45,10 +45,16 @@ export class ProfesoresPage {
         data => {
           this.profesoresArr = data.json();
         },
-        err => console.error(err),
-        () => console.log('get alumnos completed')
+        err =>{ 
+          console.error(err);
+          loader.dismiss();
+        },
+        () => {
+          console.log('get alumnos completed');
+          loader.dismiss();
+        }
       );
-      loader.dismiss();
+      
     });
   }
   doRefresh(refresher) {

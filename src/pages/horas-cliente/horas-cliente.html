@@ -12,9 +12,15 @@
         <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>Horas Cliente</ion-title>
+    <ion-title>Agendar</ion-title>
   </ion-navbar>
-
+<!--
+  <ion-toolbar class="mui--bg-color-blue-200">
+      <ion-title>
+        <h6 style="font-size: 1.5rem;">Otros antecedentes</h6>
+      </ion-title>
+    </ion-toolbar>
+  -->
 </ion-header>
 
 
@@ -22,17 +28,55 @@
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title>
+        Datos del Cliente
+      </ion-card-title>
+    </ion-card-content>
+    <ion-item>
+      <h2>{{nombreCompletoCliente}}</h2>
+      <p text-wrap>
+          <ion-icon name="globe"></ion-icon> Comuna: {{nombreComunaCliente}}</p>
+      <p text-wrap>
+        <ion-icon name="pin"></ion-icon> {{direccionCliente}}</p>
+      <p text-wrap>
+        <ion-icon name="call"></ion-icon> {{telefonosContactoCliente}}</p>
+      <p text-wrap>
+        <ion-icon name="mail"></ion-icon> {{emailCliente}}</p>
+    </ion-item>
+  </ion-card>
   <!--contenido cuando tiene acepta condiciones -->
-  <ion-row *ngIf="tieneAceptaCondiciones">
-
-  </ion-row>
-  <!--contenido cuando NO tiene acepta condiciones -->
-  <ion-row *ngIf="tieneAceptaCondiciones == false">
-    Mostrar Mensaje que no puede debido a que el cliente no ha aceptado condiciones.
-  </ion-row>
-  <!--contenido cuando  tiene CUPOS TOMADOS -->
-  <ion-row >
-  CONTENIDO CUANDO TIENE CUPOS TOMADOS
-  </ion-row>
+  <ion-list>
+      <ion-list-header>
+        Profesores de la Comuna
+      </ion-list-header>
+    <ion-item *ngFor="let cpo of cuposArr">
+      <ion-avatar item-start>
+        <img src="{{cpo.Profesor.Fotografia}}">
+      </ion-avatar>
+      <h3 text-wrap>{{cpo.Profesor.Nombres}} {{cpo.Profesor.PrimerApellido}} {{cpo.Profesor.SegundoApellido}}</h3>
+      <p>
+          <ion-icon name="call" *ngIf="cpo.Profesor.TelefonosContacto"></ion-icon><span> {{cpo.Profesor.TelefonosContacto}}</span>
+      </p>
+      <p>
+          <ion-badge color="secondary" *ngIf="cpo.Semanas == ''">{{cpo.CuposMostrar.length}} días disponibles</ion-badge>
+          <ion-badge color="danger" *ngIf="cpo.Semanas != ''">{{cpo.Semanas}}</ion-badge>
+          <ion-badge  (click)="mostrarInfoCupos(cpo)" color="secondary" *ngIf="cpo.Semanas == ''"><ion-icon name="eye"></ion-icon> Ver</ion-badge>
+         
+      </p>
+      <p *ngIf="cpo.Semanas == ''">
+        <ion-list *ngFor="let sem of cpo.SemanasArr">
+          <ion-item *ngIf="sem.DiasDisponibles > 0">
+        
+            <h6 text-wrap>{{sem.SemanaString}}</h6>
+            <ion-badge color="primary" item-end>{{sem.DiasDisponibles}}</ion-badge>
+        
+          </ion-item>
+        </ion-list>
+        <ion-badge  (click)="mostrarAgendarHoras(cpo)" color="primary" ><ion-icon name="calendar"></ion-icon> Agendar</ion-badge>
+      </p>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

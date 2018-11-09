@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, ToastController, ViewController, LoadingController, ModalController  } from 'ionic-angular';
 
 import { GlobalService } from '../../app/Services/GlobalService';
+import {AppSettings} from "../../../AppSettings";
+import { InfoCuposPage } from '../../pages/info-cupos/info-cupos';
+import { AgendarHorasPage } from '../../pages/agendar-horas/agendar-horas';
 
 import * as moment from 'moment';
 
@@ -18,8 +21,15 @@ import * as moment from 'moment';
 })
 export class HorasClientePage {
   pcoId;
+  comId;
   horaEnvoltorio;
-  tieneAceptaCondiciones = false;
+  comunaCliente;
+  cuposArr = [];
+  nombreCompletoCliente;
+  direccionCliente;
+  emailCliente;
+  telefonosContactoCliente;
+  nombreComunaCliente;
 
   constructor(
     private nav: NavController,
@@ -31,30 +41,66 @@ export class HorasClientePage {
     private global: GlobalService,
     private modalCtrl: ModalController
     ) {
-      this.pcoId =  navParams.get('pcoId');
-      console.log(this.pcoId);
-      this.cargar();
+      this.horaEnvoltorio =  navParams.get('envoltorio');
+      console.log(this.horaEnvoltorio);
+      this.comId = this.horaEnvoltorio.Comuna.Id;
+      this.pcoId = this.horaEnvoltorio.ProductoCodigo.Id;
+      //datos del cliente
+      this.nombreCompletoCliente = this.horaEnvoltorio.Cliente.Nombres + ' ' + this.horaEnvoltorio.Cliente.PrimerApellido;
+      this.direccionCliente = this.horaEnvoltorio.Cliente.Direccion;
+      this.emailCliente = this.horaEnvoltorio.Cliente.Email;
+      this.telefonosContactoCliente = this.horaEnvoltorio.Cliente.TelefonosContacto;
+      this.nombreComunaCliente = this.horaEnvoltorio.Comuna.Nombre;
+
+
+      //this.cargarComunaCliente();
+      this.cargarCupos();
 
   }
-  cargar() {
+  cargarComunaCliente() {
     let loader = this.loading.create({
       content: 'Cargando...',
     });
     loader.present().then(() => {
-      var estado = '0';
-      var codigo = '';
-      this.global.postClientePackProducto(this.pcoId).subscribe(
+      this.global.getComunaId(this.comId).subscribe(
         data => {
-          this.horaEnvoltorio = data.json();
-          if (this.horaEnvoltorio.Condiciones && this.horaEnvoltorio.Condiciones.Id > 0){
-            this.tieneAceptaCondiciones = true;
-          }
-
+          this.comunaCliente = data.json();
         },
         err => console.error(err),
-        () => console.log('get alumnos completed')
+        () => console.log('get comuna cliente completed')
       );
       loader.dismiss();
+    });
+  }
+
+  cargarCupos() {
+    let loader = this.loading.create({
+      content: 'Cargando Cupos...',
+    });
+    loader.present().then(() => {
+      this.global.postProfesorCupo(this.comId, this.pcoId).subscribe(
+        data => {
+          var datos = data.json();
+          datos.forEach(element => {
+            if (element.Profesor.Fotografia == ''){
+              element.Profesor.Fotografia = AppSettings.URL_FOTOS + "img/no_foto.png";
+            }
+            else {
+              element.Profesor.Fotografia =AppSettings.URL_FOTOS + "img/" + element.Profesor.Fotografia;
+            }
+          });
+          this.cuposArr = datos;
+        },
+        err => {
+          loader.dismiss();
+          console.error(err);
+        },
+        () => {
+          loader.dismiss();
+          console.log('get cupos completed');
+        }
+      );
+      //loader.dismiss();
     });
   }
 
@@ -62,7 +108,7 @@ export class HorasClientePage {
     console.log('Begin async operation', refresher);
 
     setTimeout(() => {
-      this.cargar();
+      this.cargarCupos();
       refresher.complete();
     }, 2000);
   }
@@ -86,5 +132,49 @@ export class HorasClientePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad HorasClientePage');
   }
+/*
+  infoSemanas(cuposMostrar){
+    var listItems = [];
 
+    cuposMostrar.forEach(element => {
+      var texto = element.FechaLetras;
+      var cantidad = element.Cupos.length.toString();
+      let li = new ListItem;
+      li.name = texto;
+      li.total = cantidad;
+      listItems.push(li);
+
+    });
+    const alert = this.alert.create({
+      title: 'Información',
+      subTitle: '',
+      buttons: ['Aceptar']
+    });
+    alert.present();
+  }
+*/
+  mostrarInfoCupos(cuposMostrar){
+    let modal = this.modalCtrl.create(InfoCuposPage, {info: cuposMostrar });
+    modal.onDidDismiss(data => {
+      // Data is your data from the modal
+      if (data != undefined){
+        //this.cargarProfesores();
+      }
+    });
+    modal.present();
+  }
+  mostrarAgendarHoras(cuposMostrar){
+    let modal = this.modalCtrl.create(AgendarHorasPage, {info: cuposMostrar });
+    modal.onDidDismiss(data => {
+      // Data is your data from the modal
+      if (data != undefined){
+        //this.cargarProfesores();
+      }
+    });
+    modal.present();
+  }
+}
+class ListItem {
+  name: string;
+  total: string;
 }

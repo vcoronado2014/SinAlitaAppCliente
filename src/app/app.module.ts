@@ -37,6 +37,8 @@ import { ProfesorPage } from '../pages/profesor/profesor';
 import { AgendaProfesorPage } from '../pages/agenda-profesor/agenda-profesor';
 import { DetalleAgendaPage } from '../pages/detalle-agenda/detalle-agenda';
 import { HorasClientePage } from '../pages/horas-cliente/horas-cliente';
+import { InfoCuposPage } from '../pages/info-cupos/info-cupos';
+import { AgendarHorasPage } from '../pages/agendar-horas/agendar-horas';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import { HorasClientePage } from '../pages/horas-cliente/horas-cliente';
     AgendaProfesorPage,
     DetalleAgendaPage,
     HorasClientePage,
+    InfoCuposPage,
+    AgendarHorasPage,
     TextAvatarDirective
   ],
   imports: [
@@ -94,6 +98,8 @@ import { HorasClientePage } from '../pages/horas-cliente/horas-cliente';
     AgendaProfesorPage,
     DetalleAgendaPage,
     HorasClientePage,
+    InfoCuposPage,
+    AgendarHorasPage,
     PacksPage
   ],
   providers: [

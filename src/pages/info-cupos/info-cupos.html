@@ -1,0 +1,29 @@
+<!--
+  Generated template for the InfoCuposPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="mui--bg-color-blue-400 fg-light">
+
+    <ion-navbar>
+      <ion-buttons style="float: right;">
+        <button (click)="cancel()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title>Información de los Cupos</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+      <ion-item *ngFor="let cpo of cuposMostrar.SemanasArr">
+        <h3 text-wrap>{{cpo.SemanaString}}</h3>
+        <ion-badge *ngIf="cpo.DiasDisponibles > 0" color="primary" item-end>{{cpo.DiasDisponibles}}</ion-badge>
+        <ion-badge *ngIf="cpo.DiasDisponibles == 0" color="danger" item-end>{{cpo.DiasDisponibles}}</ion-badge>
+      </ion-item>
+    </ion-list>
+</ion-content>

@@ -260,4 +260,22 @@ export class GlobalService{
       });
       return repos;
     }
+    getComunaId(id){
+      let url = AppSettings.URL_API + 'Comunas?Parametro=' + id.toString();
+      let repos = this.http.get(url);
+      
+      return repos;
+    }
+    postProfesorCupo(comId, pcoId){
+      let url = AppSettings.URL_API + 'ProfesorCupo';
+      let dataGet = { 
+        ComId: comId.toString(),
+        PcoId: pcoId.toString()
+      };
+  
+      let repos = this.http.post(url, dataGet, {
+        headers: new Headers({'Content-Type': 'application/json'})
+      });
+      return repos;
+    }
 }

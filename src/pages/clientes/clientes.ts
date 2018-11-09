@@ -56,10 +56,16 @@ export class ClientesPage {
           this.clientesArr = datos;
           this.todasLosClientes = this.clientesArr;
         },
-        err => console.error(err),
-        () => console.log('get alumnos completed')
+        err => {
+          console.error(err);
+          loader.dismiss();
+        },
+        () => {
+          console.log('get alumnos completed');
+          loader.dismiss();
+        }
       );
-      loader.dismiss();
+      //loader.dismiss();
     });
   }
   doRefresh(refresher) {

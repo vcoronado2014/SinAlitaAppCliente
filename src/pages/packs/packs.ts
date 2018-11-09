@@ -49,10 +49,16 @@ export class PacksPage {
           this.packArr = data.json();
 
         },
-        err => console.error(err),
-        () => console.log('get alumnos completed')
+        err => {
+          console.error(err);
+          loader.dismiss();
+        },
+        () => {
+          console.log('get alumnos completed');
+          loader.dismiss();
+        }
       );
-      loader.dismiss();
+      
     });
   }
   doRefresh(refresher) {
@@ -76,8 +82,8 @@ export class PacksPage {
 
     toast.present();
   }
-  abrirHorasCliente(pcoid){
-    let modal = this.modalCtrl.create(HorasClientePage, {pcoId: pcoid });
+  gotoHorasCliente(envoltorio){
+    let modal = this.modalCtrl.create(HorasClientePage, {envoltorio: envoltorio });
     modal.onDidDismiss(data => {
       // Data is your data from the modal
       if (data != undefined){
@@ -85,6 +91,36 @@ export class PacksPage {
       }
     });
     modal.present();
+  }
+  abrirHorasCliente(pcoid){
+
+    this.global.postClientePackProducto(pcoid).subscribe(
+      data => {
+        var datos = data.json();
+        if (datos.Condiciones && datos.Condiciones.Id > 0){
+          //tiene acepta condiciones
+          if (datos.CuposTomados){
+            if (datos.CuposTomados.length == datos.ProductoCodigo.CantidadClases){
+              //hay que derivarlo a otra pagina
+              //seleccionar semanas cliente
+
+            }
+          }
+          //aca seguimos y enviamos a horas cliente
+          this.gotoHorasCliente(datos);
+        }
+        else {
+          //aca se debe enviar mensaje de que el cliente aún no ha 
+          //aceptado condiciones
+
+        }
+
+      },
+      err => console.error(err),
+      () => console.log('get alumnos completed')
+    );
+
+
 
   } 
 }
