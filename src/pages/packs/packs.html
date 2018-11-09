@@ -14,10 +14,26 @@
 
 
 <ion-content padding>
-    <ion-fab top right edge>
-        <button ion-fab mini class="mui--bg-color-blue-900" (click)="cerrarSesion()">
-          <ion-icon name="exit"></ion-icon>
+  <ion-fab top right edge>
+    <button ion-fab mini class="mui--bg-color-blue-900" (click)="cerrarSesion()">
+      <ion-icon name="exit"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+    <ion-item *ngFor="let pack of packArr">
+
+        <h2 text-wrap text-justify>{{pack.Texto}}</h2>
+        <button ion-button icon-start *ngIf="pack.MostrarAbrir" (click)="abrirHorasCliente(pack.Id)">
+            <ion-icon name="open"></ion-icon>
+          Abrir
+          
         </button>
-      </ion-fab>
+
+    </ion-item>
+  </ion-list>  
 
 </ion-content>

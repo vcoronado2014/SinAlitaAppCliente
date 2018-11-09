@@ -248,4 +248,16 @@ export class GlobalService{
       });
       return repos;
     }
+    postClientePackProducto(pcoId){
+      var usuario = localStorage.getItem("USUARIO");
+      let url = AppSettings.URL_API + 'ClientePaackProducto';
+      let dataGet = { 
+        PcoId: pcoId.toString()
+      };
+  
+      let repos = this.http.post(url, dataGet, {
+        headers: new Headers({'Content-Type': 'application/json'})
+      });
+      return repos;
+    }
 }

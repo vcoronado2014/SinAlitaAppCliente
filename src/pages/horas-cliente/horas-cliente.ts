@@ -2,24 +2,26 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, ToastController, ViewController, LoadingController, ModalController  } from 'ionic-angular';
 
 import { GlobalService } from '../../app/Services/GlobalService';
-import { InicioPage } from '../../pages/Inicio/inicio';
-import { HorasClientePage } from '../../pages/horas-cliente/horas-cliente';
+
+import * as moment from 'moment';
 
 /**
- * Generated class for the PacksPage page.
+ * Generated class for the HorasClientePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
 @Component({
-  selector: 'page-packs',
-  templateUrl: 'packs.html',
+  selector: 'page-horas-cliente',
+  templateUrl: 'horas-cliente.html',
 })
-export class PacksPage {
+export class HorasClientePage {
+  pcoId;
+  horaEnvoltorio;
+  tieneAceptaCondiciones = false;
 
-  packArr = [];
-  constructor(    
+  constructor(
     private nav: NavController,
     private alert: AlertController,
     public loading: LoadingController,
@@ -27,26 +29,26 @@ export class PacksPage {
     private navParams: NavParams,
     private viewCtrl: ViewController,
     private global: GlobalService,
-    private modalCtrl: ModalController) {
-      this.cargarPack();
+    private modalCtrl: ModalController
+    ) {
+      this.pcoId =  navParams.get('pcoId');
+      console.log(this.pcoId);
+      this.cargar();
+
   }
-  cerrarSesion(){
-    sessionStorage.clear();
-    this.nav.setRoot(InicioPage);
-  }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PacksPage');
-  }
-  cargarPack() {
+  cargar() {
     let loader = this.loading.create({
       content: 'Cargando...',
     });
     loader.present().then(() => {
       var estado = '0';
       var codigo = '';
-      this.global.postObtenerPCOGrilla(estado, codigo).subscribe(
+      this.global.postClientePackProducto(this.pcoId).subscribe(
         data => {
-          this.packArr = data.json();
+          this.horaEnvoltorio = data.json();
+          if (this.horaEnvoltorio.Condiciones && this.horaEnvoltorio.Condiciones.Id > 0){
+            this.tieneAceptaCondiciones = true;
+          }
 
         },
         err => console.error(err),
@@ -55,20 +57,22 @@ export class PacksPage {
       loader.dismiss();
     });
   }
+
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
 
     setTimeout(() => {
-      this.cargarPack();
+      this.cargar();
       refresher.complete();
     }, 2000);
   }
+
   presentToast = function(mensaje, posicion, duracion) {
     let toast = this.toastCtrl.create({
       message: mensaje,
       duration: duracion,
       position: posicion
-    }); 
+    });
 
     toast.onDidDismiss(() => {
       console.log('Dismissed toast');
@@ -76,15 +80,11 @@ export class PacksPage {
 
     toast.present();
   }
-  abrirHorasCliente(pcoid){
-    let modal = this.modalCtrl.create(HorasClientePage, {pcoId: pcoid });
-    modal.onDidDismiss(data => {
-      // Data is your data from the modal
-      if (data != undefined){
-        //this.cargarProfesores();
-      }
-    });
-    modal.present();
+  cancel(){
+    this.viewCtrl.dismiss();
+  }
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad HorasClientePage');
+  }
 
-  } 
 }
