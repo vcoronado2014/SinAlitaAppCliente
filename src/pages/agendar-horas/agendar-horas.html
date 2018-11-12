@@ -19,13 +19,77 @@
 
 
 <ion-content padding>
-    <ion-list>
-
-      <ion-item *ngFor="let cpo of cuposMostrar">
-        <h3 text-wrap>{{cpo.FechaLetras}}</h3>
-
-        <ion-badge color="primary" item-end>{{cpo.Cupos.length}}</ion-badge>
-
+    <ion-fab top right edge *ngIf="seleccionadas > 0" >
+        <button ion-fab mini class="mui--bg-color-red-900" style="margin: 8px;
+        width: 60px;
+        height: 40px;
+        line-height: 40px;">
+            {{seleccionadas}} de {{programadas}}
+        </button>
+      </ion-fab>
+    <ion-item>
+        <ion-label>Seleccione Fecha Inicio</ion-label>
+        <ion-datetime displayFormat="DD/MMMM/YYYY" [(ngModel)]="myDate" 
+        min="{{minDate}}" max="{{maxDate}}"
+        monthNames="Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre"
+        (ionChange)="procesarSemanas()"
+        ></ion-datetime>
       </ion-item>
+      <ion-item  *ngIf="semanasDisponibles == 0">
+        <ion-badge text-wrap text-justify color="secondary">
+          Seleccione Una fecha de inicio de las clases para calcular los cupos diponibles del profesor.
+        </ion-badge>
+      </ion-item>
+    <ion-list>
+      <ion-item *ngIf="semanasDisponibles > 0">
+       <ion-badge>Hay {{semanasDisponibles}} semanas disponibles</ion-badge> <ion-badge (click)="showAlertProfesor()">Profesor</ion-badge> <ion-badge (click)="showAlertCliente()">Cliente</ion-badge>
+      </ion-item>
+      <ion-item *ngIf="seleccionadas > 0">
+        <ion-badge color="secondary">Hay {{seleccionadas}} Cupos seleccionados de {{programadas}}</ion-badge>
+        <button ion-button color="secondary" (click)="guardar()" style="float:right;">Guardar</button>
+      </ion-item>
+      <ion-item-sliding *ngFor="let sem of semanasMostrar">
+        <ion-item *ngIf="sem.Agendas[0].length > 0">
+    
+          <h3 text-wrap><strong>{{sem.SemanaString}}</strong></h3>
+          <!--arreglo de dias -->
+          <ion-list>
+            <ion-item *ngFor="let dias of sem.Agendas[0]">
+              <h4 style="color: darkcyan;">
+                <strong>
+                  <ion-icon name="arrow-dropright"></ion-icon> {{dias.DiaString}}
+                </strong>
+              </h4>
+            
+              <ion-item *ngFor="let cpo of dias.Cupos">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-9>
+                      <h2>{{cpo.HoraInicio}} - {{cpo.HoraTermino}}</h2>
+                      <p *ngIf="cpo.Descripcion != ''">
+                        {{cpo.Descripcion}}
+                      </p>
+                    </ion-col>
+                    <ion-col col-3>
+                      <input type="checkbox" [(ngModel)]="cpo.EsSeleccionado" class="checkBox" [disabled]="cpo.EsBloqueado"  (change)="selectMember(cpo)" />
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              
+              
+                <!--
+                                                <ion-label >
+                                  {{cpo.Descripcion}}
+                              </ion-label>
+                              <ion-checkbox [(ngModel)]="cpo.EsSeleccionado" disabled="cpo.EsBloqueado"></ion-checkbox>
+                              -->
+              
+              </ion-item>
+              
+              </ion-item>
+              </ion-list>
+    
+        </ion-item>
+      </ion-item-sliding>
     </ion-list>
 </ion-content>

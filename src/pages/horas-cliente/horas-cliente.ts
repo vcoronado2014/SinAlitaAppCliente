@@ -30,6 +30,8 @@ export class HorasClientePage {
   emailCliente;
   telefonosContactoCliente;
   nombreComunaCliente;
+  tieneAlerta = false;
+  horasFaltantes = 0;
 
   constructor(
     private nav: NavController,
@@ -51,7 +53,18 @@ export class HorasClientePage {
       this.emailCliente = this.horaEnvoltorio.Cliente.Email;
       this.telefonosContactoCliente = this.horaEnvoltorio.Cliente.TelefonosContacto;
       this.nombreComunaCliente = this.horaEnvoltorio.Comuna.Nombre;
-
+      //evaluamos si tiene alerta
+      //puede que hayan cancelado clases 
+      if(this.horaEnvoltorio.CuposTomados && this.horaEnvoltorio.CuposTomados.length > 0){
+        if (this.horaEnvoltorio.ProductoCodigo && this.horaEnvoltorio.ProductoCodigo.ClieId > 0){
+          var horasTomadas = this.horaEnvoltorio.CuposTomados.length;
+          var horasProgramadas = this.horaEnvoltorio.ProductoCodigo.CantidadClases;
+          if (horasTomadas < horasProgramadas){
+            this.horasFaltantes = horasProgramadas - horasTomadas;
+            this.tieneAlerta = true;
+          }
+        }
+      }
 
       //this.cargarComunaCliente();
       this.cargarCupos();
@@ -132,43 +145,24 @@ export class HorasClientePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad HorasClientePage');
   }
-/*
-  infoSemanas(cuposMostrar){
-    var listItems = [];
 
-    cuposMostrar.forEach(element => {
-      var texto = element.FechaLetras;
-      var cantidad = element.Cupos.length.toString();
-      let li = new ListItem;
-      li.name = texto;
-      li.total = cantidad;
-      listItems.push(li);
-
-    });
-    const alert = this.alert.create({
-      title: 'Información',
-      subTitle: '',
-      buttons: ['Aceptar']
-    });
-    alert.present();
-  }
-*/
   mostrarInfoCupos(cuposMostrar){
     let modal = this.modalCtrl.create(InfoCuposPage, {info: cuposMostrar });
     modal.onDidDismiss(data => {
       // Data is your data from the modal
       if (data != undefined){
-        //this.cargarProfesores();
+        //this.cargarCupos();
       }
     });
     modal.present();
   }
   mostrarAgendarHoras(cuposMostrar){
-    let modal = this.modalCtrl.create(AgendarHorasPage, {info: cuposMostrar });
+    let modal = this.modalCtrl.create(AgendarHorasPage, {info: cuposMostrar, cantidadClases: this.horaEnvoltorio.ProductoCodigo.CantidadClases, cliente: this.horaEnvoltorio.Cliente,
+                                      productoCodigo: this.horaEnvoltorio.ProductoCodigo, cuposTomados: this.horaEnvoltorio.CuposTomados });
     modal.onDidDismiss(data => {
       // Data is your data from the modal
       if (data != undefined){
-        //this.cargarProfesores();
+        this.cargarCupos();
       }
     });
     modal.present();

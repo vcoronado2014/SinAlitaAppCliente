@@ -48,35 +48,47 @@
   </ion-card>
   <!--contenido cuando tiene acepta condiciones -->
   <ion-list>
-      <ion-list-header>
-        Profesores de la Comuna
-      </ion-list-header>
-    <ion-item *ngFor="let cpo of cuposArr">
-      <ion-avatar item-start>
-        <img src="{{cpo.Profesor.Fotografia}}">
-      </ion-avatar>
-      <h3 text-wrap>{{cpo.Profesor.Nombres}} {{cpo.Profesor.PrimerApellido}} {{cpo.Profesor.SegundoApellido}}</h3>
-      <p>
-          <ion-icon name="call" *ngIf="cpo.Profesor.TelefonosContacto"></ion-icon><span> {{cpo.Profesor.TelefonosContacto}}</span>
-      </p>
-      <p>
-          <ion-badge color="secondary" *ngIf="cpo.Semanas == ''">{{cpo.CuposMostrar.length}} días disponibles</ion-badge>
+    <ion-list-header>
+      Profesores de la Comuna
+    </ion-list-header>
+  
+    <ion-item-sliding *ngFor="let cpo of cuposArr">
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="{{cpo.Profesor.Fotografia}}">
+        </ion-avatar>
+        <h3 text-wrap>{{cpo.Profesor.Nombres}} {{cpo.Profesor.PrimerApellido}} {{cpo.Profesor.SegundoApellido}}</h3>
+        <p>
+          <ion-icon name="call" *ngIf="cpo.Profesor.TelefonosContacto"></ion-icon><span>
+            {{cpo.Profesor.TelefonosContacto}}</span>
+        </p>
+        <p>
+          <ion-badge color="secondary" *ngIf="cpo.Semanas == ''">{{cpo.SemanasArr.length}} semanas disponibles</ion-badge>
           <ion-badge color="danger" *ngIf="cpo.Semanas != ''">{{cpo.Semanas}}</ion-badge>
-          <ion-badge  (click)="mostrarInfoCupos(cpo)" color="secondary" *ngIf="cpo.Semanas == ''"><ion-icon name="eye"></ion-icon> Ver</ion-badge>
-         
-      </p>
-      <p *ngIf="cpo.Semanas == ''">
-        <ion-list *ngFor="let sem of cpo.SemanasArr">
-          <ion-item *ngIf="sem.DiasDisponibles > 0">
-        
-            <h6 text-wrap>{{sem.SemanaString}}</h6>
-            <ion-badge color="primary" item-end>{{sem.DiasDisponibles}}</ion-badge>
-        
-          </ion-item>
-        </ion-list>
-        <ion-badge  (click)="mostrarAgendarHoras(cpo)" color="primary" ><ion-icon name="calendar"></ion-icon> Agendar</ion-badge>
-      </p>
-    </ion-item>
+  
+        </p>
+        <p *ngIf="tieneAlerta">
+          <ion-badge color="danger">Faltan {{horasFaltantes}} hora(s) que agendar.</ion-badge>
+  
+        </p>
+        <p style="font-size: 0.9rem;
+                color: black;
+                font-style: italic;" *ngIf="cpo.Semanas == ''">Deslize a la
+          izquierda o drecha para ver opciones</p>
+      </ion-item>
+      <ion-item-options side="left" *ngIf="cpo.Semanas == ''">
+        <button ion-button color="secondary" (click)="mostrarInfoCupos(cpo)">
+          <ion-icon name="eye"></ion-icon>
+          Ver
+        </button>
+      </ion-item-options>
+      <ion-item-options side="right" *ngIf="cpo.Semanas == ''">
+        <button ion-button color="primary" (click)="mostrarAgendarHoras(cpo)">
+          <ion-icon name="calendar"></ion-icon>
+          Agendar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 
 </ion-content>

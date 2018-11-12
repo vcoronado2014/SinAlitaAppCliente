@@ -278,4 +278,30 @@ export class GlobalService{
       });
       return repos;
     }
+    putCupos(clieId, pcoId, profId, arrCupos, nombreCliente){
+
+      let url = AppSettings.URL_API + 'GuardarCupos';
+      let dataGet = { 
+        ClieId: clieId.toString(),
+        PcoId: pcoId.toString(),
+        ProfId: profId.toString(),
+        ArrCupos: arrCupos,
+        NombreCliente: nombreCliente
+      };
+  
+      let repos = this.http.put(url, dataGet, {
+        headers: new Headers({'Content-Type': 'application/json'})
+      });
+      return repos;
+    }
+    postProfesor(profId){
+      var usuario = localStorage.getItem("USUARIO");
+      let url = AppSettings.URL_API + 'Profesor';
+      let dataGet = { Id: profId.toString() };
+  
+      let repos = this.http.post(url, dataGet, {
+        headers: new Headers({'Content-Type': 'application/json'})
+      });
+      return repos;
+    }
 }

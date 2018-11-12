@@ -1,0 +1,46 @@
+<!--
+  Generated template for the TarjetaProfesorPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="mui--bg-color-blue-400 fg-light">
+
+    <ion-navbar>
+      <ion-buttons style="float: right;">
+        <button (click)="cancel()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title>Info Cliente</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+
+
+<ion-content padding>
+    <ion-card>
+        <ion-card-content>
+            <ion-card-title>
+              Datos del Profesor
+            </ion-card-title>
+          </ion-card-content>
+        <ion-item>
+          <img src="{{profesor.Fotografia}}" style="display: block;
+          margin-left: auto;
+          margin-right: auto;
+          width: 50%;">
+          <h1>{{profesor.NombreCompleto}}</h1>
+          <p text-wrap>
+            <ion-icon name="call"></ion-icon> {{profesor.TelefonosContacto}}
+          </p>
+          <p text-wrap>
+            <ion-icon name="mail"></ion-icon> {{profesor.Email}}
+          </p>
+        </ion-item>
+
+
+
+      </ion-card>
+
+</ion-content>

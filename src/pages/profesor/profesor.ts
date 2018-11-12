@@ -15,7 +15,7 @@ import { AgendaProfesorPage } from '../../pages/agenda-profesor/agenda-profesor'
   templateUrl: 'profesor.html',
 })
 export class ProfesorPage {
-  tab1Root = AgendaProfesorPage;
+  tab1RootProf = AgendaProfesorPage;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

@@ -120,7 +120,7 @@ export class CreaAlumnoPage {
     //se envian los elementos a guardar, luego se asigna al arreglo de fichas
     //el retorno del guardado, se asigna a la variable contador la cantidad de alumnos
     //se limpia el formulario
-    if (this.fichasArr.length < this.cantidadAlumnos){
+    if (this.cantidadAlumnosActual <= this.cantidadAlumnos){
       if (this.validar()){
         //todo ok.
         //let mi = this.presentToast('correcto', 'bottom', 4000);

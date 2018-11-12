@@ -1,0 +1,63 @@
+<!--
+  Generated template for the SemanasClientePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="mui--bg-color-blue-400 fg-light">
+
+    <ion-navbar>
+      <ion-buttons style="float: right;">
+        <button (click)="cancel()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title>Clases</ion-title>
+    </ion-navbar>
+
+  </ion-header>
+
+
+<ion-content padding>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+  <!--info profesor-->
+  <ion-item>
+      <ion-badge (click)="gotoProfesor()">Info Profesor</ion-badge> <ion-badge (click)="gotoCliente()">Info Cliente</ion-badge> <ion-badge color="dark">{{cantidadCupos}} Clases Agendadas</ion-badge>
+  </ion-item>
+  <ion-list>
+      <ion-item-sliding *ngFor="let cpo of cuposArr">
+        <ion-item>
+          <!--
+                      <ion-avatar item-start>
+            <text-avatar [text]="prof.Nombres" item-left></text-avatar>
+          </ion-avatar>
+          -->
+
+          <h2>{{cpo.FechaString}}</h2>
+          <p>
+              <ion-badge color="secondary" >{{cpo.HoraInicio}}</ion-badge> <ion-badge color="secondary" >{{cpo.HoraTermino}}</ion-badge>
+              <ion-badge class="mui--bg-color-red-200 fg-light" style="float: right;" *ngIf="cpo.Estado == 'Terminado'"> {{cpo.Estado}}</ion-badge>
+              <ion-badge class="mui--bg-color-green-200 fg-light" style="float: right;"  *ngIf="cpo.Estado == 'Agendado'"> {{cpo.Estado}}</ion-badge>
+          </p>
+          <p  *ngIf="cpo.MuestraCancelar" style="font-size: 0.9rem;
+          color: black;
+          font-style: italic;">Deslize a la izquierda para ver opciones</p>
+          <!--
+                      <p>
+            <ion-icon *ngIf="prof.Activo == 1" name="checkmark"> Activo</ion-icon>
+            <ion-icon *ngIf="prof.Activo == 0" name="close"> Inactivo</ion-icon>
+          </p>
+          -->
+
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="danger" *ngIf="cpo.MuestraCancelar" (click)="gotoCancelarClase(cpo)">
+            <ion-icon name="trash"></ion-icon>
+            Eliminar
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+</ion-content>

@@ -39,6 +39,10 @@ import { DetalleAgendaPage } from '../pages/detalle-agenda/detalle-agenda';
 import { HorasClientePage } from '../pages/horas-cliente/horas-cliente';
 import { InfoCuposPage } from '../pages/info-cupos/info-cupos';
 import { AgendarHorasPage } from '../pages/agendar-horas/agendar-horas';
+import { SemanasClientePage } from '../pages/semanas-cliente/semanas-cliente';
+import { TarjetaProfesorPage } from '../pages/tarjeta-profesor/tarjeta-profesor';
+import { TarjetaClientePage } from '../pages/tarjeta-cliente/tarjeta-cliente';
+import { CancelarClasePage } from '../pages/cancelar-clase/cancelar-clase';
 
 @NgModule({
   declarations: [
@@ -66,6 +70,10 @@ import { AgendarHorasPage } from '../pages/agendar-horas/agendar-horas';
     HorasClientePage,
     InfoCuposPage,
     AgendarHorasPage,
+    SemanasClientePage,
+    TarjetaClientePage,
+    TarjetaProfesorPage,
+    CancelarClasePage,
     TextAvatarDirective
   ],
   imports: [
@@ -100,6 +108,10 @@ import { AgendarHorasPage } from '../pages/agendar-horas/agendar-horas';
     HorasClientePage,
     InfoCuposPage,
     AgendarHorasPage,
+    SemanasClientePage,
+    TarjetaClientePage,
+    TarjetaProfesorPage,
+    CancelarClasePage,
     PacksPage
   ],
   providers: [

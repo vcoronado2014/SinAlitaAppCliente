@@ -4,6 +4,7 @@ import { NavController, NavParams, AlertController, ToastController, ViewControl
 import { GlobalService } from '../../app/Services/GlobalService';
 import { InicioPage } from '../../pages/Inicio/inicio';
 import { HorasClientePage } from '../../pages/horas-cliente/horas-cliente';
+import { SemanasClientePage } from '../../pages/semanas-cliente/semanas-cliente';
 
 /**
  * Generated class for the PacksPage page.
@@ -92,22 +93,39 @@ export class PacksPage {
     });
     modal.present();
   }
+  gotoSemanasCliente(envoltorio){
+    let modal = this.modalCtrl.create(SemanasClientePage, {envoltorio: envoltorio });
+    modal.onDidDismiss(data => {
+      // Data is your data from the modal
+      if (data != undefined){
+        //this.cargarProfesores();
+      }
+    });
+    modal.present();
+  }
   abrirHorasCliente(pcoid){
 
     this.global.postClientePackProducto(pcoid).subscribe(
       data => {
         var datos = data.json();
-        if (datos.Condiciones && datos.Condiciones.Id > 0){
+        if (datos.Condiciones && datos.Condiciones.Id > 0) {
           //tiene acepta condiciones
-          if (datos.CuposTomados){
-            if (datos.CuposTomados.length == datos.ProductoCodigo.CantidadClases){
+          if (datos.CuposTomados) {
+            if (datos.CuposTomados.length == datos.ProductoCodigo.CantidadClases) {
               //hay que derivarlo a otra pagina
               //seleccionar semanas cliente
-
+              this.gotoSemanasCliente(datos);
+            }
+            else {
+              //aca seguimos y enviamos a horas cliente
+              this.gotoHorasCliente(datos);
             }
           }
-          //aca seguimos y enviamos a horas cliente
-          this.gotoHorasCliente(datos);
+          else {
+            //aca seguimos y enviamos a horas cliente
+            this.gotoHorasCliente(datos);
+          }
+
         }
         else {
           //aca se debe enviar mensaje de que el cliente aún no ha 
