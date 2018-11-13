@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, ToastController, ViewController, LoadingController, ModalController  } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ToastController, ViewController, LoadingController, ModalController, App  } from 'ionic-angular';
 
 import { GlobalService } from '../../app/Services/GlobalService';
 //modales
@@ -26,6 +26,7 @@ export class AgendaProfesorPage {
   minDate;
 
   constructor(
+    private app: App,
     private nav: NavController,
     private alert: AlertController,
     public loading: LoadingController,
@@ -211,7 +212,9 @@ export class AgendaProfesorPage {
   }
   cerrarSesion(){
     sessionStorage.clear();
-    this.nav.setRoot(InicioPage);
+    //this.nav.popAll();
+    //this.nav.setRoot(InicioPage);
+    this.app.getRootNav().setRoot(InicioPage);
   }
   presentToast = function(mensaje, posicion, duracion) {
     let toast = this.toastCtrl.create({

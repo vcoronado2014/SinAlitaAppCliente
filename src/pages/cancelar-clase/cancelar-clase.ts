@@ -18,6 +18,7 @@ import * as moment from 'moment';
 })
 export class CancelarClasePage {
 claseCancelar;
+motivo;
   constructor(
     private nav: NavController,
     private alert: AlertController,
@@ -43,6 +44,43 @@ claseCancelar;
     });
 
     toast.present();
+  }
+  cancelarClase() {
+    if (this.motivo == '' || this.motivo == undefined){
+      let sms = this.presentToast('El motivo de cancelación es requerido', 'bottom', 3000);
+      return;
+    }
+
+    let loader = this.loading.create({
+      content: 'Cargando Profesor...',
+    });
+
+    loader.present().then(() => {
+      var id = this.claseCancelar.Id;
+
+
+      this.global.cancelarCupo(
+        id,
+        this.motivo
+      ).subscribe(
+        data => {
+          var datos = data.json();
+        },
+        err => {
+          console.error(err);
+          let toast = this.presentToast("Error al guardar", "top", 2000);
+          loader.dismiss();
+        },
+        () => {
+          console.log('save completed');
+          let toast = this.presentToast("Cancelado con éxito", "top", 2000);
+          //ProfesoresPage.cargarProfesores();
+          loader.dismiss();
+          //volvemos a la página anterior
+          this.viewCtrl.dismiss({ mensaje: 'volver' });
+        }
+      );
+    });
   }
   cancel(){
     this.viewCtrl.dismiss();

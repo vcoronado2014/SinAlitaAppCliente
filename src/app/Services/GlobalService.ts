@@ -304,4 +304,17 @@ export class GlobalService{
       });
       return repos;
     }
+    cancelarCupo(id, motivo){
+
+      let url = AppSettings.URL_API + 'Cupo';
+      let dataGet = { 
+        Id: id.toString(),
+        Motivo: motivo
+      };
+  
+      let repos = this.http.put(url, dataGet, {
+        headers: new Headers({'Content-Type': 'application/json'})
+      });
+      return repos;
+    }
 }

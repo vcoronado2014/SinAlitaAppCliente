@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, ToastController, ViewController, LoadingController, ModalController  } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ToastController, ViewController, LoadingController, ModalController, App  } from 'ionic-angular';
 
 import { GlobalService } from '../../app/Services/GlobalService';
 
@@ -28,6 +28,7 @@ export class ClientesPage {
 
   constructor(
     private nav: NavController,
+    private app: App,
     private alert: AlertController,
     public loading: LoadingController,
     public toastCtrl: ToastController,
@@ -162,7 +163,9 @@ export class ClientesPage {
   }  
   cerrarSesion(){
     sessionStorage.clear();
-    this.nav.setRoot(InicioPage);
+    //this.nav.popAll();
+    //this.nav.setRoot(InicioPage);
+    this.app.getRootNav().setRoot(InicioPage);
   }
 
 

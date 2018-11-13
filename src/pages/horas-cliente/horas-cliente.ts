@@ -162,7 +162,14 @@ export class HorasClientePage {
     modal.onDidDismiss(data => {
       // Data is your data from the modal
       if (data != undefined){
-        this.cargarCupos();
+        if (data.mensaje == 'volver'){
+          //aca devemos volver a pack
+          this.viewCtrl.dismiss({ mensaje: 'volver' });
+        }
+        else {
+          this.cargarCupos();
+        }
+
       }
     });
     modal.present();

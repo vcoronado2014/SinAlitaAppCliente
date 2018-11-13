@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, ToastController, ViewController, LoadingController, ModalController  } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ToastController, ViewController, LoadingController, ModalController, App  } from 'ionic-angular';
 
 import { GlobalService } from '../../app/Services/GlobalService';
 
@@ -24,6 +24,7 @@ export class ProfesoresPage {
   profesoresArr =[];
 
   constructor(
+    private app: App,
     private nav: NavController,
     private alert: AlertController,
     public loading: LoadingController,
@@ -207,7 +208,9 @@ export class ProfesoresPage {
   }
   cerrarSesion(){
     sessionStorage.clear();
-    this.nav.setRoot(InicioPage);
+    //this.nav.popAll();
+    //this.nav.setRoot(InicioPage);
+    this.app.getRootNav().setRoot(InicioPage);
   }
 
 }

@@ -124,7 +124,9 @@ cuposArr = [];
     modal.onDidDismiss(data => {
       // Data is your data from the modal
       if (data != undefined){
-        //this.cargarProfesores();
+        if(data.mensaje == 'volver'){
+          this.viewCtrl.dismiss({ mensaje: 'volver' });
+        }
       }
     });
     modal.present();

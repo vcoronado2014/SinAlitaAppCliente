@@ -353,7 +353,7 @@ cuposTomados;
                 //ProfesoresPage.cargarProfesores();
                 loader.dismiss();
                 //volvemos a la página anterior
-                this.viewCtrl.dismiss({ cupos: retorno });
+                this.viewCtrl.dismiss({ mensaje: 'volver' });
               }
             );
           });

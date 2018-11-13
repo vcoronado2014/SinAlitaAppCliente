@@ -22,6 +22,10 @@
     <ion-refresher (ionRefresh)="doRefresh($event)">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
+    <ion-label no-padding no-margin text-center style="font-style: italic;
+    font-size: 0.9rem;">
+        Deslize hacia abajo para actualizar
+    </ion-label>
   <!--info profesor-->
   <ion-item>
       <ion-badge (click)="gotoProfesor()">Info Profesor</ion-badge> <ion-badge (click)="gotoCliente()">Info Cliente</ion-badge> <ion-badge color="dark">{{cantidadCupos}} Clases Agendadas</ion-badge>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, ToastController, ViewController, LoadingController, ModalController  } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ToastController, ViewController, LoadingController, ModalController, App  } from 'ionic-angular';
 
 import { GlobalService } from '../../app/Services/GlobalService';
 import { InicioPage } from '../../pages/Inicio/inicio';
@@ -22,6 +22,7 @@ export class PacksPage {
   packArr = [];
   constructor(    
     private nav: NavController,
+    private app: App,
     private alert: AlertController,
     public loading: LoadingController,
     public toastCtrl: ToastController,
@@ -33,7 +34,10 @@ export class PacksPage {
   }
   cerrarSesion(){
     sessionStorage.clear();
-    this.nav.setRoot(InicioPage);
+    
+    //this.nav.setRoot(InicioPage);
+    //this.nav.popAll();
+    this.app.getRootNav().setRoot(InicioPage);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad PacksPage');
@@ -88,7 +92,8 @@ export class PacksPage {
     modal.onDidDismiss(data => {
       // Data is your data from the modal
       if (data != undefined){
-        //this.cargarProfesores();
+        //aca debería actualizarse la lista completa
+        this.cargarPack();
       }
     });
     modal.present();
@@ -99,6 +104,9 @@ export class PacksPage {
       // Data is your data from the modal
       if (data != undefined){
         //this.cargarProfesores();
+        if (data.mensaje == 'volver'){
+          this.cargarPack();
+        }
       }
     });
     modal.present();

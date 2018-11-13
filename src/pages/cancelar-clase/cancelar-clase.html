@@ -20,5 +20,32 @@
 
 
 <ion-content padding>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title>
+        Datos de la Clase
+      </ion-card-title>
+    </ion-card-content>
+    <ion-item>
+      <h4 text-wrap>{{claseCancelar.Descripcion}}</h4>
+      <p text-wrap>
+        <ion-icon name="calendar"></ion-icon> {{claseCancelar.FechaString}}
+      </p>
+      <p text-wrap>
+        <ion-badge color="secondary" style="float: right;">
+          <ion-icon name="calendar"></ion-icon> {{claseCancelar.HoraInicio}} - {{claseCancelar.HoraTermino}}
+        </ion-badge>
+      </p>
+    </ion-item>
+  </ion-card>
+  <ion-item>
+    <ion-badge class="mui--bg-color-red-200 fg-light" text-wrap>
+      Ingrese el motivo por el cual va a Cancelar la Clase, luego presione el botón Aceptar.
+    </ion-badge>
+  </ion-item>
+  <ion-item>
+    <ion-textarea [(ngModel)]="motivo" placeholder="Ingrese Motivo"></ion-textarea>
+  </ion-item>
+  <button ion-button full (click)="cancelarClase()">Acpetar</button>
 
 </ion-content>

@@ -22,7 +22,6 @@ export class SupervisorPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad SupervisorPage');
   }
