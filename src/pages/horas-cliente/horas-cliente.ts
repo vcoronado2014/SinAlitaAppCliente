@@ -32,6 +32,7 @@ export class HorasClientePage {
   nombreComunaCliente;
   tieneAlerta = false;
   horasFaltantes = 0;
+  semanasDisponibles = 0;
 
   constructor(
     private nav: NavController,
@@ -103,6 +104,18 @@ export class HorasClientePage {
             }
           });
           this.cuposArr = datos;
+          if (this.cuposArr){
+            this.cuposArr.forEach(cpo => {
+              if (cpo.SemanasArr){
+                cpo.SemanasArr.forEach(semana => {
+                  if (semana.DiasDisponibles > 0){
+                    this.semanasDisponibles++;
+                  }
+                  
+                });
+              }
+            });
+          }
         },
         err => {
           loader.dismiss();

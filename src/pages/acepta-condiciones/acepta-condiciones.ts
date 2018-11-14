@@ -59,7 +59,10 @@ export class AceptaCondicionesPage {
           //todo ok
           let mi = this.presentToast('Condiciones aceptadas.', 'top', 5000);
           //this.navCtrl.setRoot(UsuariosPage);
-          this.nav.setRoot(HomePage, {idPack: this.idPack, codigoCliente: this.codigoCliente});
+          var datos = data.json();
+          //ahora procesamos los datos para ver donde nos dirigimos
+          this.nav.setRoot(DetailPackPage, {id: this.codigoCliente, envoltorio: datos});
+          //this.nav.setRoot(HomePage, {idPack: this.idPack, codigoCliente: this.codigoCliente});
 
 
         }

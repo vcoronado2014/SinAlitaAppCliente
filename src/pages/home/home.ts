@@ -133,32 +133,5 @@ export class HomePage {
       return this.scheme;
     }
   }
-  /*
-  openFacebookApp(){
-    var miFacebookScheme = this.findSchemeFacebook();
-    this.appAvailability.check(
-      miFacebookScheme,       // URI Scheme or Package Name
-      function() {  // Success callback
-          //aca abrir facebook
-          //esto me retornara fb:// o com.facebook.katana
 
-          console.log(this.scheme + ' is available :)');
-      },
-      function() {  // Error callback
-          console.log(this.scheme + ' is not available :(');
-      }
-    );
-  }
-  openTwitterApp(){
-    this.appAvailability.check(
-      this.scheme,       // URI Scheme or Package Name
-      function() {  // Success callback
-          console.log(this.scheme + ' is available :)');
-      },
-      function() {  // Error callback
-          console.log(this.scheme + ' is not available :(');
-      }
-    );
-  }
-  */
 }

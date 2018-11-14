@@ -244,30 +244,6 @@ export class CreaAlumnoPage {
       err => console.error(err),
       () => console.log('ok')
     );
-    //aca hay que ir a la pagina anterior con push
-    //this.viewCtrl.dismiss();
-/*    this.auth.Post(this.codigoCliente)
-      .subscribe(
-        rs => = rs,
-        er => {
-          //console.log(error)
-          //let mi = this.presentToast('No existe información', 'bottom', 4000);
-
-        },
-        () => {
-            this.nav.push(DetailPackPage, {id: this.codigoCliente, envoltorio: this.auth.envoltorio })
-              .then(data => console.log(data),
-                error => {
-                  //console.log(error)
-                  let mi = this.presentToast(error, 'bottom', 4000);
-                }
-              );
-          }
-
-        }
-      )*/
-
-
   }
   validar(){
     if (this.nombreCompleto == undefined){

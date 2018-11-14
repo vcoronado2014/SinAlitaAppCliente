@@ -1,0 +1,71 @@
+<!--
+  Generated template for the TareasProfesorPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header  class="mui--bg-color-red-A200 fg-light">
+
+  <ion-navbar>
+    <ion-title>Mis Clases Pendientes</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    
+    <ion-label no-padding no-margin text-center style="font-style: italic;
+          font-size: 0.9rem;">
+      Deslize hacia abajo para actualizar
+    </ion-label>
+    <ion-fab top right edge>
+      <button ion-fab mini class="mui--bg-color-red-900" (click)="cerrarSesion()">
+        <ion-icon name="exit"></ion-icon>
+      </button>
+    </ion-fab>
+
+    <!--listado-->
+
+    <ion-list>
+    
+
+
+
+          <ion-item *ngFor="let cal of tareasArr">
+            <!--
+                          <ion-avatar item-start>
+              <span [ngClass]="cal.ClaseDia" style="border-radius: 15px;">{{cal.DiaSemanaInt}}</span>
+            </ion-avatar>
+            -->
+
+            <h2><ion-icon name="calendar"></ion-icon> {{cal.FechaTexto}}</h2>
+              <ion-item-sliding *ngFor="let tr of cal.TareasMostrar">
+                <ion-item>
+                  <h3 text-wrap>{{tr.Descripcion}}</h3>
+                  <p text-wrap>
+                      <ion-icon name="pin"></ion-icon> {{tr.DireccionCliente}}
+                  </p>
+                  <p>
+                    <ion-badge color="secondary">{{tr.CodigoCliente}}</ion-badge>
+                    <ion-badge color="secondary">{{tr.FechaHoraInicioTexto}} - {{tr.FechaHoraTerminoTexto}}</ion-badge>
+                  </p>
+                  <p style="font-size: 0.9rem;
+                          color: black;
+                          font-style: italic;">Deslize a la izquierda para ver opciones</p>
+                </ion-item>
+                <ion-item-options side="right">
+                  <button ion-button color="primary" (click)="cancelarClase(tr)">
+                    <ion-icon name="trash"></ion-icon>
+                    Cancelar
+                  </button>
+                </ion-item-options>
+              
+              </ion-item-sliding>
+          </ion-item>
+
+      </ion-list>
+</ion-content>

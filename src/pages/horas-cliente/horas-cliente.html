@@ -67,6 +67,10 @@
             {{cpo.Profesor.TelefonosContacto}}</span>
         </p>
         <p>
+          <!--
+                      <ion-badge color="secondary" *ngIf="cpo.Semanas == ''">{{cpo.SemanasArr.length}} semanas disponibles</ion-badge>
+          <ion-badge color="danger" *ngIf="cpo.Semanas != ''">{{cpo.Semanas}}</ion-badge>
+          -->
           <ion-badge color="secondary" *ngIf="cpo.Semanas == ''">{{cpo.SemanasArr.length}} semanas disponibles</ion-badge>
           <ion-badge color="danger" *ngIf="cpo.Semanas != ''">{{cpo.Semanas}}</ion-badge>
   

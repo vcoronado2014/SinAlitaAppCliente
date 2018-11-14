@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 //pages
 import { AgendaProfesorPage } from '../../pages/agenda-profesor/agenda-profesor';
+import { TareasProfesorPage } from '../../pages/tareas-profesor/tareas-profesor';
 
 /**
  * Generated class for the ProfesorPage page.
@@ -16,6 +17,7 @@ import { AgendaProfesorPage } from '../../pages/agenda-profesor/agenda-profesor'
 })
 export class ProfesorPage {
   tab1RootProf = AgendaProfesorPage;
+  tab2RootProf = TareasProfesorPage;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

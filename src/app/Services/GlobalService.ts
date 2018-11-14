@@ -326,4 +326,13 @@ export class GlobalService{
       });
       return repos;
     }
+    postTareasProfesor(fechaEntera, profId){
+      let url = AppSettings.URL_API + 'TareasProfesor';
+      let dataGet = { FechaEntera: fechaEntera.toString(), ProfId: profId.toString() };
+  
+      let repos = this.http.post(url, dataGet, {
+        headers: new Headers({'Content-Type': 'application/json'})
+      });
+      return repos;
+    }
 }

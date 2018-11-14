@@ -44,6 +44,7 @@ import { TarjetaProfesorPage } from '../pages/tarjeta-profesor/tarjeta-profesor'
 import { TarjetaClientePage } from '../pages/tarjeta-cliente/tarjeta-cliente';
 import { CancelarClasePage } from '../pages/cancelar-clase/cancelar-clase';
 import { PlanillaProfesoresPage } from '../pages/planilla-profesores/planilla-profesores';
+import { TareasProfesorPage } from '../pages/tareas-profesor/tareas-profesor';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { PlanillaProfesoresPage } from '../pages/planilla-profesores/planilla-pr
     TarjetaProfesorPage,
     CancelarClasePage,
     PlanillaProfesoresPage,
+    TareasProfesorPage,
     TextAvatarDirective
   ],
   imports: [
@@ -115,6 +117,7 @@ import { PlanillaProfesoresPage } from '../pages/planilla-profesores/planilla-pr
     TarjetaProfesorPage,
     CancelarClasePage,
     PlanillaProfesoresPage,
+    TareasProfesorPage,
     PacksPage
   ],
   providers: [
