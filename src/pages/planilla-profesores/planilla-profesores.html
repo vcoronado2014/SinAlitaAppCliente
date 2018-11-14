@@ -1,0 +1,192 @@
+<!--
+  Generated template for the PlanillaProfesoresPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="mui--bg-color-blue-500 fg-light">
+
+  <ion-navbar>
+    <ion-title>Planilla Profesores</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-fab top right edge>
+      <button ion-fab mini class="mui--bg-color-blue-900" (click)="cerrarSesion()">
+        <ion-icon name="exit"></ion-icon>
+      </button>
+    </ion-fab>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-label no-padding no-margin text-center style="font-style: italic;
+          font-size: 0.9rem;">
+      Deslize hacia abajo para actualizar
+    </ion-label>
+    <ion-item>
+      <ion-label>Seleccione Fecha</ion-label>
+      <ion-datetime displayFormat="DD/MMMM/YYYY" [(ngModel)]="myDate" min="{{minDate}}" max="{{maxDate}}" monthNames="Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre"
+        (ionChange)="cargarPlanilla()"></ion-datetime>
+    </ion-item>
+    <ion-list>
+      <ion-item *ngFor="let pla of planillaArr">
+        <!--
+          <ion-avatar item-start>
+              <text-avatar [text]="pla.NombreProfesor" item-left></text-avatar>
+            </ion-avatar>
+        -->
+          <h1>{{pla.NombreProfesor}}</h1>
+          <!-- item detalle -->
+          <ion-item *ngFor="let det of pla.Detalle">
+            <h3><strong>{{det.FechaStr}}</strong></h3>
+            <!-- los segmentos -->
+            <ion-grid>
+              <ion-row>
+                <!--SEGMENTO UNO-->
+                <ion-col text-center col-3 *ngIf="det.SegmentoUno =='' || det.SegmentoUno == null" class="mui--bg-color-red-400 fg-light" style="font-size: 1rem;">09:00
+                  - 09:45</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoUno =='Disponible'" class="mui--bg-color-green-400 fg-light" style="font-size: 1rem;">09:00
+                  - 09:45</ion-col>
+                <ion-col  text-center  col-3 *ngIf="det.SegmentoUno != '' && det.SegmentoUno != null && det.SegmentoUno != 'Disponible'" class="mui--bg-color-blue-400 fg-light"
+                  style="font-size: 1rem;">09:00 - 09:45</ion-col>
+                <!--SEGMENTO DOS-->
+                <ion-col text-center  col-3 *ngIf="det.SegmentoDos =='' || det.SegmentoDos == null" class="mui--bg-color-red-400 fg-light" style="font-size: 1rem;">10:15
+                  - 11:00</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoDos =='Disponible'" class="mui--bg-color-green-400 fg-light" style="font-size: 1rem;">10:15
+                  - 11:00</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoDos != '' && det.SegmentoDos != null && det.SegmentoDos != 'Disponible'" class="mui--bg-color-blue-400 fg-light"
+                  style="font-size: 1rem;">10:15 - 11:00</ion-col>
+                <!--SEGMENTO TRES-->
+                <ion-col text-center  col-3 *ngIf="det.SegmentoTres =='' || det.SegmentoTres == null" class="mui--bg-color-red-400 fg-light"
+                  style="font-size: 1rem;">11:30 - 12:15</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoTres =='Disponible'" class="mui--bg-color-green-400 fg-light" style="font-size: 1rem;">11:30
+                  - 12:15</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoTres != '' && det.SegmentoTres != null && det.SegmentoTres != 'Disponible'" class="mui--bg-color-blue-400 fg-light"
+                  style="font-size: 1rem;">11:30 - 12:15</ion-col>
+                <!--SEGMENTO CUATRO-->
+                <ion-col text-center  col-3 *ngIf="det.SegmentoCuatro =='' || det.SegmentoCuatro == null" class="mui--bg-color-red-400 fg-light"
+                  style="font-size: 1rem;">13:00 - 13:45</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoCuatro =='Disponible'" class="mui--bg-color-green-400 fg-light" style="font-size: 1rem;">13:00
+                  - 13:45</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoCuatro != '' && det.SegmentoCuatro != null && det.SegmentoCuatro != 'Disponible'"
+                  class="mui--bg-color-blue-400 fg-light" style="font-size: 1rem;">13:00 - 13:45</ion-col>
+            
+              </ion-row>
+              <ion-row>
+                <!--SEGMENTO UNO-->
+                <ion-col text-center  col-3 *ngIf="det.SegmentoUno =='' || det.SegmentoUno == null" class="mui--bg-color-red-400 fg-light" style="font-size: 1rem;">Sin
+                  Agenda</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoUno =='Disponible'" class="mui--bg-color-green-400 fg-light" style="font-size: 1rem;">Disponible</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoUno != '' && det.SegmentoUno != null && det.SegmentoUno != 'Disponible'" class="mui--bg-color-blue-400 fg-light"
+                  style="font-size: 1rem;">{{det.SegmentoUno}}</ion-col>
+                <!--SEGMENTO DOS-->
+                <ion-col text-center  col-3 *ngIf="det.SegmentoDos =='' || det.SegmentoDos == null" class="mui--bg-color-red-400 fg-light" style="font-size: 1rem;">Sin
+                  Agenda</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoDos =='Disponible'" class="mui--bg-color-green-400 fg-light" style="font-size: 1rem;">{{det.SegmentoDos}}</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoDos != '' && det.SegmentoDos != null && det.SegmentoDos != 'Disponible'" class="mui--bg-color-blue-400 fg-light"
+                  style="font-size: 1rem;">{{det.SegmentoDos}}</ion-col>
+                <!--SEGMENTO TRES-->
+                <ion-col text-center  col-3 *ngIf="det.SegmentoTres =='' || det.SegmentoTres == null" class="mui--bg-color-red-400 fg-light"
+                  style="font-size: 1rem;">Sin Agenda</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoTres =='Disponible'" class="mui--bg-color-green-400 fg-light" style="font-size: 1rem;">{{det.SegmentoTres}}</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoTres != '' && det.SegmentoTres != null && det.SegmentoTres != 'Disponible'" class="mui--bg-color-blue-400 fg-light"
+                  style="font-size: 1rem;">{{det.SegmentoTres}}</ion-col>
+                <!--SEGMENTO CUATRO-->
+                <ion-col text-center  col-3 *ngIf="det.SegmentoCuatro =='' || det.SegmentoCuatro == null" class="mui--bg-color-red-400 fg-light"
+                  style="font-size: 1rem;">Sin Agenda</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoCuatro =='Disponible'" class="mui--bg-color-green-400 fg-light" style="font-size: 1rem;">{{det.SegmentoCuatro}}</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoCuatro != '' && det.SegmentoCuatro != null && det.SegmentoCuatro != 'Disponible'"
+                  class="mui--bg-color-blue-400 fg-light" style="font-size: 1rem;">{{det.SegmentoCuatro}}</ion-col>
+            
+              </ion-row>
+              <ion-row>
+                <!--SEGMENTO CINCO-->
+                <ion-col text-center  col-3 *ngIf="det.SegmentoCinco =='' || det.SegmentoCinco == null" class="mui--bg-color-red-400 fg-light"
+                  style="font-size: 1rem;">14:15 - 15:00</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoCinco =='Disponible'" class="mui--bg-color-green-400 fg-light" style="font-size: 1rem;">14:15
+                  - 15:00</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoCinco != '' && det.SegmentoCinco != null && det.SegmentoCinco != 'Disponible'"
+                  class="mui--bg-color-blue-400 fg-light" style="font-size: 1rem;">14:15 - 15:00</ion-col>
+                <!--SEGMENTO SEIS-->
+                <ion-col text-center  col-3 *ngIf="det.SegmentoSeis =='' || det.SegmentoSeis == null" class="mui--bg-color-red-400 fg-light"
+                  style="font-size: 1rem;">15:30 - 16:15</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoSeis =='Disponible'" class="mui--bg-color-green-400 fg-light" style="font-size: 1rem;">15:30
+                  - 16:15</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoSeis != '' && det.SegmentoSeis != null && det.SegmentoSeis != 'Disponible'" class="mui--bg-color-blue-400 fg-light"
+                  style="font-size: 1rem;">15:30 - 16:15</ion-col>
+                <!--SEGMENTO SIETE-->
+                <ion-col text-center  col-3 *ngIf="det.SegmentoSiete =='' || det.SegmentoSiete == null" class="mui--bg-color-red-400 fg-light"
+                  style="font-size: 1rem;">16:45 - 17:30</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoSiete =='Disponible'" class="mui--bg-color-green-400 fg-light" style="font-size: 1rem;">16:45
+                  - 17:30</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoSiete != '' && det.SegmentoSiete != null && det.SegmentoSiete != 'Disponible'"
+                  class="mui--bg-color-blue-400 fg-light" style="font-size: 1rem;">16:45 - 17:30</ion-col>
+                <!--SEGMENTO OCHO-->
+                <ion-col text-center  col-3 *ngIf="det.SegmentoOcho =='' || det.SegmentoOcho == null" class="mui--bg-color-red-400 fg-light"
+                  style="font-size: 1rem;">18:00 - 18:45</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoOcho =='Disponible'" class="mui--bg-color-green-400 fg-light" style="font-size: 1rem;">18:00
+                  - 18:45</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoOcho != '' && det.SegmentoOcho != null && det.SegmentoOcho != 'Disponible'" class="mui--bg-color-blue-400 fg-light"
+                  style="font-size: 1rem;">18:00 - 18:45</ion-col>
+            
+              </ion-row>
+              <ion-row>
+                <!--SEGMENTO CINCO-->
+                <ion-col text-center  col-3 *ngIf="det.SegmentoCinco =='' || det.SegmentoCinco == null" class="mui--bg-color-red-400 fg-light"
+                  style="font-size: 1rem;">Sin Agenda</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoCinco =='Disponible'" class="mui--bg-color-green-400 fg-light" style="font-size: 1rem;">{{det.SegmentoCinco}}</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoCinco != '' && det.SegmentoCinco != null && det.SegmentoCinco != 'Disponible'"
+                  class="mui--bg-color-blue-400 fg-light" style="font-size: 1rem;">{{det.SegmentoCinco}}</ion-col>
+                <!--SEGMENTO SEIS-->
+                <ion-col text-center  col-3 *ngIf="det.SegmentoSeis =='' || det.SegmentoSeis == null" class="mui--bg-color-red-400 fg-light"
+                  style="font-size: 1rem;">Sin Agenda</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoSeis =='Disponible'" class="mui--bg-color-green-400 fg-light" style="font-size: 1rem;">{{det.SegmentoSeis}}</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoSeis != '' && det.SegmentoSeis != null && det.SegmentoSeis != 'Disponible'" class="mui--bg-color-blue-400 fg-light"
+                  style="font-size: 1rem;">{{det.SegmentoSeis}}</ion-col>
+                <!--SEGMENTO SIETE-->
+                <ion-col text-center  col-3 *ngIf="det.SegmentoSiete =='' || det.SegmentoSiete == null" class="mui--bg-color-red-400 fg-light"
+                  style="font-size: 1rem;">Sin Agenda</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoSiete =='Disponible'" class="mui--bg-color-green-400 fg-light" style="font-size: 1rem;">{{det.SegmentoSiete}}</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoSiete != '' && det.SegmentoSiete != null && det.SegmentoSiete != 'Disponible'"
+                  class="mui--bg-color-blue-400 fg-light" style="font-size: 1rem;">{{det.SegmentoSiete}}</ion-col>
+                <!--SEGMENTO OCHO-->
+                <ion-col text-center  col-3 *ngIf="det.SegmentoOcho =='' || det.SegmentoOcho == null" class="mui--bg-color-red-400 fg-light"
+                  style="font-size: 1rem;">Sin Agenda</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoOcho =='Disponible'" class="mui--bg-color-green-400 fg-light" style="font-size: 1rem;">{{det.SegmentoOcho}}</ion-col>
+                <ion-col text-center  col-3 *ngIf="det.SegmentoOcho != '' && det.SegmentoOcho != null && det.SegmentoOcho != 'Disponible'" class="mui--bg-color-blue-400 fg-light"
+                  style="font-size: 1rem;">{{det.SegmentoOcho}}</ion-col>
+            
+              </ion-row>
+            
+            </ion-grid>
+
+
+          </ion-item>
+        <!--
+        <ion-item *ngFor="let cpo of dias.Cupos">
+          <ion-grid>
+            <ion-row>
+              <ion-col col-9>
+                <h2>{{cpo.HoraInicio}} - {{cpo.HoraTermino}}</h2>
+                <p *ngIf="cpo.Descripcion != ''">
+                  {{cpo.Descripcion}}
+                </p>
+              </ion-col>
+              <ion-col col-3>
+                <input type="checkbox" [(ngModel)]="cpo.EsSeleccionado" class="checkBox" [disabled]="cpo.EsBloqueado"
+                  (change)="selectMember(cpo)" />
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+
+        -->
+
+    
+      </ion-item>
+    </ion-list>
+
+</ion-content>

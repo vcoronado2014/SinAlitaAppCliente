@@ -317,4 +317,13 @@ export class GlobalService{
       });
       return repos;
     }
+    postPlanillaProfesores(fechaEntera){
+      let url = AppSettings.URL_API + 'PlanillaProfesores';
+      let dataGet = { FechaEntera: fechaEntera.toString() };
+  
+      let repos = this.http.post(url, dataGet, {
+        headers: new Headers({'Content-Type': 'application/json'})
+      });
+      return repos;
+    }
 }
