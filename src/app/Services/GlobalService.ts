@@ -4,6 +4,7 @@ import { AppSettings } from '../../../AppSettings'
 
 import 'rxjs/add/operator/map';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { ProfesoresPage } from '../../pages/profesores/profesores';
 @Injectable()
 export class GlobalService{
     nombreUsuario: string;
@@ -241,6 +242,20 @@ export class GlobalService{
       let dataGet = { 
         Estado: estado.toString(),
         Codigo: codigo
+      };
+  
+      let repos = this.http.post(url, dataGet, {
+        headers: new Headers({'Content-Type': 'application/json'})
+      });
+      return repos;
+    }
+    postObtenerPCOGrillaProfesor(estado, codigo){
+      var prfoId = sessionStorage.getItem("PROF_ID");
+      let url = AppSettings.URL_API + 'ObtenerProductoCodigoGrilla';
+      let dataGet = { 
+        Estado: estado.toString(),
+        Codigo: codigo,
+        ProfId: prfoId.toString()
       };
   
       let repos = this.http.post(url, dataGet, {

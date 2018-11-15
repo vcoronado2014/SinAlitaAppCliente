@@ -30,7 +30,16 @@ export class PacksPage {
     private viewCtrl: ViewController,
     private global: GlobalService,
     private modalCtrl: ModalController) {
-      this.cargarPack();
+      //debemos evaluar si se trata de un profesor o supervisor
+      var rolId = sessionStorage.getItem("ROL_ID");
+      if (rolId == '3'){
+        //profesor
+        this.cargarPackProfesor();
+      }
+      else {
+        //supervisor
+        this.cargarPack();  
+      }
   }
   cerrarSesion(){
     sessionStorage.clear();
@@ -66,11 +75,43 @@ export class PacksPage {
       
     });
   }
+  cargarPackProfesor() {
+    let loader = this.loading.create({
+      content: 'Cargando...',
+    });
+    loader.present().then(() => {
+      var estado = '0';
+      var codigo = '';
+      this.global.postObtenerPCOGrillaProfesor(estado, codigo).subscribe(
+        data => {
+          this.packArr = data.json();
+
+        },
+        err => {
+          console.error(err);
+          loader.dismiss();
+        },
+        () => {
+          console.log('get alumnos completed');
+          loader.dismiss();
+        }
+      );
+      
+    });
+  }
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
 
     setTimeout(() => {
-      this.cargarPack();
+      var rolId = sessionStorage.getItem("ROL_ID");
+      if (rolId == '3'){
+        //profesor
+        this.cargarPackProfesor();
+      }
+      else {
+        //supervisor
+        this.cargarPack();  
+      }
       refresher.complete();
     }, 2000);
   }
@@ -93,7 +134,15 @@ export class PacksPage {
       // Data is your data from the modal
       if (data != undefined){
         //aca debería actualizarse la lista completa
-        this.cargarPack();
+        var rolId = sessionStorage.getItem("ROL_ID");
+        if (rolId == '3'){
+          //profesor
+          this.cargarPackProfesor();
+        }
+        else {
+          //supervisor
+          this.cargarPack();  
+        }
       }
     });
     modal.present();
@@ -105,7 +154,15 @@ export class PacksPage {
       if (data != undefined){
         //this.cargarProfesores();
         if (data.mensaje == 'volver'){
-          this.cargarPack();
+          var rolId = sessionStorage.getItem("ROL_ID");
+          if (rolId == '3'){
+            //profesor
+            this.cargarPackProfesor();
+          }
+          else {
+            //supervisor
+            this.cargarPack();  
+          }
         }
       }
     });
