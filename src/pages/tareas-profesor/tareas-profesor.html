@@ -47,7 +47,7 @@
                 <ion-item>
                   <h3 text-wrap>{{tr.Descripcion}}</h3>
                   <p text-wrap>
-                      <ion-icon name="pin"></ion-icon> {{tr.DireccionCliente}}
+                      <ion-icon name="pin" (click)="abrirMapa(tr.DireccionCliente)"></ion-icon> {{tr.DireccionCliente}}
                   </p>
                   <p>
                     <ion-badge color="secondary">{{tr.CodigoCliente}}</ion-badge>

@@ -7,7 +7,9 @@ import { DetalleAgendaPage } from '../../pages/detalle-agenda/detalle-agenda';
 import { InicioPage } from '../../pages/Inicio/inicio';
 import { CancelarClasePage } from '../../pages/cancelar-clase/cancelar-clase';
 import { CerrarClasePage } from '../../pages/cerrar-clase/cerrar-clase';
+import { MapaClientePage } from '../../pages/mapa-cliente/mapa-cliente';
 import * as moment from 'moment';
+
 
 /**
  * Generated class for the TareasProfesorPage page.
@@ -24,6 +26,7 @@ export class TareasProfesorPage {
 tareasArr = [];
 profId;
 rolId;
+
   constructor(
     private app: App,
     private nav: NavController,
@@ -80,6 +83,16 @@ rolId;
       //loader.dismiss();
     });
 
+  }
+  abrirMapa(direccion){
+
+    let modal = this.modalCtrl.create(MapaClientePage, {clase: direccion });
+    modal.onDidDismiss(data => {
+      // Data is your data from the modal
+      if (data != undefined){
+      }
+    });
+    modal.present();
   }
   gotoCancelarClase(clase){
 
