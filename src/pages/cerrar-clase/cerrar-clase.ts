@@ -6,19 +6,20 @@ import { GlobalService } from '../../app/Services/GlobalService';
 import * as moment from 'moment';
 
 /**
- * Generated class for the CancelarClasePage page.
+ * Generated class for the CerrarClasePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
 @Component({
-  selector: 'page-cancelar-clase',
-  templateUrl: 'cancelar-clase.html',
+  selector: 'page-cerrar-clase',
+  templateUrl: 'cerrar-clase.html',
 })
-export class CancelarClasePage {
-claseCancelar;
-motivo;
+export class CerrarClasePage {
+  claseCerrar;
+  motivo;
+
   constructor(
     private nav: NavController,
     private alert: AlertController,
@@ -29,8 +30,48 @@ motivo;
     private global: GlobalService,
     private modalCtrl: ModalController
   ) {
-    this.claseCancelar =  navParams.get('clase');
-    console.log(this.claseCancelar);
+    this.claseCerrar =  navParams.get('clase');
+    console.log(this.claseCerrar);
+  }
+  cerrarClase() {
+    if (this.motivo == '' || this.motivo == undefined){
+      let sms = this.presentToast('El motivo de cancelación es requerido', 'bottom', 3000);
+      return;
+    }
+
+    let loader = this.loading.create({
+      content: 'Cargando...',
+    });
+
+    loader.present().then(() => {
+      var id = this.claseCerrar.Id;
+
+
+      this.global.cerrarCupo(
+        id,
+        this.motivo
+      ).subscribe(
+        data => {
+          var datos = data.json();
+        },
+        err => {
+          console.error(err);
+          let toast = this.presentToast("Error al guardar", "top", 2000);
+          loader.dismiss();
+        },
+        () => {
+          console.log('save completed');
+          let toast = this.presentToast("Cerrada con éxito", "top", 2000);
+          //ProfesoresPage.cargarProfesores();
+          loader.dismiss();
+          //volvemos a la página anterior
+          this.viewCtrl.dismiss({ mensaje: 'volver' });
+        }
+      );
+    });
+  }
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad CerrarClasePage');
   }
   presentToast = function(mensaje, posicion, duracion) {
     let toast = this.toastCtrl.create({
@@ -45,48 +86,8 @@ motivo;
 
     toast.present();
   }
-  cancelarClase() {
-    if (this.motivo == '' || this.motivo == undefined){
-      let sms = this.presentToast('El motivo de cancelación es requerido', 'bottom', 3000);
-      return;
-    }
-
-    let loader = this.loading.create({
-      content: 'Cargando...',
-    });
-
-    loader.present().then(() => {
-      var id = this.claseCancelar.Id;
-
-
-      this.global.cancelarCupo(
-        id,
-        this.motivo
-      ).subscribe(
-        data => {
-          var datos = data.json();
-        },
-        err => {
-          console.error(err);
-          let toast = this.presentToast("Error al guardar", "top", 2000);
-          loader.dismiss();
-        },
-        () => {
-          console.log('save completed');
-          let toast = this.presentToast("Cancelado con éxito", "top", 2000);
-          //ProfesoresPage.cargarProfesores();
-          loader.dismiss();
-          //volvemos a la página anterior
-          this.viewCtrl.dismiss({ mensaje: 'volver' });
-        }
-      );
-    });
-  }
   cancel(){
     this.viewCtrl.dismiss();
-  }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CancelarClasePage');
   }
 
 }

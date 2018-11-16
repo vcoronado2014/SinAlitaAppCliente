@@ -41,6 +41,9 @@ export class AgendaProfesorPage {
     console.log(this.maxDate);
     this.myDate = moment().toISOString();
     this.profId = sessionStorage.getItem("PROF_ID");
+    //this.cargarAgenda();
+  }
+  ionViewWillEnter() {
     this.cargarAgenda();
   }
 

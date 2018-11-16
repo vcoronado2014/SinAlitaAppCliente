@@ -39,6 +39,9 @@ export class ClientesPage {
   ) {
     this.todasLosClientes=[];
     this.encontrados = 0;
+    //this.cargarProfesores();
+  }
+  ionViewWillEnter() {
     this.cargarProfesores();
   }
   cargarProfesores() {

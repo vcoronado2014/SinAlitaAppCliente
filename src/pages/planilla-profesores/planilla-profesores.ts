@@ -38,8 +38,11 @@ minDate;
     this.minDate = moment().subtract(1,'months').toISOString();
     console.log(this.maxDate);
     this.myDate = moment().toISOString();
-    this.cargarPlanilla();
+    //this.cargarPlanilla();
 
+  }
+  ionViewWillEnter() {
+    this.cargarPlanilla();
   }
   cerrarSesion(){
     sessionStorage.clear();

@@ -26,6 +26,7 @@ profesor;
 cliente;
 cantidadCupos = 0;
 cuposArr = [];
+rolIdLogueado;
   constructor(
     private nav: NavController,
     private alert: AlertController,
@@ -37,6 +38,7 @@ cuposArr = [];
     private modalCtrl: ModalController
     ) {
       moment.locale('es'); 
+      this.rolIdLogueado = sessionStorage.getItem("ROL_ID");
       this.horaEnvoltorio =  navParams.get('envoltorio');
       console.log(this.horaEnvoltorio);
       this.cliente = this.horaEnvoltorio.Cliente;

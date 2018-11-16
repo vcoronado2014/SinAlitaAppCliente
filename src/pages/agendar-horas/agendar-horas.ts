@@ -71,6 +71,7 @@ cuposTomados;
       var totalClases = navParams.get('cantidadClases');
       this.programadas = totalClases - this.cuposTomados.length;
     }
+    this.procesarSemanas();
 
   }
   buscarEnCupos(semana) {

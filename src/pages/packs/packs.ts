@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, AlertController, ToastController, ViewController, LoadingController, ModalController, App  } from 'ionic-angular';
 
 import { GlobalService } from '../../app/Services/GlobalService';
@@ -20,6 +20,7 @@ import { SemanasClientePage } from '../../pages/semanas-cliente/semanas-cliente'
 export class PacksPage {
 
   packArr = [];
+  rolIdLogueado;
   constructor(    
     private nav: NavController,
     private app: App,
@@ -30,7 +31,9 @@ export class PacksPage {
     private viewCtrl: ViewController,
     private global: GlobalService,
     private modalCtrl: ModalController) {
+      this.rolIdLogueado = sessionStorage.getItem("ROL_ID");
       //debemos evaluar si se trata de un profesor o supervisor
+      /*
       var rolId = sessionStorage.getItem("ROL_ID");
       if (rolId == '3'){
         //profesor
@@ -40,7 +43,32 @@ export class PacksPage {
         //supervisor
         this.cargarPack();  
       }
+      */
   }
+  ionViewWillEnter() {
+    var rolId = sessionStorage.getItem("ROL_ID");
+    if (rolId == '3'){
+      //profesor
+      this.cargarPackProfesor();
+    }
+    else {
+      //supervisor
+      this.cargarPack();  
+    }
+  }
+  /*
+  ngOnInit(){
+    var rolId = sessionStorage.getItem("ROL_ID");
+    if (rolId == '3'){
+      //profesor
+      this.cargarPackProfesor();
+    }
+    else {
+      //supervisor
+      this.cargarPack();  
+    }
+  }
+  */
   cerrarSesion(){
     sessionStorage.clear();
     

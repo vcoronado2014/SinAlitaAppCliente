@@ -33,9 +33,19 @@
         <p>
           <ion-badge color="danger" *ngIf="pack.Alerta != ''">{{pack.Alerta}}</ion-badge>
         </p>
-        <button ion-button icon-start *ngIf="pack.MostrarAbrir" (click)="abrirHorasCliente(pack.Id)">
+        <button ion-button icon-start *ngIf="pack.MostrarAbrir && rolIdLogueado == '2'" (click)="abrirHorasCliente(pack.Id)">
             <ion-icon name="open"></ion-icon>
           Abrir
+          
+        </button>
+        <button ion-button icon-start *ngIf="pack.MostrarAbrir && rolIdLogueado == '3' && pack.Alerta" (click)="abrirHorasCliente(pack.Id)">
+            <ion-icon name="open"></ion-icon>
+          Reagendar
+          
+        </button>
+        <button ion-button icon-start *ngIf="pack.MostrarAbrir && rolIdLogueado == '3' && pack.Alerta == null" (click)="abrirHorasCliente(pack.Id)">
+            <ion-icon name="open"></ion-icon>
+          Ver Clases
           
         </button>
 

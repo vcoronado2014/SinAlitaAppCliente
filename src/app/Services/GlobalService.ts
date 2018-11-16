@@ -332,6 +332,19 @@ export class GlobalService{
       });
       return repos;
     }
+    cerrarCupo(id, motivo){
+
+      let url = AppSettings.URL_API + 'CerrarClase';
+      let dataGet = { 
+        Id: id.toString(),
+        Motivo: motivo
+      };
+  
+      let repos = this.http.put(url, dataGet, {
+        headers: new Headers({'Content-Type': 'application/json'})
+      });
+      return repos;
+    }
     postPlanillaProfesores(fechaEntera){
       let url = AppSettings.URL_API + 'PlanillaProfesores';
       let dataGet = { FechaEntera: fechaEntera.toString() };
@@ -343,6 +356,15 @@ export class GlobalService{
     }
     postTareasProfesor(fechaEntera, profId){
       let url = AppSettings.URL_API + 'TareasProfesor';
+      let dataGet = { FechaEntera: fechaEntera.toString(), ProfId: profId.toString() };
+  
+      let repos = this.http.post(url, dataGet, {
+        headers: new Headers({'Content-Type': 'application/json'})
+      });
+      return repos;
+    }
+    postTareasProfesorRealizadas(fechaEntera, profId){
+      let url = AppSettings.URL_API + 'TareasProfesorRealizadas';
       let dataGet = { FechaEntera: fechaEntera.toString(), ProfId: profId.toString() };
   
       let repos = this.http.post(url, dataGet, {

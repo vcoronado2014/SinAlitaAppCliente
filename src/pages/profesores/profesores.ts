@@ -35,6 +35,9 @@ export class ProfesoresPage {
     private modalCtrl: ModalController
   ) {
     //cargamos los profesores
+    //this.cargarProfesores();
+  }
+  ionViewWillEnter() {
     this.cargarProfesores();
   }
   cargarProfesores() {

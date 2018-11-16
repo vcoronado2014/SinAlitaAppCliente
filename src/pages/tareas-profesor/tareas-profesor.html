@@ -58,7 +58,11 @@
                           font-style: italic;">Deslize a la izquierda para ver opciones</p>
                 </ion-item>
                 <ion-item-options side="right">
-                  <button ion-button color="primary" (click)="cancelarClase(tr)">
+                  <button ion-button color="primary" (click)="cerrarClase(tr)" *ngIf="tr.PuedeCerrar">
+                    <ion-icon name="close"></ion-icon>
+                    Cerrar
+                  </button>
+                  <button ion-button color="danger" (click)="cancelarClase(tr)" *ngIf="tr.PuedeCancelar">
                     <ion-icon name="trash"></ion-icon>
                     Cancelar
                   </button>

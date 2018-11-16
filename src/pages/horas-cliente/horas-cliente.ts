@@ -71,6 +71,7 @@ export class HorasClientePage {
       this.cargarCupos();
 
   }
+  
   cargarComunaCliente() {
     let loader = this.loading.create({
       content: 'Cargando...',
@@ -153,7 +154,8 @@ export class HorasClientePage {
     toast.present();
   }
   cancel(){
-    this.viewCtrl.dismiss();
+    //this.viewCtrl.dismiss();
+    this.viewCtrl.dismiss({ mensaje: 'volver' });
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad HorasClientePage');
