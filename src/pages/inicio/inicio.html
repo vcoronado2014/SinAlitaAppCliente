@@ -16,7 +16,29 @@
 
 
 <ion-content padding>
-  <ion-fab top right edge>
+  <ion-grid no-padding no-margin>
+    <!--
+          <ion-row text-center>
+      Encuentranos en:
+    </ion-row>
+    -->
+
+      <ion-row text-center no-padding no-margin>
+        <ion-col style="text-align: -webkit-center;">
+            <a href="{{urlFacebook}}" ion-fab style="width:30px; height:30px;"><ion-icon name="logo-facebook"></ion-icon></a>
+        </ion-col>
+        <ion-col style="text-align: -webkit-center;">
+            <a href="{{urlFun}}" ion-fab style="width:30px; height:30px;"><ion-icon name="at"></ion-icon></a>
+        </ion-col>
+          <ion-col style="text-align: -webkit-center;">
+              <a href="{{urlInstagram}}" ion-fab style="width:30px; height:30px;"><ion-icon name="logo-instagram"></ion-icon></a>
+          </ion-col>
+
+      </ion-row>
+  </ion-grid>
+
+    <!--
+        <ion-fab top right edge>
     <button ion-fab mini class="mui--bg-color-blue-900"><ion-icon name="add"></ion-icon></button>
     <ion-fab-list>
       <a href="{{urlFacebook}}" ion-fab><ion-icon name="logo-facebook"></ion-icon></a>
@@ -24,6 +46,8 @@
       <a href="{{urlInstagram}}" ion-fab><ion-icon name="logo-instagram"></ion-icon></a>
     </ion-fab-list>
   </ion-fab>
+    -->
+
   <h2 ion-text class="mui--text-title mui--text-dark-secondary">Bienvenido a la App SinAlitas</h2>
   <ion-grid style="padding-bottom: 0;">
     <ion-row>
@@ -41,7 +65,7 @@
               <ion-icon name="person"></ion-icon> Clientes
             </ion-card-title>
             <p>
-              Acceso a los clientes de sin alitas, le permitirà revisar sus clases agendadas.
+              Acceso a los clientes de Sin Alitas, le permitirá revisar sus clases agendadas.
             </p>
           </ion-card-content>
         </ion-card>
