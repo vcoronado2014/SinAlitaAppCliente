@@ -19,5 +19,8 @@
 
 
 <ion-content>
-    <div id="map"></div>
+    <div id="map" *ngIf="mostrarElMapa == true"></div>
+    <div  *ngIf="mostrarElMapa == false">
+      No hay Información que mostrar.
+    </div>
 </ion-content>

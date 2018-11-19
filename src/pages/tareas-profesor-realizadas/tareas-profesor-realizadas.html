@@ -9,12 +9,12 @@
 
 
 <ion-content padding>
-    <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="noHayElementos == false">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     
     <ion-label no-padding no-margin text-center style="font-style: italic;
-                font-size: 0.9rem;">
+                font-size: 0.9rem;" *ngIf="noHayElementos == false">
       Deslize hacia abajo para actualizar
     </ion-label>
     <ion-fab top right edge>
@@ -22,53 +22,68 @@
         <ion-icon name="exit"></ion-icon>
       </button>
     </ion-fab>
-        <!--listado-->
-
-        <ion-list>
-    
-
-
-
-            <ion-item *ngFor="let cal of tareasArr">
-              <!--
-                            <ion-avatar item-start>
-                <span [ngClass]="cal.ClaseDia" style="border-radius: 15px;">{{cal.DiaSemanaInt}}</span>
-              </ion-avatar>
-              -->
+  <!--no tiene packs-->
+  <ion-grid *ngIf="noHayElementos == true">
+    <ion-row>
+      <ion-col style="width: auto !important;
+          align-items: center; text-align: center;">
+        <ion-icon name="alert" style="color:gray; font-size: 5em;"></ion-icon>
+      </ion-col>
   
-              <h2><ion-icon name="calendar"></ion-icon> {{cal.FechaTexto}}</h2>
-                <ion-item-sliding *ngFor="let tr of cal.TareasMostrar">
-                  <ion-item>
-                      <h2 text-wrap>{{tr.NombreCliente}}</h2>
-                    <h3 text-wrap>{{tr.Descripcion}}</h3>
-                    <p text-wrap>
-                        <ion-icon name="pin"></ion-icon> {{tr.DireccionCliente}}
-                    </p>
-                    <p>
-                      <ion-badge color="secondary">{{tr.CodigoCliente}}</ion-badge>
-                      <ion-badge color="secondary">{{tr.FechaHoraInicioTexto}} - {{tr.FechaHoraTerminoTexto}}</ion-badge>
-                    </p>
-                    <!--
-                                          <p style="font-size: 0.9rem;
-                            color: black;
-                            font-style: italic;">Deslize a la izquierda para ver opciones</p>
-                    -->
-
-                  </ion-item>
-                  <ion-item-options side="right">
-                    <button ion-button color="primary" (click)="cerrarClase(tr)" *ngIf="tr.PuedeCerrar">
-                      <ion-icon name="close"></ion-icon>
-                      Cerrar
-                    </button>
-                    <button ion-button color="danger" (click)="cancelarClase(tr)" *ngIf="tr.PuedeCancelar">
-                      <ion-icon name="trash"></ion-icon>
-                      Cancelar
-                    </button>
-                  </ion-item-options>
-                
-                </ion-item-sliding>
-            </ion-item>
+    </ion-row>
+    <ion-row text-center>
+      <h1 text-wrap style="color:gray;"> Usted no tiene Clases Cerradas</h1>
+    </ion-row>
+  </ion-grid>
+  <!--listado-->
   
-        </ion-list>
+  <ion-list *ngIf="noHayElementos == false">
+  
+  
+  
+  
+    <ion-item *ngFor="let cal of tareasArr">
+      <!--
+                              <ion-avatar item-start>
+                  <span [ngClass]="cal.ClaseDia" style="border-radius: 15px;">{{cal.DiaSemanaInt}}</span>
+                </ion-avatar>
+                -->
+  
+      <h2>
+        <ion-icon name="calendar"></ion-icon> {{cal.FechaTexto}}
+      </h2>
+      <ion-item-sliding *ngFor="let tr of cal.TareasMostrar">
+        <ion-item>
+          <h2 text-wrap>{{tr.NombreCliente}}</h2>
+          <h3 text-wrap>{{tr.Descripcion}}</h3>
+          <p text-wrap>
+            <ion-icon name="pin"></ion-icon> {{tr.DireccionCliente}}
+          </p>
+          <p>
+            <ion-badge color="secondary">{{tr.CodigoCliente}}</ion-badge>
+            <ion-badge color="secondary">{{tr.FechaHoraInicioTexto}} - {{tr.FechaHoraTerminoTexto}}</ion-badge>
+          </p>
+          <!--
+                                            <p style="font-size: 0.9rem;
+                              color: black;
+                              font-style: italic;">Deslize a la izquierda para ver opciones</p>
+                      -->
+  
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="primary" (click)="cerrarClase(tr)" *ngIf="tr.PuedeCerrar">
+            <ion-icon name="close"></ion-icon>
+            Cerrar
+          </button>
+          <button ion-button color="danger" (click)="cancelarClase(tr)" *ngIf="tr.PuedeCancelar">
+            <ion-icon name="trash"></ion-icon>
+            Cancelar
+          </button>
+        </ion-item-options>
+  
+      </ion-item-sliding>
+    </ion-item>
+  
+  </ion-list>
 
 </ion-content>

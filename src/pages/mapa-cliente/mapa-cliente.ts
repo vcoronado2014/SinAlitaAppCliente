@@ -17,6 +17,7 @@ declare var google;
   templateUrl: 'mapa-cliente.html',
 })
 export class MapaClientePage {
+  mostrarElMapa = true;
   map: any;
   direccion;
   latitud: number;
@@ -68,6 +69,46 @@ export class MapaClientePage {
       mapEle.classList.add('show-map');
     });
   }
+  mostrarMapa(){
+    //let latitude = position.coords.latitude;
+    //let longitude = position.coords.longitude;
+    
+    //console.log(latitude, longitude);
+    
+    // create a new map by passing HTMLElement
+    let mapEle: HTMLElement = document.getElementById('map');
+  
+    // create LatLng object
+    let myLatLng = {lat: this.latitud, lng: this.longitud};
+  
+    // create map
+    this.map = new google.maps.Map(mapEle, {
+      center: myLatLng,
+      zoom: 12
+    });
+  
+    google.maps.event.addListenerOnce(this.map, 'idle', () => {
+      let marker = new google.maps.Marker({
+        position: myLatLng,
+        map: this.map,
+        title: 'Dirección del Cliente'
+      });
+      mapEle.classList.add('show-map');
+    });
+  }
+  presentToast = function(mensaje, posicion, duracion) {
+    let toast = this.toastCtrl.create({
+      message: mensaje,
+      duration: duracion,
+      position: posicion
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
+  }
   cancel(){
     //this.viewCtrl.dismiss();
     this.viewCtrl.dismiss({ mensaje: 'volver' });
@@ -78,22 +119,41 @@ export class MapaClientePage {
       if (status === 'OK') {
         var respuesta = results;
         if (respuesta && respuesta.length > 0){
+          this.mostrarElMapa = true;
 
           this.latitud = respuesta[0].geometry.location.lat();
           this.longitud = respuesta[0].geometry.location.lng();
           console.log(this.latitud);
           console.log(this.longitud);
-          this.loadMap();
+          let mapEle: HTMLElement = document.getElementById('map');
+  
+          // create LatLng object
+          let myLatLng = {lat: this.latitud, lng: this.longitud};
+        
+          // create map
+          this.map = new google.maps.Map(mapEle, {
+            center: myLatLng,
+            zoom: 12
+          });
+        
+          google.maps.event.addListenerOnce(this.map, 'idle', () => {
+            let marker = new google.maps.Marker({
+              position: myLatLng,
+              map: this.map,
+              title: 'Hello World!'
+            });
+            mapEle.classList.add('show-map');
+          });
         }
-        /*
-        resultsMap.setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
-          map: resultsMap,
-          position: results[0].geometry.location
-        });
-        */
+        else {
+          this.mostrarElMapa = false;
+          let sms = this.presentToast('No hay coincidencias ', 'bottom', 3000);
+        }
+
       } else {
-        alert('Geocode was not successful for the following reason: ' + status);
+        this.mostrarElMapa = false;
+        let sms = this.presentToast('No se puede mostrar la información: ' + status, 'bottom', 3000);
+        //alert('Geocode was not successful for the following reason: ' + status);
       }
     });
   }

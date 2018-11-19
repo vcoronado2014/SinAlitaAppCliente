@@ -14,12 +14,12 @@
 
 
 <ion-content padding>
-    <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="noHayElementos == false">
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     
     <ion-label no-padding no-margin text-center style="font-style: italic;
-          font-size: 0.9rem;">
+          font-size: 0.9rem;" *ngIf="noHayElementos == false">
       Deslize hacia abajo para actualizar
     </ion-label>
     <ion-fab top right edge>
@@ -27,10 +27,22 @@
         <ion-icon name="exit"></ion-icon>
       </button>
     </ion-fab>
-
+ <!--no tiene packs-->
+ <ion-grid *ngIf="noHayElementos == true">
+    <ion-row>
+      <ion-col style="width: auto !important;
+          align-items: center; text-align: center;">
+        <ion-icon name="alert" style="color:gray; font-size: 5em;"></ion-icon>
+      </ion-col>
+  
+    </ion-row>
+    <ion-row text-center>
+      <h1 text-wrap style="color:gray;"> Usted no tiene Clases Agendadas</h1>
+    </ion-row>
+  </ion-grid>
     <!--listado-->
 
-    <ion-list>
+    <ion-list *ngIf="noHayElementos == false">
     
 
 
@@ -47,7 +59,7 @@
                 <ion-item>
                   <h3 text-wrap>{{tr.Descripcion}}</h3>
                   <p text-wrap>
-                      <ion-icon name="pin" (click)="abrirMapa(tr.DireccionCliente)"></ion-icon> {{tr.DireccionCliente}}
+                      <ion-icon name="pin"></ion-icon> {{tr.DireccionCliente}} <button ion-button small (click)="abrirMapa(tr.DireccionCliente)" style="font-size: 0.7rem;">Ver Mapa</button>
                   </p>
                   <p>
                     <ion-badge color="secondary">{{tr.CodigoCliente}}</ion-badge>

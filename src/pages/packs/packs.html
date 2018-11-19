@@ -12,21 +12,35 @@
 
 </ion-header>
 
-
-<ion-content padding>
+<ion-content>
   <ion-fab top right edge>
     <button ion-fab mini class="mui--bg-color-blue-900" (click)="cerrarSesion()">
       <ion-icon name="exit"></ion-icon>
     </button>
   </ion-fab>
-  <ion-refresher (ionRefresh)="doRefresh($event)">
+  <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="noHayElementos == false">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-label no-padding no-margin text-center style="font-style: italic;
-  font-size: 0.9rem;">
+  font-size: 0.9rem;" *ngIf="noHayElementos == false">
       Deslize hacia abajo para actualizar
   </ion-label>
-  <ion-list>
+  <!--no tiene packs-->
+<ion-grid *ngIf="noHayElementos == true">
+  <ion-row>
+    <ion-col style="width: auto !important;
+    align-items: center; text-align: center;">
+      <ion-icon name="alert" style="color:gray; font-size: 5em;"></ion-icon>
+    </ion-col>
+  
+  </ion-row>
+  <ion-row text-center>
+    <h1 text-wrap style="color:gray;"> Usted no tiene Packs Asociados</h1>
+  </ion-row>
+</ion-grid>
+  
+
+  <ion-list *ngIf="noHayElementos == false">
     <ion-item *ngFor="let pack of packArr">
 
         <h2 text-wrap text-justify>{{pack.Texto}}</h2>

@@ -24,6 +24,7 @@ export class TareasProfesorRealizadasPage {
   tareasArr = [];
   profId;
   rolId;
+  noHayElementos = true;
   constructor(
     private app: App,
     private nav: NavController,
@@ -68,6 +69,9 @@ export class TareasProfesorRealizadasPage {
       this.global.postTareasProfesorRealizadas(fechaEntera, profId).subscribe(
         data => {
           this.tareasArr = data.json();
+          if (this.tareasArr && this.tareasArr.length > 0){
+            this.noHayElementos = false;
+          }
           console.log(this.tareasArr);
         },
         err => {

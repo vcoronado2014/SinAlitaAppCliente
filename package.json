@@ -33,12 +33,12 @@
     "@ionic/storage": "2.0.1",
     "angular2-highcharts": "^0.5.5",
     "call-number": "^1.0.1",
-    "cordova-android": "^6.2.3",
+    "cordova-android-play-services-gradle-release": "^2.0.0",
     "cordova-ios": "^4.4.0",
     "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-googlemaps": "^2.4.6",
-    "cordova-plugin-ionic-webview": "^1.1.16",
+    "cordova-plugin-ionic-webview": "^1.2.1",
     "cordova-plugin-splashscreen": "^4.1.0",
     "cordova-plugin-statusbar": "git+https://github.com/apache/cordova-plugin-statusbar.git",
     "cordova-plugin-whitelist": "^1.3.3",
@@ -51,7 +51,8 @@
     "moment": "^2.19.1",
     "rxjs": "5.4.3",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.18"
+    "zone.js": "0.8.18",
+    "cordova-android": "~7.0.0"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.0.0",
@@ -70,13 +71,15 @@
       "ionic-plugin-keyboard": {},
       "cordova-plugin-googlemaps": {
         "API_KEY_FOR_ANDROID": "AIzaSyCJxyjh-i-5Wk012UC_9r6TjeEiUoHcBUU",
-        "API_KEY_FOR_IOS": "AIzaSyCJxyjh-i-5Wk012UC_9r6TjeEiUoHcBUU"
+        "API_KEY_FOR_IOS": "AIzaSyCJxyjh-i-5Wk012UC_9r6TjeEiUoHcBUU",
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
-      "cordova-plugin-geolocation": {}
+      "cordova-plugin-geolocation": {},
+      "cordova-android-play-services-gradle-release": {}
     },
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }

@@ -25,15 +25,21 @@
 
       <ion-row text-center no-padding no-margin>
         <ion-col style="text-align: -webkit-center;">
-            <a href="{{urlFacebook}}" ion-fab style="width:30px; height:30px;"><ion-icon name="logo-facebook"></ion-icon></a>
+          <a href="{{urlFacebook}}" ion-fab style="width:30px; height:30px;">
+            <ion-icon name="logo-facebook"></ion-icon>
+          </a>
         </ion-col>
         <ion-col style="text-align: -webkit-center;">
-            <a href="{{urlFun}}" ion-fab style="width:30px; height:30px;"><ion-icon name="at"></ion-icon></a>
+          <a href="{{urlFun}}" ion-fab style="width:30px; height:30px;">
+            <ion-icon name="at"></ion-icon>
+          </a>
         </ion-col>
-          <ion-col style="text-align: -webkit-center;">
-              <a href="{{urlInstagram}}" ion-fab style="width:30px; height:30px;"><ion-icon name="logo-instagram"></ion-icon></a>
-          </ion-col>
-
+        <ion-col style="text-align: -webkit-center;">
+          <a href="{{urlInstagram}}" ion-fab style="width:30px; height:30px;">
+            <ion-icon name="logo-instagram"></ion-icon>
+          </a>
+        </ion-col>
+      
       </ion-row>
   </ion-grid>
 
@@ -59,19 +65,19 @@
   <ion-grid style="padding-bottom: 0;">
     <ion-row>
       <ion-col col-xs-12 col-md-6>
-        <ion-card (click)="abrirCliente()">
+        <ion-card (click)="abrirCliente()" style="min-height: 245px;">
           <ion-card-content>
             <ion-card-title>
               <ion-icon name="person"></ion-icon> Clientes
             </ion-card-title>
             <p>
-              Acceso a los clientes de Sin Alitas, le permitirá revisar sus clases agendadas.
+              Acceso a los clientes de Sin Alitas, le permitirá revisar sus clases agendadas, crear Fichas de los alumnos.
             </p>
           </ion-card-content>
         </ion-card>
       </ion-col>
       <ion-col col-xs-12 col-md-6>
-        <ion-card (click)="abrirLogin()">
+        <ion-card (click)="abrirLogin()" style="min-height: 245px;">
           <ion-card-content>
             <ion-card-title>
               <ion-icon name="people"></ion-icon> Supervisor, Profesores

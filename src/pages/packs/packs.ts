@@ -18,7 +18,7 @@ import { SemanasClientePage } from '../../pages/semanas-cliente/semanas-cliente'
   templateUrl: 'packs.html',
 })
 export class PacksPage {
-
+  noHayElementos = false;
   packArr = [];
   rolIdLogueado;
   constructor(    
@@ -89,6 +89,9 @@ export class PacksPage {
       this.global.postObtenerPCOGrilla(estado, codigo).subscribe(
         data => {
           this.packArr = data.json();
+          if (this.packArr.length == 0){
+            this.noHayElementos = true;
+          }
 
         },
         err => {
@@ -113,7 +116,9 @@ export class PacksPage {
       this.global.postObtenerPCOGrillaProfesor(estado, codigo).subscribe(
         data => {
           this.packArr = data.json();
-
+          if (this.packArr.length == 0){
+            this.noHayElementos = true;
+          }
         },
         err => {
           console.error(err);
