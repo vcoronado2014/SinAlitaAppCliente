@@ -21,6 +21,10 @@ planillaArr=[];
 myDate;
 maxDate;
 minDate;
+filtrosProfesor = [];
+filtrados = [];
+planillaArrOriginal = [];
+nombreFiltrar;
   constructor(
     private nav: NavController,
     private app: App,
@@ -39,9 +43,12 @@ minDate;
     console.log(this.maxDate);
     this.myDate = moment().toISOString();
     //this.cargarPlanilla();
+    //seteamos el filtro
+    this.nombreFiltrar = 'Todos';
 
   }
   ionViewWillEnter() {
+    this.nombreFiltrar = 'Todos';
     this.cargarPlanilla();
   }
   cerrarSesion(){
@@ -76,8 +83,31 @@ minDate;
 
     toast.present();
   }
+  cargarFiltros(arreglo, elemento){
+    this.filtrados = [];
+    arreglo.forEach(element => {
+      if (element.NombreProfesor == elemento){
+        this.filtrados.push(element);
+      }
+      
+    });
+
+    return this.filtrados;
+  }
+  cambioFiltros(e){
+    //console.log(e.target.value);
+    if (e.Nombre && e.Nombre != 'Todos'){
+      this.planillaArr = this.cargarFiltros(this.planillaArrOriginal, e.Nombre);
+    }
+    else {
+      //mostramos todo
+      this.planillaArr = this.planillaArrOriginal;
+
+    }
+  }
   cargarPlanilla() {
     this.planillaArr=[];
+    this.filtrosProfesor = [];
     //porcesamos la fecha
     var fechaEnteraStr = moment(this.myDate).format("YYYYMMDD");
 
@@ -91,16 +121,26 @@ minDate;
         data => {
           var datos =  data.json();
           if (datos){
+            //agregar filtro todos
+            var filtroTodos = {
+              Nombre: 'Todos'
+            };
+            this.filtrosProfesor.push(filtroTodos);
             datos.forEach(element => {
               if (element.Detalle){
                 element.Detalle.forEach(detalle => {
                   detalle.FechaStr = moment(detalle.Fecha).format("dddd, MMMM Do YYYY");
                 });
               }
+              var filtro = {
+                Nombre: element.NombreProfesor
+              };
+              this.filtrosProfesor.push(filtro);
             });
           }
-
+          console.log(this.filtrosProfesor);
           this.planillaArr = datos;
+          this.planillaArrOriginal = datos;
 
         },
         err => {

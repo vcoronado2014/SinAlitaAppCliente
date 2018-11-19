@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, Toast, NavParams} from 'ionic-angular';
+import {NavController, Toast, NavParams, LoadingController} from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { DetailPackPage } from '../../pages/detail-pack/detail-pack';
 import { HomePage } from '../../pages/home/home';
@@ -37,6 +37,7 @@ export class LoginPage {
     private navParams: NavParams,
     public auth: AuthService,
     public toastCtrl: ToastController,
+    public loading:LoadingController,
     public appAvailability: AppAvailability,
     public global: GlobalService,
     public platform: Platform) {
@@ -53,15 +54,24 @@ export class LoginPage {
       return;
     }
 
-    this.global.Post(this.usuario, this.clave)
+    let loader = this.loading.create({
+      content: 'Autentificando...',
+    });
+    loader.present().then(() => {
+      this.global.Post(this.usuario, this.clave)
       .subscribe(
-        rs => this.isLogged = rs,
+        rs => {
+          this.isLogged = rs
+        },
         er => {
           //console.log(error)
+          loader.dismiss();
           let mi = this.presentToast('No existe información', 'bottom', 4000);
 
         },
         () => {
+          //esta todo ok, cerramos loading
+          loader.dismiss();
           if (this.isLogged) {
             //console.log(this.global.persona);
             if (this.global.envoltorio){
@@ -72,17 +82,7 @@ export class LoginPage {
                 this.navCtrl.push(ProfesorPage);
               }
             }
-            
-            /*
-            this.envoltorio = this.auth.envoltorio;
-            this.navCtrl.push(DetailPackPage, {id: this.codigoCliente, envoltorio: this.envoltorio})
-              .then(data => console.log(data),
-                error => {
-                  //console.log(error)
-                  let mi = this.presentToast(error, 'bottom', 4000);
-                }
-              );
-              */
+
 
           } else {
             //incorrecto
@@ -92,6 +92,7 @@ export class LoginPage {
 
         }
       )
+    });
 
   }
   presentToast = function (mensaje, posicion, duracion) {

@@ -31,6 +31,12 @@
       <ion-datetime displayFormat="DD/MMMM/YYYY" [(ngModel)]="myDate" min="{{minDate}}" max="{{maxDate}}" monthNames="Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre"
         (ionChange)="cargarPlanilla()"></ion-datetime>
     </ion-item>
+    <ion-item>
+      <ion-label>Seleccione Profesor</ion-label>
+      <ion-select [(ngModel)]="nombreFiltrar">
+        <ion-option *ngFor="let filt of filtrosProfesor" (ionSelect)="cambioFiltros(filt)">{{filt.Nombre}}</ion-option>
+      </ion-select>
+    </ion-item>
     <ion-list>
       <ion-item *ngFor="let pla of planillaArr">
         <!--
