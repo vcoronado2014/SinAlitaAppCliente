@@ -43,6 +43,16 @@ export class AuthService{
             if (retorno.ProductoCodigo.Id > 0) {
               this.envoltorio = retorno;
               this.codigoCliente = codigoCliente;
+              //** variables para las notificaciones  */
+              localStorage.setItem("PROF_ID", null);
+              if (this.envoltorio.Cliente){
+                localStorage.setItem("CLIENT_ID", this.envoltorio.Cliente.Id);
+              }
+              else{
+                localStorage.setItem("CLIENT_ID", null);
+              }
+              
+              //******************************************** */
               this.loggedIn = true;
             }
             else {

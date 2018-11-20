@@ -27,6 +27,7 @@ export class InicioPage {
   isLogged: boolean;
   envoltorio: any;
   icono;
+  timeOut = 10000;
   //para las redes sociales
   public scheme: String;
   public isApp;
@@ -49,11 +50,14 @@ export class InicioPage {
         this.codigoCliente = this.navParams.get('codigoCliente');
       }
       */
+     ;
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InicioPage');
+    //aca poner un timer de 60 segundos
+
   }
   abrirCliente(){
     this.navCtrl.setRoot(HomePage);

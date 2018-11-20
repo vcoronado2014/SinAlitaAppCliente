@@ -49,6 +49,10 @@ export class GlobalService{
                 sessionStorage.setItem('USUARIO', this.nombreUsuario);
                 sessionStorage.setItem('ROL_ID', retorno.RolId);
                 sessionStorage.setItem('PROF_ID', retorno.Id);
+                //** variables para las notificaciones  */
+                localStorage.setItem("PROF_ID", retorno.Id);
+                localStorage.setItem("CLIENT_ID", null);
+                //******************************************** */
                 this.loggedIn = true;
               }
               else {

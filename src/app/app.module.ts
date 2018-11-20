@@ -13,6 +13,8 @@ import { FichaAlumnoService } from '../app/Services/FichaAlumnoService';
 import { AlumnoService } from '../app/Services/AlumnoService';
 import { AceptaCondicionesService } from '../app/Services/AceptaCondicionesService';
 import { GlobalService } from '../app/Services/GlobalService';
+//para notificaciones locales
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 import { MyApp } from './app.component';
 import { InicioPage } from '../pages/inicio/inicio';
@@ -140,6 +142,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     GlobalService,
     GoogleMaps,
     Geolocation,
+    LocalNotifications,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
