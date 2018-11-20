@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, ToastController, ViewController } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
-import {AppSettings} from "../../../AppSettings";
+import {AppSettings} from "../../config/AppSettings";
 
 /**
  * Generated class for the DetailsFichaPage page.

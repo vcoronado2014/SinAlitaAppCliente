@@ -6,7 +6,7 @@ import { DetailPackPage } from '../../pages/detail-pack/detail-pack';
 import { HomePage } from '../../pages/home/home';
 
 import {AceptaCondicionesService} from '../../app/Services/AceptaCondicionesService';
-import {AppSettings} from "../../../AppSettings";
+import {AppSettings} from "../../config/AppSettings";
 
 /**
  * Generated class for the AceptaCondicionesPage page.

@@ -6,7 +6,7 @@ import { DetailPackPage } from '../../pages/detail-pack/detail-pack';
 import { AlumnoService } from '../../app/Services/AlumnoService';
 import { FichaAlumnoService } from '../../app/Services/FichaAlumnoService';
 import { AuthService } from '../../app/Services/AuthService';
-import {AppSettings} from "../../../AppSettings";
+import {AppSettings} from "../../config/AppSettings";
 
 /**
  * Generated class for the CreaAlumnoPage page.

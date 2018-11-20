@@ -12,7 +12,7 @@ import { Platform } from 'ionic-angular';
 
 import { AuthService } from '../../app/Services/AuthService';
 import { GlobalService } from '../../app/Services/GlobalService';
-import {AppSettings} from "../../../AppSettings";
+import {AppSettings} from "../../config/AppSettings";
 
 /**
  * Generated class for the LoginPage page.

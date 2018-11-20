@@ -7,7 +7,7 @@ import { AppAvailability } from '@ionic-native/app-availability';
 import { Platform } from 'ionic-angular';
 
 import { AuthService } from '../../app/Services/AuthService';
-import {AppSettings} from "../../../AppSettings";
+import {AppSettings} from "../../config/AppSettings";
 
 @Component({
   selector: 'page-home',

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, ToastController, ViewController, LoadingController, ModalController, App  } from 'ionic-angular';
 
 import { GlobalService } from '../../app/Services/GlobalService';
-import { InicioPage } from '../../pages/Inicio/inicio';
+import { InicioPage } from '../../pages/inicio/inicio';
 import * as moment from 'moment';
 
 /**

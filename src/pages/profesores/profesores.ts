@@ -7,7 +7,7 @@ import * as moment from 'moment';
 //modales
 import { EditarProfesorPage } from '../../pages/editar-profesor/editar-profesor';
 import { AsociarComunasPage } from '../../pages/asociar-comunas/asociar-comunas';
-import { InicioPage } from '../../pages/Inicio/inicio';
+import { InicioPage } from '../../pages/inicio/inicio';
 
 /**
  * Generated class for the ProfesoresPage page.

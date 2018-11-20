@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, ToastController, ViewController, LoadingController, ModalController  } from 'ionic-angular';
 
 import { GlobalService } from '../../app/Services/GlobalService';
-import {AppSettings} from "../../../AppSettings";
+import {AppSettings} from "../../config/AppSettings";
 import * as moment from 'moment';
 import { TarjetaProfesorPage } from '../../pages/tarjeta-profesor/tarjeta-profesor';
 import { TarjetaClientePage } from '../../pages/tarjeta-cliente/tarjeta-cliente';

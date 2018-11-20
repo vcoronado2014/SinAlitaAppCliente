@@ -10,7 +10,7 @@ import { AceptaCondicionesPage } from '../../pages/acepta-condiciones/acepta-con
 import { CreaAlumnoPage } from '../../pages/crea-alumno/crea-alumno';
 
 import * as moment from 'moment';
-import {AppSettings} from "../../../AppSettings";
+import {AppSettings} from "../../config/AppSettings";
 
 /**
  * Generated class for the DetailPackPage page.

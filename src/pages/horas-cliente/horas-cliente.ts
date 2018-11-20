@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, ToastController, ViewController, LoadingController, ModalController  } from 'ionic-angular';
 
 import { GlobalService } from '../../app/Services/GlobalService';
-import {AppSettings} from "../../../AppSettings";
+import {AppSettings} from "../../config/AppSettings";
 import { InfoCuposPage } from '../../pages/info-cupos/info-cupos';
 import { AgendarHorasPage } from '../../pages/agendar-horas/agendar-horas';
 

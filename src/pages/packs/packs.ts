@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, AlertController, ToastController, ViewController, LoadingController, ModalController, App  } from 'ionic-angular';
 
 import { GlobalService } from '../../app/Services/GlobalService';
-import { InicioPage } from '../../pages/Inicio/inicio';
+import { InicioPage } from '../../pages/inicio/inicio';
 import { HorasClientePage } from '../../pages/horas-cliente/horas-cliente';
 import { SemanasClientePage } from '../../pages/semanas-cliente/semanas-cliente';
 

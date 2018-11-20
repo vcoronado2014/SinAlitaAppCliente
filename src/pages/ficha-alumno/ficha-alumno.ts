@@ -7,7 +7,7 @@ import { DetailsFichaPage } from '../../pages/details-ficha/details-ficha';
 import { CreaAlumnoPage } from '../../pages/crea-alumno/crea-alumno';
 
 import { FichaAlumnoService } from '../../app/Services/FichaAlumnoService';
-import {AppSettings} from "../../../AppSettings";
+import {AppSettings} from "../../config/AppSettings";
 
 import * as moment from 'moment';
 

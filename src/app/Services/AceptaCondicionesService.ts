@@ -3,7 +3,7 @@
  */
 import { Injectable, Component } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { AppSettings } from '../../../AppSettings'
+import { AppSettings } from "../../config/AppSettings"
 
 import 'rxjs/add/operator/map';
 @Injectable()

@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule } from '@angular/http';
 import { NgCalendarModule } from 'ionic2-calendar';
-import { ChartModule } from 'angular2-highcharts';
 import * as highcharts from 'Highcharts';
 import { TextAvatarDirective } from '../directives/text-avatar/text-avatar';
 
@@ -16,7 +15,7 @@ import { AceptaCondicionesService } from '../app/Services/AceptaCondicionesServi
 import { GlobalService } from '../app/Services/GlobalService';
 
 import { MyApp } from './app.component';
-import { InicioPage } from '../pages/Inicio/inicio';
+import { InicioPage } from '../pages/inicio/inicio';
 import { HomePage } from '../pages/home/home';
 import { DetailPackPage } from '../pages/detail-pack/detail-pack';
 import { DetailAgendaPage } from '../pages/detail-agenda/detail-agenda';
@@ -93,7 +92,6 @@ import { Geolocation } from '@ionic-native/geolocation';
     BrowserModule,
     HttpModule,
     NgCalendarModule,
-    ChartModule.forRoot(highcharts),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

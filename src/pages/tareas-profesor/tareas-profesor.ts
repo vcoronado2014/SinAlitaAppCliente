@@ -4,7 +4,7 @@ import { NavController, NavParams, AlertController, ToastController, ViewControl
 import { GlobalService } from '../../app/Services/GlobalService';
 //modales
 import { DetalleAgendaPage } from '../../pages/detalle-agenda/detalle-agenda';
-import { InicioPage } from '../../pages/Inicio/inicio';
+import { InicioPage } from '../../pages/inicio/inicio';
 import { CancelarClasePage } from '../../pages/cancelar-clase/cancelar-clase';
 import { CerrarClasePage } from '../../pages/cerrar-clase/cerrar-clase';
 import { MapaClientePage } from '../../pages/mapa-cliente/mapa-cliente';
