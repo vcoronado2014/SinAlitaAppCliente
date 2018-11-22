@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Sin Alitas Cliente</name>
-    <description>Aplicación de Sin Alitas para el cliente.</description>
+<widget id="com.sinalitas.com" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Sin Alitas</name>
+    <description>Aplicación de Sin Alitas para el cliente y profesores.</description>
     <author email="contacto@sinalitas.cl" href="http://www.sinalitas.cl/">Ionic Framework Team</author>
     <content src="index.html" />
     <access origin="*" />
@@ -91,6 +91,6 @@
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
     <plugin name="cordova-android-play-services-gradle-release" spec="^2.0.0">
     </plugin>
-    <engine name="ios" spec="^4.4.0" />
     <engine name="android" spec="~7.0.0" />
+    <engine name="ios" spec="~4.5.5" />
 </widget>
