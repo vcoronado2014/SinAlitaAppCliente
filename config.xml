@@ -84,11 +84,6 @@
     <plugin name="cordova-plugin-statusbar" spec="git+https://github.com/apache/cordova-plugin-statusbar.git" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
-    <plugin name="cordova-plugin-googlemaps" spec="^2.4.6">
-        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCJxyjh-i-5Wk012UC_9r6TjeEiUoHcBUU" />
-        <variable name="API_KEY_FOR_IOS" value="AIzaSyCJxyjh-i-5Wk012UC_9r6TjeEiUoHcBUU" />
-    </plugin>
-    <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
     <plugin name="cordova-android-play-services-gradle-release" spec="^2.0.0">
     </plugin>
     <engine name="android" spec="~7.0.0" />
