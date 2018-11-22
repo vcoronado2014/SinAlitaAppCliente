@@ -7,7 +7,6 @@ import { DetalleAgendaPage } from '../../pages/detalle-agenda/detalle-agenda';
 import { InicioPage } from '../../pages/inicio/inicio';
 import { CancelarClasePage } from '../../pages/cancelar-clase/cancelar-clase';
 import { CerrarClasePage } from '../../pages/cerrar-clase/cerrar-clase';
-import { MapaClientePage } from '../../pages/mapa-cliente/mapa-cliente';
 import * as moment from 'moment';
 
 
@@ -87,16 +86,6 @@ noHayElementos = true;
       //loader.dismiss();
     });
 
-  }
-  abrirMapa(direccion){
-
-    let modal = this.modalCtrl.create(MapaClientePage, {clase: direccion });
-    modal.onDidDismiss(data => {
-      // Data is your data from the modal
-      if (data != undefined){
-      }
-    });
-    modal.present();
   }
   gotoCancelarClase(clase){
 

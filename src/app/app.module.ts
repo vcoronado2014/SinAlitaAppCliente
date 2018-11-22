@@ -46,10 +46,7 @@ import { PlanillaProfesoresPage } from '../pages/planilla-profesores/planilla-pr
 import { TareasProfesorPage } from '../pages/tareas-profesor/tareas-profesor';
 import { CerrarClasePage } from '../pages/cerrar-clase/cerrar-clase';
 import { TareasProfesorRealizadasPage } from '../pages/tareas-profesor-realizadas/tareas-profesor-realizadas';
-import { MapaClientePage } from '../pages/mapa-cliente/mapa-cliente';
-//mapas
-import { GoogleMaps } from '@ionic-native/google-maps';
-import { Geolocation } from '@ionic-native/geolocation';
+
 
 @NgModule({
   declarations: [
@@ -85,7 +82,6 @@ import { Geolocation } from '@ionic-native/geolocation';
     TareasProfesorPage,
     CerrarClasePage,
     TareasProfesorRealizadasPage,
-    MapaClientePage,
     TextAvatarDirective
   ],
   imports: [
@@ -127,7 +123,6 @@ import { Geolocation } from '@ionic-native/geolocation';
     TareasProfesorPage,
     CerrarClasePage,
     TareasProfesorRealizadasPage,
-    MapaClientePage,
     PacksPage
   ],
   providers: [
@@ -138,8 +133,6 @@ import { Geolocation } from '@ionic-native/geolocation';
     AlumnoService,
     AceptaCondicionesService,
     GlobalService,
-    GoogleMaps,
-    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
