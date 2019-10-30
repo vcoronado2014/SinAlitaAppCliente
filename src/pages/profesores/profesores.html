@@ -49,25 +49,30 @@
         <h2>{{prof.Nombres}} {{prof.PrimerApellido}} {{prof.SegundoApellido}}</h2>
         <p>
           <ion-icon *ngIf="prof.Activo == 1" name="checkmark"> Activo</ion-icon>
-          <ion-icon *ngIf="prof.Activo == 0" name="close"> Inactivo</ion-icon>
+          <ion-icon *ngIf="prof.Activo == 0 && prof.Eliminado == 0" name="close"> Inactivo</ion-icon>
+          <ion-icon *ngIf="prof.Eliminado == 1" name="close" style="color:red;"> Eliminado</ion-icon>
         </p>
       </ion-item>
-      <ion-item-options side="left">
+      <ion-item-options *ngIf="prof.RolId == 3" side="left">
         <button ion-button color="primary" *ngIf="prof.Activo == 1" (click)="asociarComunas(prof)">
           <ion-icon name="globe"></ion-icon>
           Comunas
         </button>
       </ion-item-options>
-      <ion-item-options side="right">
+      <ion-item-options side="right" *ngIf="prof.RolId == 3">
         <button ion-button color="primary" *ngIf="prof.Activo == 1" (click)="editarProfesor(prof)">
           <ion-icon name="create"></ion-icon>
           Editar
         </button>
-        <button ion-button color="danger" *ngIf="prof.Activo == 1"  (click)="desactivarProfesor(prof)">
+        <button ion-button color="danger" *ngIf="prof.Activo == 1" (click)="desactivarProfesor(prof)">
+          <ion-icon name="trash"></ion-icon>
+          Desactivar
+        </button>
+        <button ion-button color="danger" *ngIf="prof.Activo == 1"  (click)="eliminarProfesor(prof)">
           <ion-icon name="trash"></ion-icon>
           Eliminar
         </button>
-        <button ion-button color="secondary" *ngIf="prof.Activo == 0"  (click)="activarProfesor(prof)">
+        <button ion-button color="secondary" *ngIf="prof.Activo == 0 && prof.Eliminado == 0"  (click)="activarProfesor(prof)">
           <ion-icon name="checkmark-circle"></ion-icon>
           Activar
         </button>

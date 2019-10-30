@@ -56,6 +56,10 @@
       <button (click)="limpiarComunas()">Limpiar</button>
     </ion-row>
   -->
+  <ion-item>
+      <ion-label>{{nombreCheck}}</ion-label>
+      <ion-checkbox [(ngModel)]="checkGeneral" color="dark" (click)="unChecked()"></ion-checkbox>
+  </ion-item>
     <ion-item *ngFor="let com of comunasGeneral">
       <!-- <div *ngIf="com.visible">-->
         <ion-label>{{com.Nombre}}</ion-label>

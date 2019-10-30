@@ -2,7 +2,7 @@ import { Injectable, Component } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { AppSettings } from '../../../AppSettings'
 
-import 'rxjs/add/operator/map';
+//import 'rxjs/add/operator/map';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { ProfesoresPage } from '../../pages/profesores/profesores';
 @Injectable()
@@ -90,7 +90,7 @@ export class GlobalService{
       });
       return repos;
     }
-    putProfesor(idProfesor, rut, nombres, primerApellido, segundoApellido, telefonos, sexo, correo, activo){
+    putProfesor(idProfesor, rut, nombres, primerApellido, segundoApellido, telefonos, sexo, correo, activo, eliminado){
       var usuario = localStorage.getItem("USUARIO");
       let url = AppSettings.URL_API + 'Profesores';
       let dataGet = { 
@@ -102,7 +102,8 @@ export class GlobalService{
         Telefonos: telefonos,
         Sexo: sexo,
         Correo: correo,
-        Activo: activo 
+        Activo: activo,
+        Eliminado: eliminado
       };
   
       let repos = this.http.put(url, dataGet, {

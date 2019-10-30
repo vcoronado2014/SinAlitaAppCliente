@@ -120,7 +120,8 @@ export class EditarProfesorPage {
         this.telefonos,
         this.sexo,
         this.correo,
-        activo
+        activo,
+        '0'
       ).subscribe(
         data => {
           this.profesores = data.json();

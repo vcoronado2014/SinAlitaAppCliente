@@ -16,7 +16,7 @@ import { AceptaCondicionesService } from '../app/Services/AceptaCondicionesServi
 import { GlobalService } from '../app/Services/GlobalService';
 
 import { MyApp } from './app.component';
-import { InicioPage } from '../pages/Inicio/inicio';
+import { InicioPage } from '../pages/inicio/inicio';
 import { HomePage } from '../pages/home/home';
 import { DetailPackPage } from '../pages/detail-pack/detail-pack';
 import { DetailAgendaPage } from '../pages/detail-agenda/detail-agenda';

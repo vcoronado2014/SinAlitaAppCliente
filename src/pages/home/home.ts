@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {NavController, Toast, NavParams} from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { DetailPackPage } from '../../pages/detail-pack/detail-pack';
+import { InicioPage } from '../../pages/inicio/inicio';
 //para redes sociales
 import { AppAvailability } from '@ionic-native/app-availability';
 import { Platform } from 'ionic-angular';
@@ -98,7 +99,9 @@ export class HomePage {
       )
 
   }
-
+  cancelar(){
+    this.navCtrl.setRoot(InicioPage);
+  }
   isIOS() {
     if (this.platform.is('ios')) {
       return true;

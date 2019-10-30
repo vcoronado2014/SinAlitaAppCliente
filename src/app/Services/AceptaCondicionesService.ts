@@ -5,7 +5,7 @@ import { Injectable, Component } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { AppSettings } from '../../../AppSettings'
 
-import 'rxjs/add/operator/map';
+//import 'rxjs/add/operator/map';
 @Injectable()
 export class AceptaCondicionesService{
 

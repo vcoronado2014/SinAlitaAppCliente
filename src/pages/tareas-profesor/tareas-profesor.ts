@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, ToastController, ViewController, LoadingController, ModalController, App  } from 'ionic-angular';
 
 import { GlobalService } from '../../app/Services/GlobalService';
+import { FichaAlumnoService } from '../../app/Services/FichaAlumnoService';
 //modales
 import { DetalleAgendaPage } from '../../pages/detalle-agenda/detalle-agenda';
-import { InicioPage } from '../../pages/Inicio/inicio';
+import { InicioPage } from '../../pages/inicio/inicio';
 import { CancelarClasePage } from '../../pages/cancelar-clase/cancelar-clase';
 import { CerrarClasePage } from '../../pages/cerrar-clase/cerrar-clase';
 import { MapaClientePage } from '../../pages/mapa-cliente/mapa-cliente';
+import { FichaAlumnoPage } from '../../pages/ficha-alumno/ficha-alumno';
 import * as moment from 'moment';
 
 
@@ -37,6 +39,7 @@ noHayElementos = true;
     private navParams: NavParams,
     private viewCtrl: ViewController,
     private global: GlobalService,
+    public ficha: FichaAlumnoService,
     private modalCtrl: ModalController
   ) {
     //evaluamos algunas cosas antes de levantar esta pantalla
@@ -55,6 +58,46 @@ noHayElementos = true;
     if (this.rolId == 3){
       this.cargarTareas();
     }
+  }
+  cargarFicha(tarea) {
+    var idPack = tarea.PcoId;
+    var clieId = tarea.ClieId;
+    var fichasArr = [];
+    let loader = this.loading.create({
+      content: 'Cargando...',
+    });
+    loader.present().then(() => {
+
+      this.ficha.getFichas(idPack).subscribe(
+        dataAl => {
+
+          fichasArr = dataAl.json();
+          if (fichasArr){
+            //acá abrir la ficha
+            this.nav.push(FichaAlumnoPage, {fichaAlumnos: fichasArr, cantidadAlumnos: fichasArr.length, idPack: idPack, clieId: clieId });
+          }
+          else {
+            let sms = this.presentToast('No hay fichas', 'bottom', 2000);
+          }
+          /*
+          if (this.fichasArr){
+            this.cantidadAlumnosActual = this.fichasArr.length;
+          }
+  
+          */
+
+        },
+        err => {
+          console.error(err);
+          loader.dismiss();
+        },
+        () => {
+          loader.dismiss();
+          console.log('get fichas completed');
+        }
+      );
+
+    });
   }
   cargarTareas() {
     this.tareasArr = [];

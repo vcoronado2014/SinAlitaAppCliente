@@ -6,64 +6,80 @@
 -->
 <ion-header class="mui--bg-color-blue-500 fg-light">
 
-  <ion-navbar>
-    <ion-title>Packs</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-<ion-content>
-  <ion-fab top right edge>
-    <button ion-fab mini class="mui--bg-color-blue-900" (click)="cerrarSesion()">
-      <ion-icon name="exit"></ion-icon>
+    <ion-navbar>
+      <ion-title>Packs</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content>
+    <ion-fab top right edge>
+      <button ion-fab mini class="mui--bg-color-blue-900" (click)="cerrarSesion()">
+        <ion-icon name="exit"></ion-icon>
+      </button>
+    </ion-fab>
+    <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="noHayElementos == false">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-label no-padding no-margin text-center style="font-style: italic;
+    font-size: 0.9rem;" *ngIf="noHayElementos == false">
+        Deslize hacia abajo para actualizar
+    </ion-label>
+    <!--no tiene packs-->
+  <ion-grid *ngIf="noHayElementos == true">
+    <ion-row>
+      <ion-col style="width: auto !important;
+      align-items: center; text-align: center;">
+        <ion-icon name="alert" style="color:gray; font-size: 5em;"></ion-icon>
+      </ion-col>
+    
+    </ion-row>
+    <ion-row text-center>
+      <h1 text-wrap style="color:gray;"> Usted no tiene Packs Asociados</h1>
+    </ion-row>
+  </ion-grid>
+  
+  <!-- busqueda de packs -->
+  <ion-item *ngIf="noHayElementos == false">
+    <ion-label floating *ngIf="encontrados > 0">{{encontrados}} coincidencias</ion-label>
+    <ion-label floating *ngIf="encontrados == 0">Ingrese texto a buscar</ion-label>
+    <!-- <ion-input type="text" #nombre></ion-input>-->
+    <ion-input type="text" [(ngModel)]="nombreBuscar"></ion-input>
+    <button ion-button outline item-end icon-start (click)="getPacksNombres()" small style="font-size: 1rem;">
+      <ion-icon name="search"></ion-icon>
+      Buscar 
+  
     </button>
-  </ion-fab>
-  <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="noHayElementos == false">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-  <ion-label no-padding no-margin text-center style="font-style: italic;
-  font-size: 0.9rem;" *ngIf="noHayElementos == false">
-      Deslize hacia abajo para actualizar
-  </ion-label>
-  <!--no tiene packs-->
-<ion-grid *ngIf="noHayElementos == true">
-  <ion-row>
-    <ion-col style="width: auto !important;
-    align-items: center; text-align: center;">
-      <ion-icon name="alert" style="color:gray; font-size: 5em;"></ion-icon>
-    </ion-col>
+    <button ion-button outline item-end icon-start (click)="limpiar()" small style="font-size: 1rem;">
+      <ion-icon name="remove-circle"></ion-icon>
+      Limpiar
+    </button>
+  </ion-item>
+    <ion-list *ngIf="noHayElementos == false">
+      <ion-item *ngFor="let pack of packArr">
   
-  </ion-row>
-  <ion-row text-center>
-    <h1 text-wrap style="color:gray;"> Usted no tiene Packs Asociados</h1>
-  </ion-row>
-</ion-grid>
+          <h2 text-wrap text-justify>{{pack.Texto}}</h2>
+          <p>
+            <ion-badge color="danger" *ngIf="pack.Alerta != ''">{{pack.Alerta}}</ion-badge>
+          </p>
+          <button ion-button icon-start *ngIf="pack.MostrarAbrir && rolIdLogueado == '2'" (click)="abrirHorasCliente(pack.Id)">
+              <ion-icon name="open"></ion-icon>
+            Abrir
+            
+          </button>
+          <button ion-button icon-start *ngIf="pack.MostrarAbrir && rolIdLogueado == '3' && pack.Alerta" (click)="abrirHorasCliente(pack.Id)">
+              <ion-icon name="open"></ion-icon>
+            Reagendar
+            
+          </button>
+          <button ion-button icon-start *ngIf="pack.MostrarAbrir && rolIdLogueado == '3' && pack.Alerta == null" (click)="abrirHorasCliente(pack.Id)">
+              <ion-icon name="open"></ion-icon>
+            Ver Clases
+            
+          </button>
   
-
-  <ion-list *ngIf="noHayElementos == false">
-    <ion-item *ngFor="let pack of packArr">
-
-        <h2 text-wrap text-justify>{{pack.Texto}}</h2>
-        <p>
-          <ion-badge color="danger" *ngIf="pack.Alerta != ''">{{pack.Alerta}}</ion-badge>
-        </p>
-        <button ion-button icon-start *ngIf="pack.MostrarAbrir && rolIdLogueado == '2'" (click)="abrirHorasCliente(pack.Id)">
-            <ion-icon name="open"></ion-icon>
-          Abrir
-          
-        </button>
-        <button ion-button icon-start *ngIf="pack.MostrarAbrir && rolIdLogueado == '3' && pack.Alerta" (click)="abrirHorasCliente(pack.Id)">
-            <ion-icon name="open"></ion-icon>
-          Reagendar
-          
-        </button>
-        <button ion-button icon-start *ngIf="pack.MostrarAbrir && rolIdLogueado == '3' && pack.Alerta == null" (click)="abrirHorasCliente(pack.Id)">
-            <ion-icon name="open"></ion-icon>
-          Ver Clases
-          
-        </button>
-
-    </ion-item>
-  </ion-list>  
-
-</ion-content>
+      </ion-item>
+    </ion-list>  
+  
+  </ion-content>
+  

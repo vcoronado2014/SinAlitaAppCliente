@@ -29,6 +29,8 @@ export class AsociarComunasPage {
   todasLasComunas;
   nombreBuscar;
   encontrados;
+  checkGeneral : any;
+  nombreCheck;
 
   constructor(    private nav: NavController,
     private alert: AlertController,
@@ -38,6 +40,7 @@ export class AsociarComunasPage {
     private viewCtrl: ViewController,
     private global: GlobalService,
     private modalCtrl: ModalController, ) {
+      this.nombreCheck = 'Quitar Todas';
     this.profesor = navParams.get('profesor');
 
       this.seleccionadas = 0;
@@ -57,6 +60,26 @@ export class AsociarComunasPage {
     this.nombreBuscar = '';
     this.comunasGeneral = this.todasLasComunas;
     this.encontrados = 0;
+  }
+  unChecked(){
+    var check = this.checkGeneral;
+    //si es true, hay que descheckearlas
+    if (check){
+      this.nombreCheck = 'Seleccionar Todas';
+    }
+    else{
+      this.nombreCheck = 'Quitar Todas';
+    }
+    if (this.selectedArray && this.selectedArray.length > 0){
+      for(var i in this.selectedArray){
+        this.selectedArray[i].check = !check;
+      }
+    }
+    if (this.comunasGeneral && this.comunasGeneral.length > 0){
+      for(var i in this.comunasGeneral){
+        this.comunasGeneral[i].check = !check;
+      }
+    }
   }
 
   cargarComunas(profesor) {
@@ -183,7 +206,7 @@ export class AsociarComunasPage {
     if (this.selectedArray.length > 0){
       for (var i=0; i <= this.selectedArray.length; i++){
         var obj = this.selectedArray[i];
-        if (obj != undefined){
+        if (obj != undefined && obj.check){
           ids = ids + ',' + obj.Id.toString();
         }
       }

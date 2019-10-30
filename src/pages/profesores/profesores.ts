@@ -7,7 +7,7 @@ import * as moment from 'moment';
 //modales
 import { EditarProfesorPage } from '../../pages/editar-profesor/editar-profesor';
 import { AsociarComunasPage } from '../../pages/asociar-comunas/asociar-comunas';
-import { InicioPage } from '../../pages/Inicio/inicio';
+import { InicioPage } from '../../pages/inicio/inicio';
 
 /**
  * Generated class for the ProfesoresPage page.
@@ -135,7 +135,7 @@ export class ProfesoresPage {
               console.log('Agree clicked');
               //let mensaje = this.presentToast("Desactivar profesor " + profesor.Nombres, "bottom", 2000);
               profesor.Activo = 0;
-              profesor.Eliminado = 1;
+              profesor.Eliminado = 0;
               this.guardarProferor(profesor, "Profesor desactivado con éxito.")
 
             }
@@ -144,6 +144,33 @@ export class ProfesoresPage {
       });
       confirm.present();
   }
+  eliminarProfesor(profesor){
+    
+    const confirm = this.alert.create({
+      title: 'Eliminar Profesor',
+      message: '¿Esta seguro de eliminar al Profesor ' + profesor.Nombres + ' ' + profesor.PrimerApellido + ' ' + profesor.SegundoApellido + '?',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Si',
+          handler: () => {
+            console.log('Agree clicked');
+            //let mensaje = this.presentToast("Desactivar profesor " + profesor.Nombres, "bottom", 2000);
+            profesor.Activo = 0;
+            profesor.Eliminado = 1;
+            this.guardarProferor(profesor, "Profesor eliminado con éxito.")
+
+          }
+        }
+      ]
+    });
+    confirm.present();
+}
   activarProfesor(profesor){
     const confirm = this.alert.create({
       title: 'Activar Profesor',
@@ -187,7 +214,8 @@ export class ProfesoresPage {
         profesor.TelefonosContacto,
         profesor.Sexo,
         profesor.Email,
-        profesor.Activo.toString()
+        profesor.Activo.toString(),
+        profesor.Eliminado.toString()
       ).subscribe(
         data => {
           this.profesoresArr = data.json();

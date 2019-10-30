@@ -7,7 +7,7 @@ import * as moment from 'moment';
 //modales
 import { EditarClientePage } from '../../pages/editar-cliente/editar-cliente';
 import { CrearPackPage } from '../../pages/crear-pack/crear-pack';
-import { InicioPage } from '../../pages/Inicio/inicio';
+import { InicioPage } from '../../pages/inicio/inicio';
 
 /**
  * Generated class for the ClientesPage page.
